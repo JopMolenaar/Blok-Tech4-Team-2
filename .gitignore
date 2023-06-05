@@ -1,2 +1,17 @@
-# wachtwoorden in env
+# NPM packages folder.
+node_modules
+
+# vs code folder
+.vscode
+
+# eslint
+.eslintrc.js
+
+#prettier rules
+.prettierrc.json
+
+# wwden in env
 .env
+
+# mac bestand
+.DS_Store
