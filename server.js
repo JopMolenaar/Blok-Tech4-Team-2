@@ -43,7 +43,7 @@ app.get("/login", async (req, res) => {
 })
 
 app.get("/signup", async (req, res) => {
-    res.render("login")
+    res.render("signUp")
 })
 
 app.get("*", (req, res) => {
