@@ -41,6 +41,26 @@ app.get("/login", async (req, res) => {
     res.render("login")
 })
 
+//
+// normale gebruikers
+//
+app.get("/products", async (req, res) => {
+    res.render("products")
+})
+
+//
+// Admin pagina's
+//
+app.get("/producten-overzicht", async (req, res) => {
+    res.render("admin-overzicht")
+})
+app.get("/producten-overzicht/toevoegen", async (req, res) => {
+    res.render("admin-addProducts")
+})
+
+//
+// 404
+//
 app.get("*", (req, res) => {
     res.status(404).render("notfound")
 })
