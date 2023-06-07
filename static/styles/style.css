@@ -64,17 +64,7 @@ header section {
           align-items: center;
 }
 
-header section img {
-  margin-left: 1em;
-  height: 80%;
-  width: auto;
-}
-
-header section h1 {
-  font-size: 1.5em;
-}
-
-header ul {
+header nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,14 +75,5 @@ header ul {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   width: 30em;
-}
-
-header ul li {
-  list-style: none;
-}
-
-header ul li a {
-  font-size: 1.4em;
-  color: #232323;
 }
 /*# sourceMappingURL=style.css.map */
