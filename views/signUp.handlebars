@@ -1,0 +1,50 @@
+<body>
+    <h1>Vul de onderstaande informatie in om een account te maken</h1>
+
+    <form id="signupForm" action="/signup" method="POST">
+        {{#if error}}
+            <p class="error-message">{{error}}</p>
+        {{/if}} 
+        
+        <div>
+            <label for="naam">Naam:</label>
+            <input type="tekst" id="naam" name="name" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="tekst" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="age">Leeftijd:</label>
+            <input type="tekst" id="leeftijd" name="age" required>
+        </div>
+
+        <div>
+            <label for="username">Gebruikersnaam:</label>
+            <input type="tekst" id="gebruikersnaam" name="username" required>
+        </div>
+
+        <div>
+            <label for="wachtwoord">Wachtwoord:</label>
+            <input type="wachtwoord" id="wachtwoord" name="wachtwoord" required>
+        </div>
+        
+        <div>
+            <label for="wachtwoordBevestigen">Wachtwoord bevestigen:</label>
+            <input type="wachtwoord" id="wachtwoordBevestigen" name="wachtwoordBevestigen" required>
+        </div>
+
+        <div>
+            <button id="signUp" type="submit">Sign Up</button>
+        </div>
+        
+        <div>
+            <p>Already have an account?</p>
+            <a class="formButton" href="/login" id="loginButton" type="button">Log in</a>
+        </div>
+    </form>   
+
+    <script src="javascript/signup.js"></script>
+</body>
