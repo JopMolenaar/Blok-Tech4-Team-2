@@ -42,6 +42,18 @@ app.set("views", "./views")
 app.use(express.static(path.join(__dirname, "/static")))
 app.use(express.urlencoded({ extended: true }))
 
+// The User schema defined
+const userSchema = new mongoose.Schema({
+	naam: String,
+	email: String,
+	leeftijd: Number,
+	gebruikersnaam: String,
+	wachtwoord: String,
+})
+
+// Create the User model
+const User = mongoose.model("User", userSchema)
+
 // Configure session
 app.use(
     session({
@@ -156,7 +168,7 @@ mongoose
                 .save()
                 .then(() => {
                     req.session.loggedIn = true
-                    req.session.username = gebruikersnaam
+                    req.session.gebruikersnaam = gebruikersnaam
                     req.session.save(() => {
                         res.redirect("/products")
                     })
