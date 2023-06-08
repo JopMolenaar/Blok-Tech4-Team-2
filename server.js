@@ -65,8 +65,8 @@ mongoose
 app.get("/login", async (req, res) => {
     const errorMessage = req.session.error
     req.session.error = "" // Clear the error message from the session
-    const username = req.session.loggedIn ? req.session.username : "" // Get the username from the session
-    res.render("login", { error: errorMessage, username: username })
+    const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
+    res.render("login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
 })
 
 app.get("/signUp", async (req, res) => {
@@ -116,7 +116,7 @@ app.post("/login", (req, res) => {
 // Signup as a new user
 app.post("/signUp", (req, res) => {
     const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
-
+    console.log("post request werkt")
     // Check if username is filled in
     if (!gebruikersnaam) {
         req.session.error = "Vul een gebruikersnaam in"
