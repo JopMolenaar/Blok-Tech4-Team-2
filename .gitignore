@@ -6,6 +6,7 @@ node_modules
 
 # eslint
 .eslintrc.js
+.eslintrc.json
 
 #prettier rules
 .prettierrc.json
