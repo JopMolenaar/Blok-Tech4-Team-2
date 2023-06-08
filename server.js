@@ -38,7 +38,19 @@ const userSchema = new mongoose.Schema({
 })
 
 // Create the User model
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model("User", userSchema, "users")
+
+// The User schema defined
+const productShema = new mongoose.Schema({
+    naam: String,
+    soort: String,
+    leeftijd: Number,
+    img: String,
+    beschrijving: String,
+})
+
+// Create the User model
+const Product = mongoose.model("Product", productShema, "products")
 
 // Configure session
 app.use(
@@ -179,7 +191,22 @@ app.post("/signUp", (req, res) => {
 // normale gebruikers
 //
 app.get("/products", async (req, res) => {
-    res.render("products")
+    try {
+        // zoekt producten op
+        const products = await Product.find({})
+        const overeenkomende = []
+        products.forEach((product) => {
+            // matching logica
+            overeenkomende.push(product)
+        })
+        res.render("products", {
+            product: overeenkomende.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got all products")
+    }
 })
 
 //
@@ -188,23 +215,31 @@ app.get("/products", async (req, res) => {
 app.get("/producten-overzicht", async (req, res) => {
     res.render("admin-overzicht")
 })
+
+// add products
+const add = async (req, res) => {
+    try {
+        const { naam, soort, leeftijd, image, beschrijving } = req.body
+        const newProduct = new Product({
+            naam: naam,
+            soort: soort,
+            leeftijd: leeftijd,
+            img: req.file ? req.file.filename : null,
+            beschrijving: beschrijving,
+        })
+        newProduct.save()
+        console.log("added:", newProduct)
+        res.redirect("/producten-overzicht")
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("finally")
+    }
+}
+
+app.post("/producten-overzicht/add", upload.single("image"), add)
+
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
-    // const { naam, leeftijd } = req.body
-    //     // Create a new user object with the filled-in information
-    //     const newUser = new User({
-    //         naam: naam,
-    //         leeftijd: leeftijd,
-    //     })
-    //     newUser
-    //     .save()
-    //     .then(() => {
-    //         console.log("new user")
-    //         req.session.loggedIn = true
-    //         req.session.gebruikersnaam = gebruikersnaam
-    //         req.session.save(() => {
-    //             res.redirect("/products")
-    //         })
-    //     })
     res.render("admin-addProducts")
 })
 
