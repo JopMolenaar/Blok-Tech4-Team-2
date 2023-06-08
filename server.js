@@ -116,6 +116,7 @@ app.post("/login", (req, res) => {
 // Signup as a new user
 app.post("/signUp", (req, res) => {
     const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
+    console.log(gebruikersnaam)
     console.log("post request werkt")
     // Check if username is filled in
     if (!gebruikersnaam) {
@@ -131,45 +132,47 @@ app.post("/signUp", (req, res) => {
         return
     }
 
-    // Hash the password
-    bcrypt.hash(wachtwoord, 10, (err, hashedPassword) => {
-        if (err) {
-            console.error("Error hashing password:", err)
-            req.session.error = "Gebruiker niet kunnen registreren"
-            res.redirect("/signUp") // Redirect to the signup page
-            return
-        }
+    // Create a new user object with the filled-in information
+    const newUser = new User({
+        naam: naam,
+        email: email,
+        leeftijd: leeftijd,
+        gebruikersnaam: gebruikersnaam,
+        // wachtwoord: hashedPassword,
+    })
 
-        // Create a new user object with the filled-in information
-        const newUser = new User({
-            naam: naam,
-            email: email,
-            leeftijd: leeftijd,
-            gebruikersnaam: gebruikersnaam,
-            wachtwoord: hashedPassword,
+    // Save the new user to the database
+    newUser
+        .save()
+        .then(() => {
+            console.log("new user")
+            req.session.loggedIn = true
+            req.session.gebruikersnaam = gebruikersnaam
+            req.session.save(() => {
+                res.redirect("/products")
+            })
+        })
+        .catch((error) => {
+            console.error("Error gebruiker aanmaken:", error)
+            if (error.code === 11000) {
+                // Duplicate key error
+                req.session.error = "Email al in gebruik"
+            } else {
+                req.session.error = "Gebruiker niet kunnen registreren"
+            }
+            res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
         })
 
-        // Save the new user to the database
-        newUser
-            .save()
-            .then(() => {
-                req.session.loggedIn = true
-                req.session.gebruikersnaam = gebruikersnaam
-                req.session.save(() => {
-                    res.redirect("/products")
-                })
-            })
-            .catch((error) => {
-                console.error("Error gebruiker aanmaken:", error)
-                if (error.code === 11000) {
-                    // Duplicate key error
-                    req.session.error = "Email al in gebruik"
-                } else {
-                    req.session.error = "Gebruiker niet kunnen registreren"
-                }
-                res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
-            })
-    })
+    // Hash the password
+    // bcrypt.hash(wachtwoord, 10, (err, hashedPassword) => {
+    //     console.log("bycrypt")
+    //     if (err) {
+    //         console.error("Error hashing password:", err)
+    //         req.session.error = "Gebruiker niet kunnen registreren"
+    //         res.redirect("/signUp") // Redirect to the signup page
+    //         return
+    //     }
+    // })
 })
 
 app.get("*", (req, res) => {
