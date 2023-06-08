@@ -97,19 +97,19 @@ app.post("/login", (req, res) => {
                     } else {
                         // Password does not match
                         req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-                        res.redirect("/")
+                        res.redirect("/login")
                     }
                 })
             } else {
                 // User not found
                 req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-                res.redirect("/")
+                res.redirect("/login")
             }
         })
         .catch((error) => {
             console.error("Error gebruiker niet gevonden:", error)
             req.session.error = "Inloggen onsuccesvol"
-            res.redirect("/")
+            res.redirect("/login")
         })
 })
 
@@ -175,6 +175,26 @@ app.post("/signUp", (req, res) => {
     // })
 })
 
+//
+// normale gebruikers
+//
+app.get("/products", async (req, res) => {
+    res.render("products")
+})
+
+//
+// Admin pagina's
+//
+app.get("/producten-overzicht", async (req, res) => {
+    res.render("admin-overzicht")
+})
+app.get("/producten-overzicht/toevoegen", async (req, res) => {
+    res.render("admin-addProducts")
+})
+
+//
+// 404
+//
 app.get("*", (req, res) => {
     res.status(404).render("notfound")
 })
