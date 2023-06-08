@@ -9,7 +9,7 @@ const app = express()
 const PORT = 3000
 const mongoose = require("mongoose")
 const { engine } = require("express-handlebars")
-const ObjectId = require("mongodb").ObjectId
+const { ObjectId } = mongoose.Types
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", "./views")
@@ -205,7 +205,7 @@ app.get("/products", async (req, res) => {
     } catch (error) {
         console.log(error)
     } finally {
-        console.log("got all products")
+        console.log("got all products for normal user")
     }
 })
 
@@ -217,9 +217,10 @@ app.get("/producten-overzicht", async (req, res) => {
 })
 
 // add products
-const add = async (req, res) => {
+const addProduct = async (req, res) => {
     try {
         const { naam, soort, leeftijd, image, beschrijving } = req.body
+        console.log(naam)
         const newProduct = new Product({
             naam: naam,
             soort: soort,
@@ -237,7 +238,39 @@ const add = async (req, res) => {
     }
 }
 
-app.post("/producten-overzicht/add", upload.single("image"), add)
+// change products
+const changeProduct = async (req, res) => {
+    try {
+        const { naam, id } = req.body
+        const productId = id
+        Product.findOneAndUpdate({ _id: `${productId}` }, { naam: naam }).then(() => console.log("Object updated successfully."))
+        res.redirect("/producten-overzicht")
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("finally")
+    }
+}
+
+app.post("/producten-overzicht/add", upload.single("image"), addProduct)
+app.post("/producten-overzicht/change", changeProduct)
+
+app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
+    try {
+        // zoekt producten op id
+        // voorbeeld: 6481cd5fdda4a51efa6f5765
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+        res.render("admin-aanpassen", {
+            product: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got product for admin")
+    }
+})
 
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
     res.render("admin-addProducts")
@@ -250,6 +283,9 @@ app.get("*", (req, res) => {
     res.status(404).render("notfound")
 })
 
+//
+// PORT
+//
 app.listen(PORT, () => {
     console.log(`server running on port: ${PORT}`)
 })

@@ -1,0 +1,44 @@
+<header>
+    <section>
+    </section>
+    <nav>
+    </nav>
+</header>
+
+<main>
+    {{#each product}}
+        <section>
+            <div>
+                <img src="/upload/{{this.img}}" alt="Picture" />
+            </div>
+            <form action="/producten-overzicht/change" method="post">
+                <section>
+                    <p>It has this {{this._id}} id </p>
+                    <input id="id" name="id" type="text" value="{{this._id}}" />
+                </section>
+                <section>
+                    <p>It is {{this.naam}}</p>
+                    <label>It needs to be:
+                        <input id="naam" name="naam" type="text" required />
+                    </label>
+                </section>
+                <section>
+                    <p>It is {{this.leeftijd}}</p>
+                    <label for="leeftijd">It needs to be:</label>
+                    <input type="text" name="leeftijd" />
+                </section>
+                <section>
+                    <p>It is {{this.soort}}</p>
+                    <label for="soort">It needs to be:</label>
+                    <input type="text" name="soort" />
+                </section>
+                <section>
+                    <p>It is {{this.beschrijving}}</p>
+                    <label for="beschrijving">It needs to be:</label>
+                    <input type="text" name="beschrijving" />
+                </section>
+                <input type="submit" value="change" />
+            </form>
+        </section>
+    {{/each}}
+</main>
