@@ -189,6 +189,22 @@ app.get("/producten-overzicht", async (req, res) => {
     res.render("admin-overzicht")
 })
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
+    // const { naam, leeftijd } = req.body
+    //     // Create a new user object with the filled-in information
+    //     const newUser = new User({
+    //         naam: naam,
+    //         leeftijd: leeftijd,
+    //     })
+    //     newUser
+    //     .save()
+    //     .then(() => {
+    //         console.log("new user")
+    //         req.session.loggedIn = true
+    //         req.session.gebruikersnaam = gebruikersnaam
+    //         req.session.save(() => {
+    //             res.redirect("/products")
+    //         })
+    //     })
     res.render("admin-addProducts")
 })
 
