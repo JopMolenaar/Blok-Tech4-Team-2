@@ -10,7 +10,7 @@
         <a href="/producten-overzicht/toevoegen">Product toevoegen</a>
     </section>
     <ul>
-        {{#each result}}
+        {{#each product}}
             <li>
                 {{!-- <div>
                     <img src="/upload/{{this.img}}" alt="Picture" />
@@ -19,6 +19,7 @@
                 <p>{{this.leeftijd}}</p>
                 <p>{{this.soort}}</p>
                 <p>{{this.beschrijving}}</p>
+                <a href="/producten-overzicht/aanpassen/{{this._id}}">Change</a>
             </li>
         {{/each}}
     </ul>

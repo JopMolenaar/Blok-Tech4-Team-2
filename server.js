@@ -213,7 +213,17 @@ app.get("/products", async (req, res) => {
 // Admin pagina's
 //
 app.get("/producten-overzicht", async (req, res) => {
-    res.render("admin-overzicht")
+    try {
+        // zoekt producten op
+        const products = await Product.find({})
+        res.render("admin-overzicht", {
+            product: products.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got all products for admin")
+    }
 })
 
 // add products
@@ -242,8 +252,7 @@ const addProduct = async (req, res) => {
 const changeProduct = async (req, res) => {
     try {
         const { naam, id } = req.body
-        const productId = id
-        Product.findOneAndUpdate({ _id: `${productId}` }, { naam: naam }).then(() => console.log("Object updated successfully."))
+        Product.findOneAndUpdate({ _id: `${id}` }, { naam: naam }).then(() => console.log("Object updated successfully."))
         res.redirect("/producten-overzicht")
     } catch (error) {
         console.log(error)
