@@ -47,6 +47,12 @@ const productShema = new mongoose.Schema({
     leeftijd: Number,
     img: String,
     beschrijving: String,
+    eigenschappen: {
+        activiteit: String,
+        leefstijl: String,
+        grootte: String,
+        dag: String,
+    },
 })
 
 // Create the User model
@@ -229,7 +235,7 @@ app.get("/producten-overzicht", async (req, res) => {
 // add products
 const addProduct = async (req, res) => {
     try {
-        const { naam, soort, leeftijd, image, beschrijving } = req.body
+        const { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
         console.log(naam)
         const newProduct = new Product({
             naam: naam,
@@ -237,10 +243,18 @@ const addProduct = async (req, res) => {
             leeftijd: leeftijd,
             img: req.file ? req.file.filename : null,
             beschrijving: beschrijving,
+            eigenschappen: {
+                activiteit: activiteit,
+                leefstijl: leefstijl,
+                grootte: grootte,
+                dag: dag,
+            },
         })
         newProduct.save()
         console.log("added:", newProduct)
-        res.redirect("/producten-overzicht")
+        setTimeout(() => {
+            res.redirect("/producten-overzicht")
+        }, "1000")
     } catch (error) {
         console.log(error)
     } finally {
@@ -250,17 +264,21 @@ const addProduct = async (req, res) => {
 
 const changeProduct = async (req, res) => {
     try {
-        const { naam, leeftijd, soort, beschrijving, id } = req.body
+        const { naam, leeftijd, soort, beschrijving, id, activiteit, leefstijl, grootte, dag } = req.body
         let updateObject = {}
         if (naam) updateObject.naam = naam
         if (leeftijd) updateObject.leeftijd = leeftijd
         if (soort) updateObject.soort = soort
         if (beschrijving) updateObject.beschrijving = beschrijving
+        if (activiteit) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.activiteit": activiteit })
+        if (leefstijl) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.leefstijl": leefstijl })
+        if (grootte) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.grootte": grootte })
+        if (dag) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.dag": dag })
         if (req.file) updateObject.img = req.file.filename
-        Product.findOneAndUpdate({ _id: id }, updateObject).then(() => console.log("Object updated successfully."))
+        await Product.findOneAndUpdate({ _id: id }, updateObject).then(() => console.log("Object updated successfully."))
         setTimeout(() => {
             res.redirect("/producten-overzicht")
-        }, "1000")
+        }, 1000)
     } catch (error) {
         console.log(error)
     } finally {

@@ -19,6 +19,14 @@
                 <p>{{this.leeftijd}}</p>
                 <p>{{this.soort}}</p>
                 <p>{{this.beschrijving}}</p>
+                <section>
+                    <h2>Eigenschappen</h2>
+                    <p>{{this.eigenschappen.activiteit}}</p>
+                    <p>{{this.eigenschappen.leefstijl}}</p>
+                    <p>{{this.eigenschappen.grootte}}</p>
+                    <p>{{this.eigenschappen.dag}}</p>
+                </section>
+
                 <a href="/producten-overzicht/aanpassen/{{this._id}}">Change</a>
             </li>
         {{/each}}
