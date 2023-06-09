@@ -12,15 +12,16 @@
             <div>
                 <img src="/upload/{{this.img}}" alt="Picture" />
             </div>
-            <form action="/producten-overzicht/change" method="post">
-                <section>
+
+            <form action="/producten-overzicht/change" method="post" enctype="multipart/form-data">
+                <section class="visually-hidden">
                     <p>It has this {{this._id}} id </p>
                     <input id="id" name="id" type="text" value="{{this._id}}" />
                 </section>
                 <section>
                     <p>It is {{this.naam}}</p>
                     <label>It needs to be:
-                        <input id="naam" name="naam" type="text" required />
+                        <input id="naam" name="naam" type="text" />
                     </label>
                 </section>
                 <section>
@@ -38,6 +39,10 @@
                     <label for="beschrijving">It needs to be:</label>
                     <input type="text" name="beschrijving" />
                 </section>
+                <label>
+                    Andere afbeelding:
+                    <input name="image" type="file" accept="image" />
+                </label>
                 <input type="submit" value="change" />
             </form>
         </section>

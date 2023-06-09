@@ -248,12 +248,19 @@ const addProduct = async (req, res) => {
     }
 }
 
-// change products
 const changeProduct = async (req, res) => {
     try {
-        const { naam, id } = req.body
-        Product.findOneAndUpdate({ _id: `${id}` }, { naam: naam }).then(() => console.log("Object updated successfully."))
-        res.redirect("/producten-overzicht")
+        const { naam, leeftijd, soort, beschrijving, id } = req.body
+        let updateObject = {}
+        if (naam) updateObject.naam = naam
+        if (leeftijd) updateObject.leeftijd = leeftijd
+        if (soort) updateObject.soort = soort
+        if (beschrijving) updateObject.beschrijving = beschrijving
+        if (req.file) updateObject.img = req.file.filename
+        Product.findOneAndUpdate({ _id: id }, updateObject).then(() => console.log("Object updated successfully."))
+        setTimeout(() => {
+            res.redirect("/producten-overzicht")
+        }, "1000")
     } catch (error) {
         console.log(error)
     } finally {
@@ -262,12 +269,11 @@ const changeProduct = async (req, res) => {
 }
 
 app.post("/producten-overzicht/add", upload.single("image"), addProduct)
-app.post("/producten-overzicht/change", changeProduct)
+app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
 
 app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     try {
         // zoekt producten op id
-        // voorbeeld: 6481cd5fdda4a51efa6f5765
         const products = await Product.findById(req.params.id)
         const getItToJson = []
         getItToJson.push(products)
