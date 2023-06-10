@@ -305,6 +305,22 @@ app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     }
 })
 
+app.get("/producten-overzicht/:id", async (req, res) => {
+    try {
+        // zoekt producten op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+        res.render("product-detail", {
+            product: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got product detail for user")
+    }
+})
+
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
     res.render("admin-addProducts")
 })
