@@ -243,6 +243,11 @@ app.get("/producten-overzicht/toevoegen", async (req, res) => {
     res.render("admin-addProducts")
 })
 
+// voorkeuren pagina
+app.get("/voorkeuren", (req, res) => {
+    res.render("voorkeuren", { error: "" })
+})
+
 //
 // 404
 //
