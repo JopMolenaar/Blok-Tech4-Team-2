@@ -232,11 +232,9 @@ app.get("/producten-overzicht", async (req, res) => {
     }
 })
 
-// add products
 const addProduct = async (req, res) => {
     try {
         const { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
-        console.log(naam)
         const newProduct = new Product({
             naam: naam,
             soort: soort,
@@ -286,9 +284,11 @@ const changeProduct = async (req, res) => {
     }
 }
 
+// forms post requests: add en change
 app.post("/producten-overzicht/add", upload.single("image"), addProduct)
 app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
 
+// pas producten aan als admin
 app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     try {
         // zoekt producten op id
@@ -305,7 +305,8 @@ app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     }
 })
 
-app.get("/producten-overzicht/:id", async (req, res) => {
+// product detail pagina
+app.get("/producten-overzicht/detail/:id", async (req, res) => {
     try {
         // zoekt producten op id
         const products = await Product.findById(req.params.id)
@@ -321,6 +322,7 @@ app.get("/producten-overzicht/:id", async (req, res) => {
     }
 })
 
+// add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
     res.render("admin-addProducts")
 })
