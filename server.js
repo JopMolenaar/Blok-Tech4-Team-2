@@ -234,25 +234,25 @@ app.get("/producten-overzicht", async (req, res) => {
 
 const addProduct = async (req, res) => {
     try {
-        const { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
+        let { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
         const newProduct = new Product({
-            naam: naam,
-            soort: soort,
+            naam: naam.charAt(0).toUpperCase() + naam.slice(1),
+            soort: soort.charAt(0).toUpperCase() + soort.slice(1),
             leeftijd: leeftijd,
             img: req.file ? req.file.filename : null,
-            beschrijving: beschrijving,
+            beschrijving: beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1),
             eigenschappen: {
-                activiteit: activiteit,
-                leefstijl: leefstijl,
-                grootte: grootte,
-                dag: dag,
+                activiteit: activiteit.charAt(0).toUpperCase() + activiteit.slice(1),
+                leefstijl: leefstijl.charAt(0).toUpperCase() + leefstijl.slice(1),
+                grootte: grootte.charAt(0).toUpperCase() + grootte.slice(1),
+                dag: dag.charAt(0).toUpperCase() + dag.slice(1),
             },
         })
         newProduct.save()
         console.log("added:", newProduct)
         setTimeout(() => {
             res.redirect("/producten-overzicht")
-        }, "1000")
+        }, 1000)
     } catch (error) {
         console.log(error)
     } finally {
@@ -262,7 +262,7 @@ const addProduct = async (req, res) => {
 
 const changeProduct = async (req, res) => {
     try {
-        const { naam, leeftijd, soort, beschrijving, id, activiteit, leefstijl, grootte, dag } = req.body
+        let { naam, leeftijd, soort, beschrijving, id, activiteit, leefstijl, grootte, dag } = req.body
         let updateObject = {}
         if (naam) updateObject.naam = naam
         if (leeftijd) updateObject.leeftijd = leeftijd
