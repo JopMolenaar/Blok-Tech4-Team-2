@@ -1,0 +1,41 @@
+$border-color: #ccc;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$background-color: #d5eeff;
+$select-background-color: #fbf5ff;
+$label-margin-bottom: 0.625em;
+$error-color: red;
+
+#voorkeurenForm {
+  border: 1px solid $border-color;
+  border-radius: 0.2em;
+  box-shadow: 0em 0em .3125em $box-shadow-color;
+  background-color: $background-color;
+  max-width: 25em;
+  padding: 1.25em;
+  margin: 0 auto;
+  text-align: center;
+
+  select {
+    margin-bottom: 2em;
+    padding: 0.3125em;
+    font-size: 1em;
+    background-color: $select-background-color;
+    border-radius: 0.2em;
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.voorkeurenLabel {
+  display: block;
+  font-weight: bold;
+  margin-bottom: $label-margin-bottom;
+}
+
+.error-message {
+  color: $error-color;
+}
