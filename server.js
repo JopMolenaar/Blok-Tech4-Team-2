@@ -113,6 +113,11 @@ app.post("/login", (req, res) => {
         })
 })
 
+app.post("/logout", (req, res) => {
+    req.session.destroy()
+    res.redirect("/")
+})
+
 // Signup as a new user
 app.post("/signUp", (req, res) => {
     const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
