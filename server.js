@@ -88,26 +88,37 @@ app.get("/signUp", async (req, res) => {
 app.post("/login", (req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
 
+	console.log("Login username:", gebruikersnaam);
+
 	// Find the user in the database with the provided username
 	User.findOne({ gebruikersnaam: gebruikersnaam })
 		.then((user) => {
 			if (user) {
-				// if user found compare the provided password with the hashed password
-				bcrypt.compare(wachtwoord, user.wachtwoord, (error, result) => {
+				console.log("User found:", user)
+
+				// Compare the provided password with the stored password
+				bcrypt.compare(wachtwoord, user.wachtwoord, (err, result) => {
 					if (result) {
+						console.log("Password matched")
+
 						// Password matches, set loggedIn session variable to true
 						req.session.loggedIn = true
 						req.session.gebruikersnaam = gebruikersnaam
 						req.session.save(() => {
+							console.log("Session saved")
 							res.redirect("/products")
 						})
 					} else {
+						console.log("Password did not match")
+
 						// Password does not match
 						req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
 						res.redirect("/login")
 					}
 				})
 			} else {
+				console.log("User not found")
+
 				// User not found
 				req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
 				res.redirect("/login")
@@ -122,7 +133,7 @@ app.post("/login", (req, res) => {
 
 app.post("/logout", (req, res) => {
 	req.session.destroy()
-	res.redirect("/")
+	res.redirect("/login")
 })
 
 // Signup as a new user
@@ -150,7 +161,7 @@ app.post("/signUp", (req, res) => {
 		email: email,
 		leeftijd: leeftijd,
 		gebruikersnaam: gebruikersnaam,
-		// wachtwoord: hashedPassword,
+		wachtwoord: wachtwoord,
 	})
 
 	// Save the new user to the database
