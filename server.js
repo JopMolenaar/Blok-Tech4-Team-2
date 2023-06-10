@@ -9,7 +9,7 @@ const app = express()
 const PORT = 3000
 const mongoose = require("mongoose")
 const { engine } = require("express-handlebars")
-const ObjectId = require("mongodb").ObjectId
+const { ObjectId } = mongoose.Types
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", "./views")
@@ -47,6 +47,12 @@ const productShema = new mongoose.Schema({
     leeftijd: Number,
     img: String,
     beschrijving: String,
+    eigenschappen: {
+        activiteit: String,
+        leefstijl: String,
+        grootte: String,
+        dag: String,
+    },
 })
 
 // Create the User model
@@ -205,7 +211,7 @@ app.get("/products", async (req, res) => {
     } catch (error) {
         console.log(error)
     } finally {
-        console.log("got all products")
+        console.log("got all products for normal user")
     }
 })
 
@@ -213,23 +219,40 @@ app.get("/products", async (req, res) => {
 // Admin pagina's
 //
 app.get("/producten-overzicht", async (req, res) => {
-    res.render("admin-overzicht")
+    try {
+        // zoekt producten op
+        const products = await Product.find({})
+        res.render("admin-overzicht", {
+            product: products.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got all products for admin")
+    }
 })
 
-// add products
-const add = async (req, res) => {
+const addProduct = async (req, res) => {
     try {
-        const { naam, soort, leeftijd, image, beschrijving } = req.body
+        let { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
         const newProduct = new Product({
-            naam: naam,
-            soort: soort,
+            naam: naam.charAt(0).toUpperCase() + naam.slice(1),
+            soort: soort.charAt(0).toUpperCase() + soort.slice(1),
             leeftijd: leeftijd,
             img: req.file ? req.file.filename : null,
-            beschrijving: beschrijving,
+            beschrijving: beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1),
+            eigenschappen: {
+                activiteit: activiteit.charAt(0).toUpperCase() + activiteit.slice(1),
+                leefstijl: leefstijl.charAt(0).toUpperCase() + leefstijl.slice(1),
+                grootte: grootte.charAt(0).toUpperCase() + grootte.slice(1),
+                dag: dag.charAt(0).toUpperCase() + dag.slice(1),
+            },
         })
         newProduct.save()
         console.log("added:", newProduct)
-        res.redirect("/producten-overzicht")
+        setTimeout(() => {
+            res.redirect("/producten-overzicht")
+        }, 1000)
     } catch (error) {
         console.log(error)
     } finally {
@@ -237,8 +260,69 @@ const add = async (req, res) => {
     }
 }
 
-app.post("/producten-overzicht/add", upload.single("image"), add)
+const changeProduct = async (req, res) => {
+    try {
+        let { naam, leeftijd, soort, beschrijving, id, activiteit, leefstijl, grootte, dag } = req.body
+        let updateObject = {}
+        if (naam) updateObject.naam = naam
+        if (leeftijd) updateObject.leeftijd = leeftijd
+        if (soort) updateObject.soort = soort
+        if (beschrijving) updateObject.beschrijving = beschrijving
+        if (activiteit) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.activiteit": activiteit })
+        if (leefstijl) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.leefstijl": leefstijl })
+        if (grootte) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.grootte": grootte })
+        if (dag) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.dag": dag })
+        if (req.file) updateObject.img = req.file.filename
+        await Product.findOneAndUpdate({ _id: id }, updateObject).then(() => console.log("Object updated successfully."))
+        setTimeout(() => {
+            res.redirect("/producten-overzicht")
+        }, 1000)
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("finally")
+    }
+}
 
+// forms post requests: add en change
+app.post("/producten-overzicht/add", upload.single("image"), addProduct)
+app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
+
+// pas producten aan als admin
+app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
+    try {
+        // zoekt producten op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+        res.render("admin-aanpassen", {
+            product: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got product for admin")
+    }
+})
+
+// product detail pagina
+app.get("/producten-overzicht/detail/:id", async (req, res) => {
+    try {
+        // zoekt producten op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+        res.render("product-detail", {
+            product: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("got product detail for user")
+    }
+})
+
+// add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
     res.render("admin-addProducts")
 })
@@ -255,6 +339,9 @@ app.get("*", (req, res) => {
     res.status(404).render("notfound")
 })
 
+//
+// PORT
+//
 app.listen(PORT, () => {
     console.log(`server running on port: ${PORT}`)
 })

@@ -1,0 +1,109 @@
+<header>
+    <section>
+    </section>
+    <nav>
+    </nav>
+</header>
+
+<main>
+    <a href="/producten-overzicht">Back</a>
+    {{#each product}}
+        <section>
+            <div>
+                <img src="/upload/{{this.img}}" alt="Picture" />
+            </div>
+
+            <form action="/producten-overzicht/change" method="post" enctype="multipart/form-data">
+                <section class="visually-hidden">
+                    <p>It has this {{this._id}} id </p>
+                    <input id="id" name="id" type="text" value="{{this._id}}" />
+                </section>
+                <section>
+                    <p>It is {{this.naam}}</p>
+                    <label>It needs to be:
+                        <input id="naam" name="naam" type="text" />
+                    </label>
+                </section>
+                <section>
+                    <p>It is {{this.leeftijd}}</p>
+                    <label for="leeftijd">It needs to be:</label>
+                    <input type="text" name="leeftijd" />
+                </section>
+                <section>
+                    <p>It is {{this.soort}}</p>
+                    <label for="soort">It needs to be:</label>
+                    <input type="text" name="soort" />
+                </section>
+                <section>
+                    <p>It is {{this.beschrijving}}</p>
+                    <label for="beschrijving">It needs to be:</label>
+                    <input type="text" name="beschrijving" />
+                </section>
+                <section>
+                    <h2>Selecteer de karakter eigenschappen:</h2>
+                    <fieldset>
+                        <legend>Activiteit</legend>
+                        <p>It is {{this.eigenschappen.activiteit}}</p>
+                        <label for="actief">
+                            <input type="radio" name="activiteit" value="actief" />
+                            Actief
+                        </label>
+                        <label for="rustig">
+                            <input type="radio" name="activiteit" value="rustig" />
+                            Rustig
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Leefstijl</legend>
+                        <p>It is {{this.eigenschappen.leefstijl}}</p>
+                        <label for="binnen">
+                            <input type="radio" name="leefstijl" value="binnen" />
+                            Binnen
+                        </label>
+                        <label for="buiten">
+                            <input type="radio" name="leefstijl" value="Buiten" />
+                            Buiten
+                        </label>
+                        <label for="beiden">
+                            <input type="radio" name="leefstijl" value="Beiden" />
+                            Beiden
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Grootte</legend>
+                        <p>It is {{this.eigenschappen.grootte}}</p>
+                        <label for="groot">
+                            <input type="radio" name="grootte" value="groot" />
+                            Groot
+                        </label>
+                        <label for="middel">
+                            <input type="radio" name="grootte" value="middel" />
+                            Middel
+                        </label>
+                        <label for="klein">
+                            <input type="radio" name="grootte" value="klein" />
+                            Klein
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Dag</legend>
+                        <p>It is {{this.eigenschappen.dag}}</p>
+                        <label for="dag">
+                            <input type="radio" name="dag" value="dag" />
+                            Dag dieren
+                        </label>
+                        <label for="nacht">
+                            <input type="radio" name="dag" value="nacht" />
+                            Nacht dieren
+                        </label>
+                    </fieldset>
+                </section>
+                <label>
+                    Andere afbeelding:
+                    <input name="image" type="file" accept="image" />
+                </label>
+                <input type="submit" value="change" />
+            </form>
+        </section>
+    {{/each}}
+</main>
