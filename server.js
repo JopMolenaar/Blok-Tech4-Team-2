@@ -227,10 +227,11 @@ app.post("/voorkeuren", (req, res) => {
 		},
 		{ new: true }
 	)
-		.then((user) => {
+		.then(() => {
 		// Preferences updated successfully
 			res.redirect("/products")
 		})
+
 		.catch((error) => {
 			console.error("Error updating preferences:", error)
 			res.render("voorkeuren", { error: "Error updating preferences" })
