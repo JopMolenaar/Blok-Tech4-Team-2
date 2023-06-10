@@ -35,7 +35,14 @@ const userSchema = new mongoose.Schema({
 	leeftijd: Number,
 	gebruikersnaam: String,
 	wachtwoord: String,
+	voorkeuren: {
+		energielevel: String,
+		leefstijl: String,
+		grootte: String,
+		slaapritme: String
+	}
 })
+
 
 // Create the User model
 const User = mongoose.model("User", userSchema)
@@ -193,6 +200,7 @@ app.get("/products", async (req, res) => {
 app.get("/producten-overzicht", async (req, res) => {
 	res.render("admin-overzicht")
 })
+
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
 	res.render("admin-addProducts")
 })
@@ -200,6 +208,38 @@ app.get("/producten-overzicht/toevoegen", async (req, res) => {
 // voorkeuren pagina
 app.get("/voorkeuren", (req, res) => {
 	res.render("voorkeuren", { error: "" })
+})
+
+// voorkeuren oplaan
+app.post("/voorkeuren", (req, res) => {
+	const { energielevel, leefstijl, grootte, slaapritme } = req.body
+	const gebruikersnaam = req.session.gebruikersnaam
+  
+	User.findOneAndUpdate(
+		{ gebruikersnaam: gebruikersnaam },
+		{
+			voorkeuren: {
+				energielevel: energielevel,
+				leefstijl: leefstijl,
+				grootte: grootte,
+				slaapritme: slaapritme
+			}
+		},
+		{ new: true }
+	)
+		.then((user) => {
+		// Preferences updated successfully
+			res.redirect("/products")
+		})
+		.catch((error) => {
+			console.error("Error updating preferences:", error)
+			res.render("voorkeuren", { error: "Error updating preferences" })
+		})
+})
+  
+// voorkeuren route
+app.get("/voorkeuren-opgeslagen", async (req, res) => {
+	res.render("voorkeuren-opgeslagen")
 })
 
 //
