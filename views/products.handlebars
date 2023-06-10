@@ -11,19 +11,30 @@
     </section>
     <ul>
         {{#each product}}
-            <li class="{{this.naam}} {{this.leeftijd}} {{this.soort}}">
-                {{!-- <div>
+            <li>
+                <div>
                     <img src="/upload/{{this.img}}" alt="Picture" />
-                </div> --}}
+                </div>
+                <section>
+                    <h3 class="visually-hidden">Gegevens:</h3>
+                    <p><b>Naam:</b> {{this.naam}}</p>
+                    <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
+                    <p><b>Soort:</b> {{this.soort}}</p>
+                    <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
+                </section>
 
-                <p>{{this.naam}}</p>
-                <p>{{this.leeftijd}}</p>
-                <p>{{this.soort}}</p>
+                <section>
+                    <h4 class="visually-hidden">Eigenschappen:</h4>
+                    <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
+                    <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
+                    <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
+                    <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
+                </section>
             </li>
         {{/each}}
     </ul>
     <section>
-        <h3>Filter products</h2>
+        <h2>Filter products</h2>
         <p id="javascriptOff">Turn on Javascript to use the filter function</p>
     </section>
 </main>
