@@ -43,6 +43,19 @@ const userSchema = new mongoose.Schema({
     },
 })
 
+// is middleware en vuurt deze function als er een user wordt gesaved
+// ARROW FUNCTION WERKT HIER NIET, DAAROM DE "function" ZOALS IN ES5
+userSchema.pre("save", async function (next) {
+    try {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(this.wachtwoord, salt)
+        this.wachtwoord = hashedPassword
+        next()
+    } catch (error) {
+        next(error)
+    }
+})
+
 // Create the User model
 const User = mongoose.model("User", userSchema, "users")
 
@@ -115,7 +128,8 @@ app.post("/login", (req, res) => {
 
                 // Compare the provided password with the stored password
                 bcrypt.compare(wachtwoord, user.wachtwoord, (err, result) => {
-                    if (wachtwoord === user.wachtwoord) {
+                    console.log(result)
+                    if (result) {
                         console.log("Password matched")
 
                         // Password matches, set loggedIn session variable to true
@@ -202,17 +216,6 @@ app.post("/signUp", (req, res) => {
             }
             res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
         })
-
-    // Hash the password
-    // bcrypt.hash(wachtwoord, 10, (err, hashedPassword) => {
-    //     console.log("bycrypt")
-    //     if (err) {
-    //         console.error("Error hashing password:", err)
-    //         req.session.error = "Gebruiker niet kunnen registreren"
-    //         res.redirect("/signUp") // Redirect to the signup page
-    //         return
-    //     }
-    // })
 })
 
 //
