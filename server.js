@@ -18,24 +18,31 @@ app.use(express.urlencoded({ extended: true }))
 
 // defines path for images, replaces file name with unique file name
 const storage = multer.diskStorage({
-    destination: (req, file, setPath) => {
-        setPath(null, "static/upload/")
-    },
-    filename: (req, file, replaceFileName) => {
-        console.log(file)
-        replaceFileName(null, Date.now() + path.extname(file.originalname))
-    },
+	destination: (req, file, setPath) => {
+		setPath(null, "static/upload/")
+	},
+	filename: (req, file, replaceFileName) => {
+		console.log(file)
+		replaceFileName(null, Date.now() + path.extname(file.originalname))
+	},
 })
 const upload = multer({ storage: storage })
 
 // The User schema defined
 const userSchema = new mongoose.Schema({
-    naam: String,
-    email: String,
-    leeftijd: Number,
-    gebruikersnaam: String,
-    wachtwoord: String,
+	naam: String,
+	email: String,
+	leeftijd: Number,
+	gebruikersnaam: String,
+	wachtwoord: String,
+	voorkeuren: {
+		energielevel: String,
+		leefstijl: String,
+		grootte: String,
+		slaapritme: String
+	}
 })
+
 
 // Create the User model
 const User = mongoose.model("User", userSchema, "users")
@@ -60,137 +67,153 @@ const Product = mongoose.model("Product", productShema, "products")
 
 // Configure session
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 15 * 60 * 1000, // Set the expiration time to 15 minutes in milliseconds
-        },
-    })
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			maxAge: 15 * 60 * 1000, // Set the expiration time to 15 minutes in milliseconds
+		},
+	})
 )
 
 mongoose
-    .connect(process.env.DB_CONNECTION_STRING, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+	.connect(process.env.DB_CONNECTION_STRING, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
 
-    .then(() => {
-        console.log("Verbonden met de database")
-    })
+	.then(() => {
+		console.log("Verbonden met de database")
+	})
 
 app.get("/login", async (req, res) => {
-    const errorMessage = req.session.error
-    req.session.error = "" // Clear the error message from the session
-    const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
-    res.render("login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
+	const errorMessage = req.session.error
+	req.session.error = "" // Clear the error message from the session
+	const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
+	res.render("login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
 })
 
 app.get("/signUp", async (req, res) => {
-    // Check if the user is already logged in
-    if (req.session.loggedIn) {
-        res.redirect("/products")
-    } else {
-        res.render("signUp")
-    }
+	// Check if the user is already logged in
+	if (req.session.loggedIn) {
+		res.redirect("/products")
+	} else {
+		res.render("signUp")
+	}
 })
 
 app.post("/login", (req, res) => {
-    const { gebruikersnaam, wachtwoord } = req.body
+	const { gebruikersnaam, wachtwoord } = req.body
 
-    // Find the user in the database with the provided username
-    User.findOne({ gebruikersnaam: gebruikersnaam })
-        .then((user) => {
-            if (user) {
-                // if user found compare the provided password with the hashed password
-                bcrypt.compare(wachtwoord, user.wachtwoord, (error, result) => {
-                    if (result) {
-                        // Password matches, set loggedIn session variable to true
-                        req.session.loggedIn = true
-                        req.session.gebruikersnaam = gebruikersnaam
-                        req.session.save(() => {
-                            res.redirect("/products")
-                        })
-                    } else {
-                        // Password does not match
-                        req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-                        res.redirect("/login")
-                    }
-                })
-            } else {
-                // User not found
-                req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-                res.redirect("/login")
-            }
-        })
-        .catch((error) => {
-            console.error("Error gebruiker niet gevonden:", error)
-            req.session.error = "Inloggen onsuccesvol"
-            res.redirect("/login")
-        })
+	console.log("Login username:", gebruikersnaam);
+
+	// Find the user in the database with the provided username
+	User.findOne({ gebruikersnaam: gebruikersnaam })
+		.then((user) => {
+			if (user) {
+				console.log("User found:", user)
+
+				// Compare the provided password with the stored password
+				bcrypt.compare(wachtwoord, user.wachtwoord, (err, result) => {
+					if (result) {
+						console.log("Password matched")
+
+						// Password matches, set loggedIn session variable to true
+						req.session.loggedIn = true
+						req.session.gebruikersnaam = gebruikersnaam
+						req.session.save(() => {
+							console.log("Session saved")
+							res.redirect("/products")
+						})
+					} else {
+						console.log("Password did not match")
+
+						// Password does not match
+						req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+						res.redirect("/login")
+					}
+				})
+			} else {
+				console.log("User not found")
+
+				// User not found
+				req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+				res.redirect("/login")
+			}
+		})
+		.catch((error) => {
+			console.error("Error gebruiker niet gevonden:", error)
+			req.session.error = "Inloggen onsuccesvol"
+			res.redirect("/login")
+		})
+})
+
+app.post("/logout", (req, res) => {
+	req.session.destroy()
+	res.redirect("/login")
 })
 
 // Signup as a new user
 app.post("/signUp", (req, res) => {
-    const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
-    console.log(gebruikersnaam)
-    console.log("post request werkt")
-    // Check if username is filled in
-    if (!gebruikersnaam) {
-        req.session.error = "Vul een gebruikersnaam in"
-        res.redirect("/signup") // Redirect to the signup page
-        return
-    }
+	const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
+	console.log(gebruikersnaam)
+	console.log("post request werkt")
+	// Check if username is filled in
+	if (!gebruikersnaam) {
+		req.session.error = "Vul een gebruikersnaam in"
+		res.redirect("/signup") // Redirect to the signup page
+		return
+	}
 
-    // Check if password and confirm password match
-    if (wachtwoord !== wachtwoordBevestigen) {
-        req.session.error = "Wachtwoorden komen niet overeen"
-        res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
-        return
-    }
+	// Check if password and confirm password match
+	if (wachtwoord !== wachtwoordBevestigen) {
+		req.session.error = "Wachtwoorden komen niet overeen"
+		res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
+		return
+	}
 
-    // Create a new user object with the filled-in information
-    const newUser = new User({
-        naam: naam,
-        email: email,
-        leeftijd: leeftijd,
-        gebruikersnaam: gebruikersnaam,
-        // wachtwoord: hashedPassword,
-    })
+	// Create a new user object with the filled-in information
+	const newUser = new User({
+		naam: naam,
+		email: email,
+		leeftijd: leeftijd,
+		gebruikersnaam: gebruikersnaam,
+		wachtwoord: wachtwoord,
+	})
 
-    // Save the new user to the database
-    newUser
-        .save()
-        .then(() => {
-            console.log("new user")
-            req.session.loggedIn = true
-            req.session.gebruikersnaam = gebruikersnaam
-            req.session.save(() => {
-                res.redirect("/products")
-            })
-        })
-        .catch((error) => {
-            console.error("Error gebruiker aanmaken:", error)
-            if (error.code === 11000) {
-                // Duplicate key error
-                req.session.error = "Email al in gebruik"
-            } else {
-                req.session.error = "Gebruiker niet kunnen registreren"
-            }
-            res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
-        })
+	// Save the new user to the database
+	newUser
+		.save()
+		.then(() => {
+			console.log("new user")
+			req.session.loggedIn = true
+			req.session.gebruikersnaam = gebruikersnaam
+			req.session.save(() => {
+				res.redirect("/products")
+			})
+		})
+		.catch((error) => {
+			console.error("Error gebruiker aanmaken:", error)
+			if (error.code === 11000) {
+				// Duplicate key error
+				req.session.error = "Email al in gebruik"
+			} else {
+				req.session.error = "Gebruiker niet kunnen registreren"
+			}
+			res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
+		})
 
-    // Hash the password
-    // bcrypt.hash(wachtwoord, 10, (err, hashedPassword) => {
-    //     console.log("bycrypt")
-    //     if (err) {
-    //         console.error("Error hashing password:", err)
-    //         req.session.error = "Gebruiker niet kunnen registreren"
-    //         res.redirect("/signUp") // Redirect to the signup page
-    //         return
-    //     }
-    // })
+	// Hash the password
+	// bcrypt.hash(wachtwoord, 10, (err, hashedPassword) => {
+	//     console.log("bycrypt")
+	//     if (err) {
+	//         console.error("Error hashing password:", err)
+	//         req.session.error = "Gebruiker niet kunnen registreren"
+	//         res.redirect("/signUp") // Redirect to the signup page
+	//         return
+	//     }
+	// })
 })
 
 //
@@ -324,24 +347,57 @@ app.get("/producten-overzicht/detail/:id", async (req, res) => {
 
 // add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
-    res.render("admin-addProducts")
+	res.render("admin-addProducts")
 })
 
 // voorkeuren pagina
 app.get("/voorkeuren", (req, res) => {
-    res.render("voorkeuren", { error: "" })
+	res.render("voorkeuren", { error: "" })
+})
+
+// voorkeuren oplaan
+app.post("/voorkeuren", (req, res) => {
+	const { energielevel, leefstijl, grootte, slaapritme } = req.body
+	const gebruikersnaam = req.session.gebruikersnaam
+  
+	User.findOneAndUpdate(
+		{ gebruikersnaam: gebruikersnaam },
+		{
+			voorkeuren: {
+				energielevel: energielevel,
+				leefstijl: leefstijl,
+				grootte: grootte,
+				slaapritme: slaapritme
+			}
+		},
+		{ new: true }
+	)
+		.then(() => {
+		// Preferences updated successfully
+			res.redirect("/products")
+		})
+
+		.catch((error) => {
+			console.error("Error updating preferences:", error)
+			res.render("voorkeuren", { error: "Error updating preferences" })
+		})
+})
+  
+// voorkeuren route
+app.get("/voorkeuren-opgeslagen", async (req, res) => {
+	res.render("voorkeuren-opgeslagen")
 })
 
 //
 // 404
 //
 app.get("*", (req, res) => {
-    res.status(404).render("notfound")
+	res.status(404).render("notfound")
 })
 
 //
 // PORT
 //
 app.listen(PORT, () => {
-    console.log(`server running on port: ${PORT}`)
+	console.log(`server running on port: ${PORT}`)
 })
