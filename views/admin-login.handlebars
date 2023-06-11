@@ -1,0 +1,23 @@
+<body class="background-image">
+    <h1>Welkom Admin</h1>
+    <h2>Login om verder te gaan</h2>
+
+    <form action="/login" method="POST">
+        <div>
+            <label for="username">Gebruikersnaam:</label>
+            <input type="tekst" id="gebruikersnaam" name="gebruikersnaam" required />
+        </div>
+
+        <div>
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="wachtwoord" name="wachtwoord" required />
+            {{#if error}}
+                <p class="error-message">{{error}}</p>
+            {{/if}}
+        </div>
+
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</body>
