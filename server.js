@@ -99,6 +99,13 @@ mongoose
 		console.log("Verbonden met de database")
 	})
 
+app.get("/admin-login", async (req, res) => {
+	const errorMessage = req.session.error
+	req.session.error = "" // Clear the error message from the session
+	const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
+	res.render("admin-login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
+})
+
 app.get("/login", async (req, res) => {
 	const errorMessage = req.session.error
 	req.session.error = "" // Clear the error message from the session
@@ -115,6 +122,55 @@ app.get("/signUp", async (req, res) => {
 	}
 })
 
+// Admin login
+app.post("/admin-login", (req, res) => {
+	const { gebruikersnaam, wachtwoord } = req.body
+
+	console.log("Login username:", gebruikersnaam)
+
+	// Find the user in the database with the provided username
+	User.findOne({ gebruikersnaam: gebruikersnaam })
+		.then((user) => {
+			if (user) {
+				console.log("User found:", user)
+
+				// Compare the provided password with the stored password
+				bcrypt.compare(wachtwoord, user.wachtwoord, (err, result) => {
+					console.log(result)
+					if (result) {
+						console.log("Password matched")
+
+						// Password matches, set loggedIn session variable to true
+						req.session.loggedIn = true
+						req.session.gebruikersnaam = gebruikersnaam
+						req.session.save(() => {
+							console.log("Session saved")
+							res.redirect("/producten-overzicht")
+						})
+					} else {
+						console.log("Password did not match")
+
+						// Password does not match
+						req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+						res.redirect("/admin-login")
+					}
+				})
+			} else {
+				console.log("User not found")
+
+				// User not found
+				req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+				res.redirect("/admin-login")
+			}
+		})
+		.catch((error) => {
+			console.error("Error gebruiker niet gevonden:", error)
+			req.session.error = "Inloggen onsuccesvol"
+			res.redirect("/admin-login")
+		})
+})
+
+// Regular user login
 app.post("/login", (req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
 
