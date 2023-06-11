@@ -125,51 +125,36 @@ app.get("/signUp", async (req, res) => {
 // Admin login
 app.post("/admin-login", (req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
-
+	const adminUsername = process.env.ADMIN_USERNAME
+	const adminPassword = process.env.ADMIN_PASSWORD
+  
 	console.log("Login username:", gebruikersnaam)
-
-	// Find the user in the database with the provided username
-	User.findOne({ gebruikersnaam: gebruikersnaam })
-		.then((user) => {
-			if (user) {
-				console.log("User found:", user)
-
-				// Compare the provided password with the stored password
-				bcrypt.compare(wachtwoord, user.wachtwoord, (err, result) => {
-					console.log(result)
-					if (result) {
-						console.log("Password matched")
-
-						// Password matches, set loggedIn session variable to true
-						req.session.loggedIn = true
-						req.session.gebruikersnaam = gebruikersnaam
-						req.session.save(() => {
-							console.log("Session saved")
-							res.redirect("/producten-overzicht")
-						})
-					} else {
-						console.log("Password did not match")
-
-						// Password does not match
-						req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-						res.redirect("/admin-login")
-					}
-				})
-			} else {
-				console.log("User not found")
-
-				// User not found
-				req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-				res.redirect("/admin-login")
-			}
+  
+	// Check if the provided username and password match the admin credentials
+	if (gebruikersnaam === adminUsername && wachtwoord === adminPassword) {
+		console.log("Admin login successful")
+  
+		// Set loggedIn session variable to true for admin
+		req.session.loggedIn = true
+		req.session.gebruikersnaam = gebruikersnaam
+		req.session.save(() => {
+			console.log("Session saved")
+			res.redirect("/producten-overzicht")
 		})
-		.catch((error) => {
-			console.error("Error gebruiker niet gevonden:", error)
-			req.session.error = "Inloggen onsuccesvol"
-			res.redirect("/admin-login")
-		})
+	} else {
+		console.log("Admin login failed")
+  
+		// Admin login failed
+		req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+		res.redirect("/admin-login")
+	}
 })
 
+app.post("/admin-logout", (req, res) => {
+	req.session.destroy()
+	res.redirect("/admin-login")
+})
+  
 // Regular user login
 app.post("/login", (req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
