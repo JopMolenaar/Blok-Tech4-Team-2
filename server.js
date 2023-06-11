@@ -43,6 +43,8 @@ const userSchema = new mongoose.Schema({
     },
 })
 
+// is middleware en vuurt deze function als er een user wordt gesaved
+// ARROW FUNCTION WERKT HIER NIET, DAAROM DE "function" ZOALS IN ES5
 userSchema.pre("save", async function (next) {
     try {
         const salt = await bcrypt.genSalt(10)
