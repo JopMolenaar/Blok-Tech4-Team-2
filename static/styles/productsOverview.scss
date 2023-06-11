@@ -13,7 +13,9 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
     grid-template-rows: 6.25em 1fr;
     flex-direction: column;
     overflow-y: hidden;
-    section:nth-child(1) {
+
+    // heading of list section
+    > section:nth-child(1) {
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 1;
@@ -34,6 +36,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             align-content: center;
         }
     }
+    // list
     ul {
         grid-column-start: 2;
         grid-column-end: 3;
@@ -52,47 +55,70 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         max-width: 103.75em;
         max-height: 90%;
         overflow-y: auto;
-        grid-template-columns: repeat(auto-fit, minmax(27em, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
         li {
             place-self: center;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 12.5em 1fr 1fr 1fr 1fr;
+
             list-style-type: none;
             box-shadow: $shadow-box;
+            background-color: $color-background;
             border-radius: 0.9375em;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 26em;
-            height: 21.875em;
+            max-width: 22em;
+            height: 22em;
             overflow: hidden;
             position: relative;
-            div {
-                display: flex;
-                overflow: hidden;
-                grid-column-start: 1;
-                grid-column-end: 4;
-                grid-row-start: 1;
-                grid-row-end: 2;
-                height: 12.5em;
-                img {
-                    width: 100%;
-                    object-fit: cover;
+            a {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 12em 1fr;
+                height: 100%;
+                width: 100%;
+                color: $color-text;
+                div {
+                    display: flex;
+                    overflow: hidden;
+                    grid-column-start: 1;
+                    grid-column-end: 3;
+                    grid-row-start: 1;
+                    grid-row-end: 2;
+                    height: 12em;
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
                 }
-            }
-            p {
-                height: fit-content;
-                margin: 0;
-                margin: 0.2em;
-                padding: 0.3em;
-                max-width: 9.375em;
-                overflow: hidden;
-                font-size: 1.3em;
+                section:nth-child(2) p,
+                section:nth-child(3) p {
+                    height: fit-content;
+                    margin: 0;
+                    margin: 0.2em;
+                    padding: 0.3em;
+                    max-width: 9.375em;
+                    overflow: hidden;
+                    font-size: 1em;
+                }
+                section:nth-child(2) {
+                    grid-column-start: 1;
+                    grid-column-end: 2;
+                    grid-row-start: 2;
+                    grid-row-end: 3;
+                    height: 100%;
+                }
+                section:nth-child(3) {
+                    grid-column-start: 2;
+                    grid-column-end: 3;
+                    grid-row-start: 2;
+                    grid-row-end: 3;
+                    height: 100%;
+                }
             }
         }
     }
-    section:nth-child(3) {
+    // filter section
+    > section:nth-child(3) {
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -150,6 +176,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
     }
 }
 
+// admin page, eigenlijk hoort deze op een andere pagina
 #productpageAdminAdd {
     height: calc(100vh - 4em);
     width: 100%;
