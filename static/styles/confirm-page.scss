@@ -44,16 +44,20 @@ $color-input-expected: #98E6BF;
     }
 
     .dogInfo {
-        display: grid;
-        
+        display: flex;
+        flex-direction: column;
         padding: 0;
         justify-items: start;
         text-align: start;
+        gap: 0.5rem;
+
         li {
-            width: 100%;
-            display: grid;
-            justify-self: start;
-            height: fit-content;
+            height: min-content;
+            display: flex;
+            flex-direction: column;
+
+
+
         }
     }
 }

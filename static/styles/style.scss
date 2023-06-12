@@ -10,6 +10,41 @@ $shadow-header: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px
 $color-input-normal: #4e4c67;
 $color-input-error: #f00;
 $color-input-expected: #98E6BF;
+// Button colors
+$color-primary-button: #dcd6f7;
+$color-primary-button-hover: #A6b1e1;
+
+$color-secondary-button:#98E6BF;
+$color-secondary-button-hover: #7DC2B2;
+
+// Fonts
+@font-face {
+    font-family: 'poppins-bold';
+    src: url(../fonts/Poppins-Bold.woff2);
+    font-weight: bolder;
+}
+$font-header: 'poppins-bold', Arial, Helvetica, sans-serif;
+
+@font-face {
+    font-family: 'poppins-semi-bold';
+    src: url(../fonts/Poppins-SemiBold.woff2);
+    font-weight: bold;
+}
+$font-button: 'poppins-semi-bold', Arial, Helvetica, sans-serif;
+
+@font-face {
+    font-family: 'poppins-medium';
+    src: url(../fonts/Poppins-Medium.woff2);
+}
+$font-caption: 'poppins-medium', Arial, Helvetica, sans-serif;
+
+@font-face {
+    font-family: 'poppins-regular';
+    src: url(../fonts/Poppins-Regular.woff2);
+}
+$font-body: 'poppins-regular', Arial, Helvetica, sans-serif;
+
+
 
 body {
     margin: 0;
@@ -17,6 +52,9 @@ body {
     position: relative;
     min-height: 100%;
     background-color: $color-text-white;
+    font-family: $font-body;
+    font-size: 1.2em;
+
 }
 
 /* The hide class */
@@ -34,10 +72,30 @@ a {
     text-decoration: none;
     transition: all 0.3s ease;
 }
+
 button,
 summary {
     cursor: pointer;
+    font-family: $font-button;
+    font-size: 1.4rem;
 }
+
+.buttonPrimary,
+.submitButton {
+    color: $color-input-normal;
+    background-color: $color-primary-button;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.7rem;
+    width: fit-content;
+    font-size: 1.4rem;
+}
+
+.buttonPrimary:hover,
+.submitButton:hover {
+    background-color: $color-primary-button-hover;
+}
+
 img {
     width: 6.25em;
     height: auto;
@@ -65,8 +123,10 @@ header {
 }
 
 form {
-    display: flex;
-    justify-content: center;
+    width: 80%;
+    margin: auto;
+    display: grid;
     align-items: center;
-    flex-direction: column;  
+    gap: 0.5rem;
+    
   }

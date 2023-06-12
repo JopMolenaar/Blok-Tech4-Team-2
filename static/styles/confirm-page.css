@@ -27,15 +27,16 @@
   justify-self: end;
 }
 #confirmPage .dogInfo {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   justify-items: start;
   text-align: start;
+  gap: 0.5rem;
 }
 #confirmPage .dogInfo li {
-  width: 100%;
-  display: grid;
-  justify-self: start;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: -moz-min-content;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=confirm-page.css.map */

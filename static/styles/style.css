@@ -1,9 +1,29 @@
+@font-face {
+  font-family: "poppins-bold";
+  src: url(../fonts/Poppins-Bold.woff2);
+  font-weight: bolder;
+}
+@font-face {
+  font-family: "poppins-semi-bold";
+  src: url(../fonts/Poppins-SemiBold.woff2);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "poppins-medium";
+  src: url(../fonts/Poppins-Medium.woff2);
+}
+@font-face {
+  font-family: "poppins-regular";
+  src: url(../fonts/Poppins-Regular.woff2);
+}
 body {
   margin: 0;
   padding: 0;
   position: relative;
   min-height: 100%;
   background-color: #eeeeee;
+  font-family: "poppins-regular", Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
 }
 
 /* The hide class */
@@ -26,6 +46,25 @@ a {
 button,
 summary {
   cursor: pointer;
+  font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+}
+
+.buttonPrimary,
+.submitButton {
+  color: #4e4c67;
+  background-color: #dcd6f7;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.7rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1.4rem;
+}
+
+.buttonPrimary:hover,
+.submitButton:hover {
+  background-color: #A6b1e1;
 }
 
 img {
@@ -55,8 +94,9 @@ header nav {
 }
 
 form {
-  display: flex;
-  justify-content: center;
+  width: 80%;
+  margin: auto;
+  display: grid;
   align-items: center;
-  flex-direction: column;
+  gap: 0.5rem;
 }/*# sourceMappingURL=style.css.map */
