@@ -67,6 +67,25 @@ summary {
   background-color: #A6b1e1;
 }
 
+.buttonPrimary:active,
+.submitButton:active {
+  animation: fillButton 3s linear infinite;
+  visibility: hidden;
+}
+
+@keyframes fillButton {
+  0% {
+    background-color: #A6b1e1;
+  }
+  100% {
+    background-color: #4e4c67;
+  }
+}
+.buttonPrimary:hover,
+.submitButton:hover {
+  background-color: #A6b1e1;
+}
+
 img {
   width: 6.25em;
   height: auto;

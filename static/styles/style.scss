@@ -96,6 +96,27 @@ summary {
     background-color: $color-primary-button-hover;
 }
 
+.buttonPrimary:active,
+.submitButton:active {
+    animation: fillButton 3s linear infinite;
+    visibility: hidden;
+}
+
+@keyframes fillButton {
+    0% {
+        background-color: $color-primary-button-hover;
+    }
+    100% {
+        background-color: $color-input-normal;
+    }
+}
+
+
+.buttonPrimary:hover,
+.submitButton:hover {
+    background-color: $color-primary-button-hover;
+}
+
 img {
     width: 6.25em;
     height: auto;
