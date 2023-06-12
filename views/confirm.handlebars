@@ -12,15 +12,18 @@
 <main id="confirmPage">
 
     <section class="message">
-        <h1>Wat fijn dat u {naam van dier} heeft gevonden!</h1>
+        {{#with doggo}}
+        <h1>Wat fijn dat u {{this.naam}} heeft gevonden!</h1>
         {{!-- foto dier --}}
-        <img src="/images/dog.webp" alt="dog Barry">
-        <ul>
-            {{#with doggo}}
+        
+        <ul class="dogContainer">
+            <li class="liIMG"><img src="/images/dog.webp" alt="dog Barry"></li>
+            <ul class="dogInfo">
             <li>Naam: {{this.naam}}</li>
             <li>Leeftijd: {{this.leeftijd}}</li>
             <li>Soort: {{this.soort}}</li>
             <li>Beschrijving: {{this.beschrijving}}</li>
+            </ul>
             {{/with}}
         </ul>
 

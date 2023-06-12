@@ -1,13 +1,41 @@
 #confirmPage {
   display: grid;
-  grid-template-rows: 1fr max-content;
+  grid-template-rows: max-content 1fr;
   align-items: center;
   text-align: center;
 }
 #confirmPage section {
   display: grid;
   margin: auto;
+  width: 80%;
 }
 #confirmPage img {
-  width: 10rem;
+  width: 15rem;
+}
+#confirmPage ul {
+  list-style: none;
+}
+#confirmPage .dogcontainer {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+#confirmPage .liIMG {
+  width: 15rem;
+  display: grid;
+  justify-self: end;
+}
+#confirmPage .dogInfo {
+  display: grid;
+  padding: 0;
+  justify-items: start;
+  text-align: start;
+}
+#confirmPage .dogInfo li {
+  width: 100%;
+  display: grid;
+  justify-self: start;
+  height: -moz-fit-content;
+  height: fit-content;
 }/*# sourceMappingURL=confirm-page.css.map */

@@ -11,16 +11,49 @@ $color-input-expected: #98E6BF;
 
 #confirmPage {
     display: grid;
-    grid-template-rows: 1fr max-content;
+    grid-template-rows: max-content 1fr;
     align-items: center;
     text-align: center;
+
 
     section {
         display: grid;
         margin: auto;
+        width: 80%;
     }
 
     img {
-        width: 10rem;
+        width: 15rem;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .dogcontainer {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .liIMG {
+        width: 15rem;
+        display: grid;
+        justify-self: end;
+    }
+
+    .dogInfo {
+        display: grid;
+        
+        padding: 0;
+        justify-items: start;
+        text-align: start;
+        li {
+            width: 100%;
+            display: grid;
+            justify-self: start;
+            height: fit-content;
+        }
     }
 }
