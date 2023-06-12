@@ -16,12 +16,12 @@
         {{!-- foto dier --}}
         <img src="/images/dog.webp" alt="dog Barry">
         <ul>
-            {{#each doggo}}
-            <li>Naam: {{doggo.naam}}</li>
-            <li>Leeftijd: {{doggo.leeftijd}}</li>
-            <li>Soort: {{doggo.soort}}</li>
-            <li>Beschrijving: {{doggo.beschrijving}}</li>
-            {{/each}}
+            {{#with doggo}}
+            <li>Naam: {{this.naam}}</li>
+            <li>Leeftijd: {{this.leeftijd}}</li>
+            <li>Soort: {{this.soort}}</li>
+            <li>Beschrijving: {{this.beschrijving}}</li>
+            {{/with}}
         </ul>
 
         <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
