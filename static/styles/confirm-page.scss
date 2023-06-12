@@ -22,9 +22,6 @@ $color-input-expected: #98E6BF;
         width: 80%;
     }
 
-    img {
-        width: 15rem;
-    }
 
     ul {
         list-style: none;
@@ -37,8 +34,12 @@ $color-input-expected: #98E6BF;
         gap: 2rem;
     }
 
+    img{
+        width: 100%;
+        height: auto;
+    }
+
     .liIMG {
-        width: 15rem;
         display: grid;
         justify-self: end;
     }

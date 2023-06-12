@@ -9,9 +9,6 @@
   margin: auto;
   width: 80%;
 }
-#confirmPage img {
-  width: 15rem;
-}
 #confirmPage ul {
   list-style: none;
 }
@@ -21,8 +18,11 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
+#confirmPage img {
+  width: 100%;
+  height: auto;
+}
 #confirmPage .liIMG {
-  width: 15rem;
   display: grid;
   justify-self: end;
 }
