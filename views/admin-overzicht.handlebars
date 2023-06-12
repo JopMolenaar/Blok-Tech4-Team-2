@@ -1,0 +1,25 @@
+<header>
+    <section>
+    </section>
+    <nav>
+    </nav>
+</header>
+
+<main id="productpageAdmin">
+    <section>
+        <a href="/producten-overzicht/toevoegen">Product toevoegen</a>
+    </section>
+    <ul>
+        {{#each result}}
+            <li>
+                {{!-- <div>
+                    <img src="/upload/{{this.img}}" alt="Picture of the place" />
+                </div> --}}
+                <p>{{this.country}}</p>
+                <p>{{this.city}}</p>
+                <p>{{this.adress}}</p>
+                <p>{{this.discription}}</p>
+            </li>
+        {{/each}}
+    </ul>
+</main>

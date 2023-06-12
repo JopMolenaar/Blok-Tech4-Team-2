@@ -51,26 +51,11 @@ header {
         width: 30em;
         height: 4em;
         align-items: center;
-        img {
-            margin-left: 1em;
-            height: 80%;
-            width: auto;
-        }
-        h1 {
-            font-size: 1.5em;
-        }
     }
-    ul {
+    nav {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         width: 30em;
-        li {
-            list-style: none;
-            a {
-                font-size: 1.4em;
-                color: $color-text-black;
-            }
-        }
     }
 }
