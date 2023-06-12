@@ -433,8 +433,25 @@ app.get("/voorkeuren-opgeslagen", async (req, res) => {
 
 // Confirmation page
 app.get("/confirm", async (req, res) => {
-    res.render("confirm")
+    const today = new Date();
+    const weekdays = new Date();
+    weekdays.setDate(today.getDate() + 7);
+
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
     
+    if (today.getDay() === 5) {
+      weekdays.setDate(weekdays.getDate() + 7); // Add additional 7 days if today is Friday
+    }
+    
+    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
+      weekdays.setDate(weekdays.getDate() + 1);
+    }
+    
+    const weekdaysStr = weekdays.toISOString().split('T')[0];
+    
+
+    res.render("confirm",{weekdaysStr}) 
 })
 
 //
