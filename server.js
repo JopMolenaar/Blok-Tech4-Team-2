@@ -390,6 +390,12 @@ app.get("/voorkeuren-opgeslagen", async (req, res) => {
     res.render("voorkeuren-opgeslagen")
 })
 
+// Confirmation page
+app.get("/confirm", async (req, res) => {
+    res.render("confirm")
+    
+})
+
 //
 // 404
 //
