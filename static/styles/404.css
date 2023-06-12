@@ -1,32 +1,22 @@
 #page-not-found {
   height: 100vh;
   width: 100vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
-
 #page-not-found img {
   width: auto;
   height: 100%;
 }
-
 #page-not-found h1 {
   position: absolute;
   top: 5%;
   left: 75%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   color: white;
 }
-
 #page-not-found button {
   all: unset;
   width: 30em;
@@ -37,16 +27,13 @@
   position: absolute;
   top: 35%;
   left: 75%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-
 #page-not-found a {
   position: absolute;
   top: 74%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 23em;
   height: 9.3em;
 }
@@ -57,18 +44,15 @@
     left: 70%;
   }
 }
-
 @media (min-width: 106.25em) {
   #page-not-found button,
   #page-not-found h1 {
     left: 65%;
   }
 }
-
 @media (min-width: 131.25em) {
   #page-not-found button,
   #page-not-found h1 {
     left: 62%;
   }
-}
-/*# sourceMappingURL=404.css.map */
+}/*# sourceMappingURL=404.css.map */

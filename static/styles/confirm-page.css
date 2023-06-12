@@ -1,0 +1,13 @@
+#confirmPage {
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  align-items: center;
+  text-align: center;
+}
+#confirmPage section {
+  display: grid;
+  margin: auto;
+}
+#confirmPage img {
+  width: 10rem;
+}/*# sourceMappingURL=confirm-page.css.map */

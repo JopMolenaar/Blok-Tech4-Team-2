@@ -14,7 +14,15 @@
     <section class="message">
         <h1>Wat fijn dat u {naam van dier} heeft gevonden!</h1>
         {{!-- foto dier --}}
-        <img src="" alt="">
+        <img src="/images/dog.webp" alt="dog Barry">
+        <ul>
+            {{#each doggo}}
+            <li>Naam: {{doggo.naam}}</li>
+            <li>Leeftijd: {{doggo.leeftijd}}</li>
+            <li>Soort: {{doggo.soort}}</li>
+            <li>Beschrijving: {{doggo.beschrijving}}</li>
+            {{/each}}
+        </ul>
 
         <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
     </section>
