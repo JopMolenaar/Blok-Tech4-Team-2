@@ -1,0 +1,53 @@
+<header>
+    <section>
+    </section>
+    <nav>
+        <form id="logout" action="/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+
+
+<main id="confirmPage">
+
+    <section class="message">
+        <h1>Wat fijn dat u {naam van dier} heeft gevonden!</h1>
+        {{!-- foto dier --}}
+        <img src="" alt="">
+
+        <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
+    </section>
+
+    <form class="confirm">
+
+        <div class="formName">
+            <label>Wat is uw naam?</label>
+            <input type="text" id="name" name="name" placeholder="Uw naam" required />
+        </div>
+
+        <div class="formPhone">
+            <label>Wat is uw telefoon nummer?</label>
+            <input type="tel" inputmode="tel" id="phone" name="phone" placeholder="+31612345678" required />
+        </div>
+
+
+        <div class="formDate">
+            <label for="date-input">Welke dag wilt u het dier komen ophalen?</label>
+            <input type="date" id="date-input" name="date" min="" max="" required>
+        </div>
+
+        <div class="formTime">
+            <label for="time-input">Hoelaat wilt u het dier komen ophalen?</label>
+            <select id="time-input" name="time" required></select>
+        </div>
+
+        <div class="formSubmit">
+            <input class="submitButton" type="submit" value="Maak uw afspraak" required>
+        </div>
+    </form>
+
+
+</main>
+
+<script src="/js/confirm-time.js"></script>
