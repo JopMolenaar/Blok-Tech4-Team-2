@@ -1,0 +1,130 @@
+/* General styling */
+
+$background-image: url("/images/dog.jpg");
+$primary-color: #242424;
+$secondary-color: #4E4C67;
+$background-color: #ffffffa0;
+$hover-color: #A6B1E1;
+$input-border-color: #DCD6F7;
+$placeholder-border-color: #98E6BF;
+
+.background-image {
+  background-image: $background-image;
+  background-size: cover;
+  background-position: center;
+}
+
+.loginH {
+  text-align: center;
+  color: $primary-color;
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+.formH3 {
+  text-align: center;
+  font-size: 1em;
+}
+
+/* loginForm styling */
+
+#loginForm {
+  border: 0em solid $secondary-color;
+  border-radius: 0.1em;
+  background-color: $background-color;
+  max-width: 25em;
+  padding: 1.25em;
+  margin-top: 2em;
+  display: block;
+
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 0.8em;
+    margin: 0;
+    text-align: center;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="username"] {
+    border: 0.01em solid $input-border-color;
+    border-radius: 0.1875em;
+    font-size: 1em;
+    padding: 0.625em;
+    width: 80%;
+    display: block;
+    margin: 1em auto;
+    margin-top: 0.5em;
+  }
+
+  button[type="submit"] {
+    background-color: $input-border-color;
+    border: none;
+    border-radius: 0.2em;
+    color: $primary-color;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    padding: 0.625em;
+    width: 80%;
+    margin: 1em auto;
+  }
+
+  button[type="submit"]:hover {
+    background-color: $hover-color;
+  }
+
+  input:required:invalid {
+    color: $secondary-color;
+    border-color: $secondary-color;
+    border-width: 0.1em;
+    border-style: solid;
+  }
+
+  input:required:-moz-placeholder-shown {
+    border-color: $placeholder-border-color;
+    border-width: 0.1em;
+    border-style: solid;
+  }
+
+  input:required:-ms-input-placeholder {
+    border-color: $placeholder-border-color;
+    border-width: 0.2em;
+    border-style: solid;
+  }
+
+  input:required:valid,
+  input:required:placeholder-shown {
+    border-color: $placeholder-border-color;
+    border-width: 0.2em;
+    border-style: solid;
+  }
+}
+
+/* Neutral form styling */
+
+.formButton {
+  background-color: $input-border-color;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.2em;
+  color: $primary-color;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  margin: 1em auto;
+  font-weight: bold;
+  width: 75%;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+.question {
+  margin-bottom: 1.25em;
+}
