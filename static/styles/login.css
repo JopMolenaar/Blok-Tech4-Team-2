@@ -67,7 +67,7 @@
   #loginForm button[type="submit"] {
     background-color: #DCD6F7;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.4em;
     color: #242424;
     cursor: pointer;
     display: block;
@@ -115,7 +115,7 @@
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.4em;
     color: #242424;
     cursor: pointer;
     display: block;
