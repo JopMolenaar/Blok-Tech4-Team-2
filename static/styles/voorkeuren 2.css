@@ -8,6 +8,7 @@
   margin: 0 auto;
   text-align: center;
 }
+
 #voorkeurenForm select {
   margin-bottom: 2em;
   padding: 0.3125em;
@@ -16,6 +17,7 @@
   border-radius: 0.2em;
   text-align: center;
 }
+
 #voorkeurenForm button {
   display: block;
   margin: 0 auto;
@@ -29,4 +31,6 @@
 
 .error-message {
   color: red;
-}/*# sourceMappingURL=voorkeuren.css.map */
+}
+
+/*# sourceMappingURL=voorkeuren.css.map */

@@ -1,18 +1,18 @@
 <head>
-	<title>Admin Login</title>
+    <title>Admin Login</title>
 </head>
 <body>
     <h1>Welkom Admin</h1>
-	{{#if error}}
-		<p class="error-message">{{error}}</p>
-	{{/if}}
-	<form action="/admin-login" method="POST">
-		<label for="gebruikersnaam">Gebruikersnaam:</label>
-		<input type="text" id="gebruikersnaam" name="gebruikersnaam">
-		<br>
-		<label for="wachtwoord">Wachtwoord:</label>
-		<input type="password" id="wachtwoord" name="wachtwoord">
-		<br>
-		<button type="submit">Login</button>
-	</form>
+    {{#if error}}
+        <p class="error-message">{{error}}</p>
+    {{/if}}
+    <form action="/admin-login" method="POST">
+        <label for="gebruikersnaam">Gebruikersnaam:</label>
+        <input type="text" id="gebruikersnaam" name="gebruikersnaam" />
+        <br />
+        <label for="wachtwoord">Wachtwoord:</label>
+        <input type="password" id="wachtwoord" name="wachtwoord" />
+        <br />
+        <button type="submit">Login</button>
+    </form>
 </body>
