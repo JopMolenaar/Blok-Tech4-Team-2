@@ -7,7 +7,7 @@ $color-hover-a: #cecece;
 // Input colors
 $color-input-normal: #4e4c67;
 $color-input-error: #f00;
-$color-input-expected: #98E6BF;
+$color-input-expected: #98e6bf;
 
 #confirmPage {
     display: grid;
@@ -15,13 +15,11 @@ $color-input-expected: #98E6BF;
     align-items: center;
     text-align: center;
 
-
     section {
         display: grid;
         margin: auto;
         width: 80%;
     }
-
 
     ul {
         list-style: none;
@@ -34,7 +32,7 @@ $color-input-expected: #98E6BF;
         gap: 2rem;
     }
 
-    img{
+    img {
         width: 100%;
         height: auto;
     }
@@ -56,9 +54,6 @@ $color-input-expected: #98E6BF;
             height: min-content;
             display: flex;
             flex-direction: column;
-
-
-
         }
     }
 }
