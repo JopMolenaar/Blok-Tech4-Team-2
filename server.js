@@ -443,9 +443,7 @@ app.get("/confirm", async (req, res) => {
     const today = new Date()
     const weekdays = new Date()
     weekdays.setDate(today.getDate() + 7)
-
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
+    // console.log(weekdays)
 
     if (today.getDay() === 5) {
         weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
@@ -456,6 +454,7 @@ app.get("/confirm", async (req, res) => {
     }
 
     const weekdaysStr = weekdays.toISOString().split("T")[0]
+    console.log(weekdaysStr)
 
     res.render("confirm", { weekdaysStr, doggo })
 })
