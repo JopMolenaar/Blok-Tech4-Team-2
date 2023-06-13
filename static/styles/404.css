@@ -7,8 +7,8 @@
   overflow: hidden;
 }
 #page-not-found img {
-  width: auto;
-  height: 100%;
+    width: auto;
+    height: 100%;
 }
 #page-not-found h1 {
   position: absolute;
@@ -39,16 +39,16 @@
 }
 
 @media (min-width: 62.5em) {
-  #page-not-found button,
-  #page-not-found h1 {
-    left: 70%;
-  }
+    #page-not-found button,
+    #page-not-found h1 {
+        left: 70%;
+    }
 }
 @media (min-width: 106.25em) {
-  #page-not-found button,
-  #page-not-found h1 {
-    left: 65%;
-  }
+    #page-not-found button,
+    #page-not-found h1 {
+        left: 65%;
+    }
 }
 @media (min-width: 131.25em) {
   #page-not-found button,
