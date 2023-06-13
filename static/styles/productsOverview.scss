@@ -127,22 +127,22 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         display: flex;
         flex-direction: column;
         padding: 2em;
-        // padding-left: 1em;
         padding-top: 0;
-        font-size: 1.5em;
-        gap: 0.5em;
+        font-size: 1.1em;
         position: relative;
         max-width: 12em;
-        h3 {
+        h2 {
             width: 100%;
             text-align: center;
             height: fit-content;
+            font-size: 1.5em;
         }
         section {
             border-bottom: lightgrey solid 3px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             h3 {
+                font-size: 1.2em;
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
@@ -152,16 +152,17 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             display: flex;
             flex-direction: column;
             align-items: left;
-            width: 80%;
-
+            width: 95%;
+            padding-bottom: 0.7em;
             .price-input {
                 display: flex;
                 gap: 1em;
                 label {
                     display: flex;
                     gap: 0.2em;
+                    padding-bottom: 0.5em;
                     input {
-                        width: 6em;
+                        width: 3em;
                     }
                 }
             }
@@ -170,6 +171,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                 background: #ddd;
                 border-radius: 5px;
                 position: relative;
+
                 .progress {
                     height: 5px;
                     left: 0%;
