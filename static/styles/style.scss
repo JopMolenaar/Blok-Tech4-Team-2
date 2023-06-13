@@ -98,7 +98,7 @@ summary {
 
 .buttonPrimary:active,
 .submitButton:active {
-    animation: fillButton 3s linear infinite;
+    animation-name: fillButton 3s linear infinite;
 
 }
 
