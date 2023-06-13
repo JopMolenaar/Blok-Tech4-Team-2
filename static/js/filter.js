@@ -49,11 +49,15 @@ const inputsCheck = document.querySelectorAll("#productpage section:nth-child(3)
 inputsRadio.forEach((input) => {
     input.addEventListener("input", (e) => {
         console.log(input.value)
+        const item = document.querySelectorAll(`.${input.value}`)
+        console.log(item)
     })
 })
 
 inputsCheck.forEach((input) => {
     input.addEventListener("input", (e) => {
         console.log(input.value)
+        const item = document.querySelectorAll(`.${input.value}`)
+        console.log(item)
     })
 })
