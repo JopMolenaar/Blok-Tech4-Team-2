@@ -1,52 +1,27 @@
 #productpageAdminAdd {
   height: calc(100vh - 4em);
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  flex-direction: column;
 }
-
 #productpageAdminAdd > section {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 50%;
   margin-left: auto;
   margin-right: auto;
   min-width: 31.25em;
 }
-
 #productpageAdminAdd > section h1 {
   font-size: 3em;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  justify-content: left;
 }
-
 #productpageAdminAdd > section a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 1.3em;
   background-color: white;
@@ -54,53 +29,32 @@
   border-radius: 0.625em;
   width: 9em;
   height: 2em;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   color: black;
 }
-
 #productpageAdminAdd form {
   width: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   height: 65%;
-  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 0.625em;
   padding: 2em;
   padding-top: 1em;
   padding-bottom: 1em;
   font-size: 2em;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   min-width: 15em;
   max-width: 25em;
 }
-
 #productpageAdminAdd form label {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-bottom: solid #bbbbbb 1px;
+  align-items: center;
+  border-bottom: solid rgb(187, 187, 187) 1px;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 #productpageAdminAdd form label input,
 #productpageAdminAdd form label textarea {
   width: 35%;
@@ -109,56 +63,36 @@
   border-radius: 0.625em;
   border: none;
 }
-
 #productpageAdminAdd form label textarea {
   font-size: 0.8em;
 }
-
 #productpageAdminAdd form section {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  -ms-grid-rows: 2em 1fr;
-      grid-template-rows: 2em 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2em 1fr;
 }
-
 #productpageAdminAdd form section h2 {
   font-size: 1em;
-  -ms-grid-column: 1;
-      grid-column-start: 1;
+  grid-column-start: 1;
   grid-column-end: 3;
-  -ms-grid-row: 1;
-      grid-row-start: 1;
+  grid-row-start: 1;
   grid-row-end: 2;
 }
-
 #productpageAdminAdd form section fieldset {
   width: 80%;
   height: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 0.8em;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-
 #productpageAdminAdd form section fieldset label {
   margin-bottom: 0.3em;
   border: none;
   width: 90%;
 }
-
-#productpageAdminAdd form input[type="submit"],
+#productpageAdminAdd form input[type=submit],
 #productpageAdminAdd form button {
   all: unset;
   text-align: center;
@@ -169,26 +103,20 @@
   background-color: white;
   border-radius: 0.3125em;
   max-width: 12.5em;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+  align-self: flex-end;
 }
-
-#productpageAdminAdd form input[type="file"] {
+#productpageAdminAdd form input[type=file] {
   font-size: 0.6em;
 }
-
 #productpageAdminAdd form p {
   margin: 0;
 }
-
 #productpageAdminAdd #errorMessage {
   font-size: 1.5em;
-  color: #c50000;
+  color: rgb(197, 0, 0);
 }
 
 #productpageAdmin a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 1.3em;
   background-color: white;
@@ -196,12 +124,7 @@
   border-radius: 0.625em;
   width: 9em;
   height: 2em;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   color: black;
-}
-/*# sourceMappingURL=adminAddProducts.css.map */
+}/*# sourceMappingURL=adminAddProducts.css.map */
