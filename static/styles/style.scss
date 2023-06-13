@@ -9,42 +9,40 @@ $shadow-header: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px
 // Input colors
 $color-input-normal: #4e4c67;
 $color-input-error: #f00;
-$color-input-expected: #98E6BF;
+$color-input-expected: #98e6bf;
 // Button colors
 $color-primary-button: #dcd6f7;
-$color-primary-button-hover: #A6b1e1;
+$color-primary-button-hover: #a6b1e1;
 
-$color-secondary-button:#98E6BF;
-$color-secondary-button-hover: #7DC2B2;
+$color-secondary-button: #98e6bf;
+$color-secondary-button-hover: #7dc2b2;
 
 // Fonts
 @font-face {
-    font-family: 'poppins-bold';
+    font-family: "poppins-bold";
     src: url(../fonts/Poppins-Bold.woff2);
     font-weight: bolder;
 }
-$font-header: 'poppins-bold', Arial, Helvetica, sans-serif;
+$font-header: "poppins-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
-    font-family: 'poppins-semi-bold';
+    font-family: "poppins-semi-bold";
     src: url(../fonts/Poppins-SemiBold.woff2);
     font-weight: bold;
 }
-$font-button: 'poppins-semi-bold', Arial, Helvetica, sans-serif;
+$font-button: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
-    font-family: 'poppins-medium';
+    font-family: "poppins-medium";
     src: url(../fonts/Poppins-Medium.woff2);
 }
-$font-caption: 'poppins-medium', Arial, Helvetica, sans-serif;
+$font-caption: "poppins-medium", Arial, Helvetica, sans-serif;
 
 @font-face {
-    font-family: 'poppins-regular';
+    font-family: "poppins-regular";
     src: url(../fonts/Poppins-Regular.woff2);
 }
-$font-body: 'poppins-regular', Arial, Helvetica, sans-serif;
-
-
+$font-body: "poppins-regular", Arial, Helvetica, sans-serif;
 
 body {
     margin: 0;
@@ -54,7 +52,6 @@ body {
     background-color: $color-text-white;
     font-family: $font-body;
     font-size: 1.2em;
-
 }
 
 /* The hide class */
@@ -113,7 +110,6 @@ summary {
     }
 }
 
-
 .buttonPrimary:hover,
 .submitButton:hover {
     background-color: $color-primary-button-hover;
@@ -151,5 +147,4 @@ form {
     display: grid;
     align-items: center;
     gap: 0.5rem;
-    
-  }
+}

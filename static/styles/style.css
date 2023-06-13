@@ -64,7 +64,7 @@ summary {
 
 .buttonPrimary:hover,
 .submitButton:hover {
-  background-color: #A6b1e1;
+  background-color: #a6b1e1;
 }
 
 .buttonPrimary:active,
@@ -77,7 +77,7 @@ summary {
 
 @keyframes fillButton {
   0% {
-    background-color: #A6b1e1;
+    background-color: #a6b1e1;
   }
   100% {
     background-color: #4e4c67;
@@ -85,7 +85,7 @@ summary {
 }
 .buttonPrimary:hover,
 .submitButton:hover {
-  background-color: #A6b1e1;
+  background-color: #a6b1e1;
 }
 
 img {
