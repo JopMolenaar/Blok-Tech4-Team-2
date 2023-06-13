@@ -99,7 +99,7 @@ summary {
 .buttonPrimary:active,
 .submitButton:active {
     animation: fillButton 3s linear infinite;
-    visibility: hidden;
+
 }
 
 @keyframes fillButton {
