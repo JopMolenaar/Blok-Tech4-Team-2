@@ -1,10 +1,1 @@
-{
-    "version": 3,
-    "sources": [
-        "voorkeuren.scss",
-        "voorkeuren.css"
-    ],
-    "names": [],
-    "mappings": "AAOA;EACI,sBAAA;EACA,oBAAA;EACA,+CAAA;EACA,yBATe;EAUf,eAAA;EACA,eAAA;EACA,cAAA;EACA,kBAAA;ACNJ;ADQI;EACI,kBAAA;EACA,iBAAA;EACA,cAAA;EACA,yBAlBkB;EAmBlB,oBAAA;EACA,kBAAA;ACNR;ADSI;EACI,cAAA;EACA,cAAA;ACPR;;ADWA;EACI,cAAA;EACA,iBAAA;EACA,sBA/BkB;ACuBtB;;ADWA;EACI,UAlCU;AC0Bd",
-    "file": "voorkeuren.css"
-}
+{"version":3,"sources":["voorkeuren.scss","voorkeuren.css"],"names":[],"mappings":"AAOA;EACI,sBAAA;EACA,oBAAA;EACA,+CAAA;EACA,yBATe;EAUf,eAAA;EACA,eAAA;EACA,cAAA;EACA,kBAAA;ACNJ;ADQI;EACI,kBAAA;EACA,iBAAA;EACA,cAAA;EACA,yBAlBkB;EAmBlB,oBAAA;EACA,kBAAA;ACNR;ADSI;EACI,cAAA;EACA,cAAA;ACPR;;ADWA;EACI,cAAA;EACA,iBAAA;EACA,sBA/BkB;ACuBtB;;ADWA;EACI,UAlCU;AC0Bd","file":"voorkeuren.css"}

@@ -95,7 +95,10 @@ summary {
 
 .buttonPrimary:active,
 .submitButton:active {
-    animation-name: fillButton 3s linear infinite;
+    animation-name: fillButton;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 @keyframes fillButton {
