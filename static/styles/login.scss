@@ -29,6 +29,11 @@ $placeholder-border-color: #98e6bf;
 
 /* loginForm styling */
 
+#loginForm fieldset{
+  border: none;
+  padding: 0;
+}
+
 #loginForm {
   border: 0em solid $secondary-color;
   border-radius: 0.4em;

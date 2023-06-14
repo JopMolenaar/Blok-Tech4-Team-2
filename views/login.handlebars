@@ -3,22 +3,22 @@
 
     <form id="loginForm" action="/login" method="POST">
         <h1 class="loginH">Welkom bij dierenshop!</h1>
-        <section>
+        <fieldset>
             <label for="username">Gebruikersnaam:</label>
             <input type="username" id="gebruikersnaam" name="gebruikersnaam" required />
-        </section>
+        </fieldset>
 
-        <section>
+        <fieldset>
             <label for="password">Wachtwoord:</label>
             <input type="password" id="wachtwoord" name="wachtwoord" required />
             {{#if error}}
                 <p class="error-message">{{error}}</p>
             {{/if}}
-        </section>
+        </fieldset>
 
-        <section>
+        <div>
             <button type="submit">Login</button>
-        </section>
+        </div>
 
         <h3 class="formH3" >Of</h3>
         <a href="/signUp" class="formButton" type="submit">Maak een account</a>

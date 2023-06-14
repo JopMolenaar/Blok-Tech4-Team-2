@@ -1,49 +1,49 @@
-<body>
-    <h1>Vul de onderstaande informatie in om een account te maken</h1>
-
+<body class="background-image2">
     <form id="signupForm" action="/signup" method="POST">
+    <h1 class="signupH">Vul de onderstaande informatie in om een account te maken</h1>
+    
         {{#if error}}
             <p class="error-message">{{error}}</p>
         {{/if}}
 
-        <div>
+        <fieldset>
             <label for="naam">Naam:</label>
-            <input type="tekst" id="naam" name="naam" required />
-        </div>
+            <input type="naam" id="naam" name="naam" required />
+        </fieldset>
 
-        <div>
+        <fieldset>
             <label for="email">Email:</label>
-            <input type="tekst" id="email" name="email" required />
-        </div>
+            <input type="email" id="email" name="email" required />
+        </fieldset>
 
-        <div>
+        <fieldset>
             <label for="age">Leeftijd:</label>
-            <input type="tekst" id="leeftijd" name="leeftijd" required />
-        </div>
+            <input type="leeftijd" id="leeftijd" name="leeftijd" required />
+        </fieldset>
 
-        <div>
+        <fieldset>
             <label for="username">Gebruikersnaam:</label>
-            <input type="tekst" id="gebruikersnaam" name="gebruikersnaam" required />
-        </div>
+            <input type="gebruikersnaam" id="gebruikersnaam" name="gebruikersnaam" required />
+        </fieldset>
 
-        <div>
+        <fieldset>
             <label for="wachtwoord">Wachtwoord:</label>
             <input type="wachtwoord" id="wachtwoord" name="wachtwoord" required />
-        </div>
+        </fieldset>
 
-        <div>
+        <fieldset>
             <label for="wachtwoordBevestigen">Wachtwoord bevestigen:</label>
             <input type="wachtwoord" id="wachtwoordBevestigen" name="wachtwoordBevestigen" required />
-        </div>
+        </fieldset>
 
         <div>
             <button id="signUp" type="submit">Sign Up</button>
         </div>
 
-        <div>
+        <section>
             <p>Already have an account?</p>
             <a class="formButton" href="/login" id="loginButton" type="button">Log in</a>
-        </div>
+        </section>
     </form>
 
     <script src="javascript/signup.js"></script>
