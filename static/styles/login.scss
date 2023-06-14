@@ -2,11 +2,11 @@
 
 $background-image: url("/images/dog.jpg");
 $primary-color: #242424;
-$secondary-color: #4E4C67;
+$secondary-color: #4e4c67;
 $background-color: #ffffffa0;
-$hover-color: #A6B1E1;
-$input-border-color: #DCD6F7;
-$placeholder-border-color: #98E6BF;
+$hover-color: #a6b1e1;
+$input-border-color: #dcd6f7;
+$placeholder-border-color: #98e6bf;
 
 .background-image {
   background-image: $background-image;
@@ -31,12 +31,16 @@ $placeholder-border-color: #98E6BF;
 
 #loginForm {
   border: 0em solid $secondary-color;
-  border-radius: 0.1em;
+  border-radius: 0.4em;
   background-color: $background-color;
   max-width: 25em;
   padding: 1.25em;
   margin-top: 2em;
   display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   label {
     display: block;
