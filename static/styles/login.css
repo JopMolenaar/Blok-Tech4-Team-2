@@ -23,11 +23,10 @@
   
   #loginForm {
     border: 0em solid #4E4C67;
-    border-radius: 0.1em;
+    border-radius: 0.4em;
     background-color: #ffffffa0;
     max-width: 25em;
     padding: 1.25em;
-    margin-top: 2em;
     display: block; 
     position: absolute;
     left: 50%;
