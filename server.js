@@ -303,36 +303,36 @@ const addProduct = async (req, res) => {
         let { naam, soort, leeftijd, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
         const newProduct = new Product({
             naam:
-                slug(naam, { remove: "<" })
+                slug(req.body.naam, "_", { remove: "<" })
                     .replace(/[^a-zA-Z]/g, "")
                     .charAt(0)
                     .toUpperCase() + naam.slice(1),
             soort:
-                slug(soort, { remove: "<" })
+                slug(req.body.soort, { remove: "<" })
                     .replace(/[^a-zA-Z]/g, "")
                     .charAt(0)
                     .toUpperCase() + soort.slice(1),
-            leeftijd: leeftijd,
+            leeftijd: req.body.leeftijd,
             img: req.file ? req.file.filename : null,
-            beschrijving: slug(beschrijving, " ", { remove: "<" }).charAt(0).toUpperCase() + beschrijving.slice(1),
+            beschrijving: slug(req.body.beschrijving, " ", { remove: "<" }).charAt(0).toUpperCase() + beschrijving.slice(1),
             eigenschappen: {
                 activiteit:
-                    slug(activiteit, { remove: "<" })
+                    slug(req.body.activiteit, { remove: "<" })
                         .replace(/[^a-zA-Z]/g, "")
                         .charAt(0)
                         .toUpperCase() + activiteit.slice(1),
                 leefstijl:
-                    slug(leefstijl, { remove: "<" })
+                    slug(req.body.leefstijl, { remove: "<" })
                         .replace(/[^a-zA-Z]/g, "")
                         .charAt(0)
                         .toUpperCase() + leefstijl.slice(1),
                 grootte:
-                    slug(grootte, { remove: "<" })
+                    slug(req.body.grootte, { remove: "<" })
                         .replace(/[^a-zA-Z]/g, "")
                         .charAt(0)
                         .toUpperCase() + grootte.slice(1),
                 dag:
-                    slug(dag, { remove: "<" })
+                    slug(req.body.dag, { remove: "<" })
                         .replace(/[^a-zA-Z]/g, "")
                         .charAt(0)
                         .toUpperCase() + dag.slice(1),
