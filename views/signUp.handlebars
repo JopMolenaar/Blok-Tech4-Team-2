@@ -1,7 +1,7 @@
 <body class="background-image2">
     <form id="signupForm" action="/signup" method="POST">
     <h1 class="signupH">Vul de onderstaande informatie in om een account te maken</h1>
-    
+
         {{#if error}}
             <p class="error-message">{{error}}</p>
         {{/if}}
@@ -36,12 +36,9 @@
             <input type="wachtwoord" id="wachtwoordBevestigen" name="wachtwoordBevestigen" required />
         </fieldset>
 
-        <div>
-            <button id="signUp" type="submit">Sign Up</button>
-        </div>
-
         <section>
-            <p>Already have an account?</p>
+            <button id="signUp" type="submit">Sign Up</button>
+            <p>of</p>
             <a class="formButton" href="/login" id="loginButton" type="button">Log in</a>
         </section>
     </form>

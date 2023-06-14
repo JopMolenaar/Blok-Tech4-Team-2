@@ -18,7 +18,7 @@ $placeholder-border-color: #98e6bf;
 .signupH {
   text-align: center;
   color: $primary-color;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 1em auto;
 }
 
@@ -26,6 +26,8 @@ $placeholder-border-color: #98e6bf;
   text-align: center;
   font-size: 1em;
   font-weight: 500;
+  margin-bottom: 0;
+  padding-top: .5em;
 }
 
 /* signupForm styling */
@@ -33,6 +35,14 @@ $placeholder-border-color: #98e6bf;
 #signupForm fieldset{
     border: none;
     padding: 0;
+}
+
+#signupForm section{
+    display: flex;
+}
+
+#signupForm section > * {
+    margin: 1em;
 }
 
 #signupForm {
@@ -82,7 +92,7 @@ $placeholder-border-color: #98e6bf;
       font-size: 1em;
       padding: 0.625em;
       width: 80%;
-      margin: 1em auto;
+      margin: 1em;
     }
   
     button[type="submit"]:hover {
