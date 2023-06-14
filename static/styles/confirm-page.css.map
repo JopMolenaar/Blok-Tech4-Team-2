@@ -1,10 +1,1 @@
-{
-    "version": 3,
-    "sources": [
-        "confirm-page.scss",
-        "confirm-page.css"
-    ],
-    "names": [],
-    "mappings": "AAWA;EACI,aAAA;EACA,mCAAA;EACA,mBAAA;EACA,kBAAA;ACVJ;ADYI;EACI,aAAA;EACA,YAAA;EACA,UAAA;ACVR;ADaI;EACI,gBAAA;ACXR;ADcI;EACI,gBAAA;EACA,aAAA;EACA,8BAAA;EACA,SAAA;ACZR;ADeI;EACI,WAAA;EACA,YAAA;ACbR;ADgBI;EACI,aAAA;EACA,iBAAA;ACdR;ADiBI;EACI,aAAA;EACA,sBAAA;EACA,UAAA;EACA,oBAAA;EACA,iBAAA;EACA,WAAA;ACfR;ADiBQ;EACI,wBAAA;EAAA,mBAAA;EACA,aAAA;EACA,sBAAA;ACfZ",
-    "file": "confirm-page.css"
-}
+{"version":3,"sourceRoot":"","sources":["confirm-page.scss"],"names":[],"mappings":"AAWA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;;AAGJ;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA","file":"confirm-page.css"}

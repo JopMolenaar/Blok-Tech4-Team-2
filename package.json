@@ -27,6 +27,7 @@
         "slug": "^8.2.2"
     },
     "devDependencies": {
+        "handlebars": "^4.5.0",
         "nodemon": "^2.0.22"
     }
 }

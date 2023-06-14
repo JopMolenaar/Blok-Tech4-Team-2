@@ -1,0 +1,17 @@
+<header>
+    <h1>Wishlist</h1>
+    <a href="/products">Back</a>
+</header>
+
+{{!-- {{#if products.length}} --}}
+    <ul>
+        {{#each products}}
+            <li>
+                <h3>{{this.naam}}</h3>
+                <p>{{this.beschrijving}}</p>
+            </li>
+        {{/each}}
+    </ul>
+{{!-- {{else}}
+    <p>No products in the wishlist.</p>
+{{/if}} --}}

@@ -1,24 +1,28 @@
 {{#each product}}
-    <a href="/products">Back</a>
+<a href="/products">Back</a>
+<section>
+    <div>
+        <img src="/upload/{{this.img}}" alt="Picture" />
+    </div>
     <section>
-        <div>
-            <img src="/upload/{{this.img}}" alt="Picture" />
-        </div>
-        <section>
-            <h3 class="visually-hidden">Gegevens:</h3>
-            <p><b>Naam:</b> {{this.naam}}</p>
-            <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
-            <p><b>Soort:</b> {{this.soort}}</p>
-            <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
-        </section>
-
-        <section>
-            <h4 class="visually-hidden">Eigenschappen:</h4>
-            <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
-            <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
-            <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
-            <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
-        </section>
+        <h3 class="visually-hidden">Gegevens:</h3>
+        <p><b>Naam:</b> {{this.naam}}</p>
+        <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
+        <p><b>Soort:</b> {{this.soort}}</p>
+        <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
     </section>
+
+    <section>
+        <h4 class="visually-hidden">Eigenschappen:</h4>
+        <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
+        <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
+        <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
+        <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
+    </section>
+    <form action="/wishlist/{{this._id}}" method="post">
+        <input type="hidden" name="productId" value="{{this._id}}">
+        <button type="submit">Add to wishlist</button>
+    </form>
+</section>
 
 {{/each}}

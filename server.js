@@ -41,6 +41,11 @@ const userSchema = new mongoose.Schema({
         grootte: String,
         slaapritme: String,
     },
+    wishlist: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+        }
+    ]
 })
 
 // is middleware en vuurt deze function als er een user wordt gesaved
@@ -121,6 +126,8 @@ app.get("/signUp", async (req, res) => {
         res.render("signUp")
     }
 })
+
+
 
 // Admin login
 app.post("/admin-login", (req, res) => {
@@ -459,6 +466,43 @@ app.get("/confirm", async (req, res) => {
 
     res.render("confirm", { weekdaysStr, doggo })
 })
+
+// Add product to wishlist
+app.post("/wishlist/:id", async (req, res) => {
+    // Get the product details from the request body
+    try {
+        User.findOneAndUpdate(
+            { gebruikersnaam: req.session.gebruikersnaam },
+            {
+                wishlist: [req.params.id]
+                // push to wishlist?
+            },
+            { new: true }
+        )
+        setTimeout(() => {
+            res.redirect("/wishlist");
+        }, 1000)
+       
+    } catch (error) {
+        console.error("Error adding product to wishlist:", error);
+        res.redirect("/products"); // Redirect to the products page or show an error message
+    }
+});
+
+// Display wishlist
+app.get("/wishlist", async (req, res) => {
+    try {
+        const user = await User.findOne({ gebruikersnaam: req.session.gebruikersnaam })
+        const wishlist = user.wishlist 
+        console.log("hoi1",wishlist)
+        const records = await Product.find({ '_id': { $in: wishlist } })
+        res.render('wishlist', { products: records})
+    } catch (error) {
+        console.error("Error retrieving wishlist:", error);
+        res.redirect("/products");
+    }
+});
+
 
 //
 // 404
