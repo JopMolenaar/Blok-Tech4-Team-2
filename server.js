@@ -300,18 +300,42 @@ app.get("/producten-overzicht", async (req, res) => {
 
 const addProduct = async (req, res) => {
     try {
-        let { naam, soort, leeftijd, image, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
+        let { naam, soort, leeftijd, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
         const newProduct = new Product({
-            naam: naam.charAt(0).toUpperCase() + naam.slice(1),
-            soort: soort.charAt(0).toUpperCase() + soort.slice(1),
+            naam:
+                slug(naam, { remove: "<" })
+                    .replace(/[^a-zA-Z]/g, "")
+                    .charAt(0)
+                    .toUpperCase() + naam.slice(1),
+            soort:
+                slug(soort, { remove: "<" })
+                    .replace(/[^a-zA-Z]/g, "")
+                    .charAt(0)
+                    .toUpperCase() + soort.slice(1),
             leeftijd: leeftijd,
             img: req.file ? req.file.filename : null,
-            beschrijving: beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1),
+            beschrijving: slug(beschrijving, " ", { remove: "<" }).charAt(0).toUpperCase() + beschrijving.slice(1),
             eigenschappen: {
-                activiteit: activiteit.charAt(0).toUpperCase() + activiteit.slice(1),
-                leefstijl: leefstijl.charAt(0).toUpperCase() + leefstijl.slice(1),
-                grootte: grootte.charAt(0).toUpperCase() + grootte.slice(1),
-                dag: dag.charAt(0).toUpperCase() + dag.slice(1),
+                activiteit:
+                    slug(activiteit, { remove: "<" })
+                        .replace(/[^a-zA-Z]/g, "")
+                        .charAt(0)
+                        .toUpperCase() + activiteit.slice(1),
+                leefstijl:
+                    slug(leefstijl, { remove: "<" })
+                        .replace(/[^a-zA-Z]/g, "")
+                        .charAt(0)
+                        .toUpperCase() + leefstijl.slice(1),
+                grootte:
+                    slug(grootte, { remove: "<" })
+                        .replace(/[^a-zA-Z]/g, "")
+                        .charAt(0)
+                        .toUpperCase() + grootte.slice(1),
+                dag:
+                    slug(dag, { remove: "<" })
+                        .replace(/[^a-zA-Z]/g, "")
+                        .charAt(0)
+                        .toUpperCase() + dag.slice(1),
             },
         })
         newProduct.save()
