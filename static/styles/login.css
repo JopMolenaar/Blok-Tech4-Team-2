@@ -82,6 +82,11 @@
   border-width: 0.1em;
   border-style: solid;
 }
+#loginForm input:required:-ms-input-placeholder {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
 #loginForm input:required:valid,
 #loginForm input:required:placeholder-shown {
   border-color: #98e6bf;

@@ -29,8 +29,7 @@ body {
 /* The hide class */
 .visually-hidden {
   clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
@@ -57,7 +56,6 @@ summary {
   border: none;
   border-radius: 1rem;
   padding: 1rem;
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 1.4rem;
 }

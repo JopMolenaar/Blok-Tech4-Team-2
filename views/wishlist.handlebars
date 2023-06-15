@@ -1,0 +1,16 @@
+{{!-- {{#if wishlist && wishlist.length}} --}}
+    <h2>Wishlist</h2>
+    <a href="/products">Back</a>
+    <ul>
+        {{#each wishlist}}
+            <li>
+                <h3>{{this.naam}}</h3>
+                <p>Director: {{this.soort}}</p>
+                <p>Release Year: {{this.leeftijd}}</p>
+                <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button>
+            </li>
+        {{/each}}
+    </ul>
+{{!-- {{else}}
+    <p>No movies in watchlist.</p>
+{{/if}} --}}
