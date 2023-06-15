@@ -28,11 +28,13 @@
                     </div>
                     <section>
                         <h3 class="visually-hidden">Gegevens:</h3>
-                        <p><b>Naam:</b> {{this.naam}}</p>
-                        <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
+
+                        <p><b>Naam:</b> {{naam}}</p>
+                        <p><b>Leeftijd:</b> {{leeftijd}}</p>
                         <p><b>Soort:</b> {{this.soort}}</p>
                         <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
                     </section>
+                    {{#productInfo}}{{/productInfo}}
 
                     <section>
                         <h4 class="visually-hidden">Eigenschappen:</h4>
@@ -43,9 +45,11 @@
                     </section>
                 </a>
             </li>
+
         {{/each}}
     </ul>
     <section>
+
         <h2>Filter products</h2>
         <p id="javascriptOff">Turn on Javascript to use the filter function</p>
 
@@ -135,6 +139,7 @@
             </label>
         </section>
     </section>
+
 </main>
 
 <script src="/js/filter.js"></script>
