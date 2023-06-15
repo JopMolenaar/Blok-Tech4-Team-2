@@ -1,0 +1,59 @@
+$color-white: #eeeeee;
+$color-black: #232323;
+$color-text-white: #eeeeee;
+$color-text-black: #232323;
+$color-parel-white: #ffffff;
+$color-hover-a: #cecece;
+// Input colors
+$color-input-normal: #4e4c67;
+$color-input-error: #f00;
+$color-input-expected: #98e6bf;
+
+#confirmPage {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    align-items: center;
+    text-align: center;
+
+    section {
+        display: grid;
+        margin: auto;
+        width: 80%;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .dogcontainer {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .liIMG {
+        display: grid;
+        justify-self: end;
+    }
+
+    .dogInfo {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        justify-items: start;
+        text-align: start;
+        gap: 0.5rem;
+
+        li {
+            height: min-content;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

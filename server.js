@@ -294,6 +294,7 @@ app.get("/products", async (req, res) => {
             console.log("Gevonden producten:", producten)
 
             const productInfo = producten.map((product) => ({
+                id: product._id,
                 naam: product.naam,
                 soort: product.soort,
                 leeftijd: product.leeftijd,
@@ -493,6 +494,35 @@ app.get("/voorkeuren-opgeslagen", async (req, res) => {
     } catch (error) {
         console.error("Fout bij het ophalen van gebruikersgegevens:", error)
     }
+})
+
+// Confirmation page
+app.get("/confirm", async (req, res) => {
+    const doggo = {
+        naam: "Barry",
+        soort: "Golden retriever",
+        leeftijd: "1",
+        beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+    }
+
+    const today = new Date()
+    const weekdays = new Date()
+    weekdays.setDate(today.getDate() + 7)
+
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+    if (today.getDay() === 5) {
+        weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
+    }
+
+    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
+        weekdays.setDate(weekdays.getDate() + 1)
+    }
+
+    const weekdaysStr = weekdays.toISOString().split("T")[0]
+
+    res.render("confirm", { weekdaysStr, doggo })
 })
 
 // 404
