@@ -290,31 +290,8 @@ app.get("/products", async (req, res) => {
             }
 
             const producten = await Product.find(query) // Zoek producten in de database die overeenkomen met de voorkeuren
-
-            console.log("Gevonden producten:", producten)
-
-            const productInfo = producten.map((product) => ({
-                id: product._id,
-                naam: product.naam,
-                soort: product.soort,
-                leeftijd: product.leeftijd,
-                img: product.img,
-                beschrijving: product.beschrijving,
-                eigenschappen: {
-                    activiteit: product.eigenschappen.activiteit,
-                    leefstijl: product.eigenschappen.leefstijl,
-                    grootte: product.eigenschappen.grootte,
-                    dag: product.eigenschappen.dag,
-                },
-            }))
-
             res.render("products", {
-                gebruikersnaam,
-                energielevel,
-                leefstijl,
-                grootte,
-                slaapritme,
-                product: productInfo,
+                product: producten.map((product) => product.toJSON()),
             })
         } else {
             console.log("Gebruiker niet gevonden")
