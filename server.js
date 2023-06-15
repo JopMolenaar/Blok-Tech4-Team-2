@@ -301,41 +301,26 @@ app.get("/producten-overzicht", async (req, res) => {
 const addProduct = async (req, res) => {
     try {
         let { naam, soort, leeftijd, beschrijving, activiteit, leefstijl, grootte, dag } = req.body
+
+        naam = naam.charAt(0).toUpperCase() + naam.slice(1)
+        soort = soort.charAt(0).toUpperCase() + soort.slice(1)
+        beschrijving = beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1)
+        activiteit = activiteit.charAt(0).toUpperCase() + activiteit.slice(1)
+        leefstijl = leefstijl.charAt(0).toUpperCase() + leefstijl.slice(1)
+        grootte = grootte.charAt(0).toUpperCase() + grootte.slice(1)
+        dag = dag.charAt(0).toUpperCase() + dag.slice(1)
+
         const newProduct = new Product({
-            naam:
-                slug(req.body.naam, "_", { remove: "<" })
-                    .replace(/[^a-zA-Z]/g, "")
-                    .charAt(0)
-                    .toUpperCase() + naam.slice(1),
-            soort:
-                slug(req.body.soort, { remove: "<" })
-                    .replace(/[^a-zA-Z]/g, "")
-                    .charAt(0)
-                    .toUpperCase() + soort.slice(1),
+            naam: naam.replace(/[^a-zA-Z]/g, ""),
+            soort: soort.replace(/[^a-zA-Z]/g, ""),
             leeftijd: req.body.leeftijd,
             img: req.file ? req.file.filename : null,
-            beschrijving: slug(req.body.beschrijving, " ", { remove: "<" }).charAt(0).toUpperCase() + beschrijving.slice(1),
+            beschrijving: beschrijving.replace("<", ""),
             eigenschappen: {
-                activiteit:
-                    slug(req.body.activiteit, { remove: "<" })
-                        .replace(/[^a-zA-Z]/g, "")
-                        .charAt(0)
-                        .toUpperCase() + activiteit.slice(1),
-                leefstijl:
-                    slug(req.body.leefstijl, { remove: "<" })
-                        .replace(/[^a-zA-Z]/g, "")
-                        .charAt(0)
-                        .toUpperCase() + leefstijl.slice(1),
-                grootte:
-                    slug(req.body.grootte, { remove: "<" })
-                        .replace(/[^a-zA-Z]/g, "")
-                        .charAt(0)
-                        .toUpperCase() + grootte.slice(1),
-                dag:
-                    slug(req.body.dag, { remove: "<" })
-                        .replace(/[^a-zA-Z]/g, "")
-                        .charAt(0)
-                        .toUpperCase() + dag.slice(1),
+                activiteit: activiteit.replace(/[^a-zA-Z]/g, ""),
+                leefstijl: leefstijl.replace(/[^a-zA-Z]/g, ""),
+                grootte: grootte.replace(/[^a-zA-Z]/g, ""),
+                dag: dag.replace(/[^a-zA-Z]/g, ""),
             },
         })
         newProduct.save()
@@ -354,16 +339,24 @@ const changeProduct = async (req, res) => {
     try {
         let { naam, leeftijd, soort, beschrijving, id, activiteit, leefstijl, grootte, dag } = req.body
         let updateObject = {}
-        if (naam) updateObject.naam = naam
+        if (naam) naam = naam.charAt(0).toUpperCase() + naam.slice(1)
+        if (soort) soort = soort.charAt(0).toUpperCase() + soort.slice(1)
+        if (beschrijving) beschrijving = beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1)
+        if (activiteit) activiteit = activiteit.charAt(0).toUpperCase() + activiteit.slice(1)
+        if (leefstijl) leefstijl = leefstijl.charAt(0).toUpperCase() + leefstijl.slice(1)
+        if (grootte) grootte = grootte.charAt(0).toUpperCase() + grootte.slice(1)
+        if (dag) dag = dag.charAt(0).toUpperCase() + dag.slice(1)
+
+        if (naam) updateObject.naam = naam.replace(/[^a-zA-Z]/g, "")
         if (leeftijd) updateObject.leeftijd = leeftijd
-        if (soort) updateObject.soort = soort
-        if (beschrijving) updateObject.beschrijving = beschrijving
-        if (activiteit) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.activiteit": activiteit })
-        if (leefstijl) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.leefstijl": leefstijl })
-        if (grootte) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.grootte": grootte })
-        if (dag) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.dag": dag })
+        if (soort) updateObject.soort = soort.replace(/[^a-zA-Z]/g, "")
+        if (beschrijving) updateObject.beschrijving = beschrijving.replace("<", "")
         if (req.file) updateObject.img = req.file.filename
         await Product.findOneAndUpdate({ _id: id }, updateObject).then(() => console.log("Object updated successfully."))
+        if (activiteit) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.activiteit": activiteit.replace(/[^a-zA-Z]/g, "") })
+        if (leefstijl) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.leefstijl": leefstijl.replace(/[^a-zA-Z]/g, "") })
+        if (grootte) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.grootte": grootte.replace(/[^a-zA-Z]/g, "") })
+        if (dag) await Product.findOneAndUpdate({ _id: id }, { "eigenschappen.dag": dag.replace(/[^a-zA-Z]/g, "") })
         setTimeout(() => {
             res.redirect("/producten-overzicht")
         }, 1000)
