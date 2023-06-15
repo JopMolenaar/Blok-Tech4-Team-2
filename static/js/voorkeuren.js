@@ -1,0 +1,49 @@
+const energielevel = document.getElementById("energielevel")
+const leefstijl = document.getElementById("leefstijl")
+const grootte = document.getElementById("grootte")
+const slaapritme = document.getElementById("slaapritme")
+const nextButton = document.getElementById("nextButton")
+
+const dropdowns = document.querySelectorAll("select")
+let allDropdownsSelected = false // Variabele om bij te houden of alle dropdowns zijn geselecteerd
+
+function updateButton() {
+    allDropdownsSelected = true
+
+    dropdowns.forEach((dropdown) => {
+        if (dropdown.value === "--") {
+            allDropdownsSelected = false
+        }
+    })
+
+    nextButton.style.backgroundColor = allDropdownsSelected ? "green" : "" // Achtergrondkleur verandert basis van de selectiestatus
+}
+
+dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("change", updateButton) // Luistert naar wijzigingen in de dropdowns en roept de updateButton-functie aan
+})
+
+nextButton.addEventListener("click", (event) => {
+    if (allDropdownsSelected) {
+    } else {
+        event.preventDefault()
+        alert("Niet alle dropdowns zijn geselecteerd.")
+    }
+})
+
+function updateText() {
+    const styleText1 = document.getElementById("styleText1")
+    const styleText2 = document.getElementById("styleText2")
+    const styleText3 = document.getElementById("styleText3")
+    const styleText4 = document.getElementById("styleText4")
+
+    styleText1.innerHTML = energielevel.value !== "--" ? "checked" : "" // Bijwerken van de innerHTML van styleText1 op basis van de geselecteerde waarde in energielevel
+    styleText2.innerHTML = leefstijl.value !== "--" ? "checked" : ""
+    styleText3.innerHTML = grootte.value !== "--" ? "checked" : ""
+    styleText4.innerHTML = slaapritme.value !== "--" ? "checked" : ""
+}
+
+energielevel.addEventListener("change", updateText) // Luistert naar wijzigingen in energielevel en roept de updateText-functie aan
+leefstijl.addEventListener("change", updateText)
+grootte.addEventListener("change", updateText)
+slaapritme.addEventListener("change", updateText)

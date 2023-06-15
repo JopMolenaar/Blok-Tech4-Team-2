@@ -259,29 +259,51 @@ app.post("/signUp", (req, res) => {
         })
 })
 
+app.get("/voorkeuren", async (req, res) => {
+    res.render("voorkeuren")
+})
 //
 // normale gebruikers
-//
+
 app.get("/products", async (req, res) => {
     try {
-        // zoekt producten op
-        const products = await Product.find({})
-        const overeenkomende = []
-        products.forEach((product) => {
-            // matching logica
-            overeenkomende.push(product)
-        })
-        res.render("products", {
-            product: overeenkomende.map((product) => product.toJSON()),
-        })
+        const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+        if (gebruiker) {
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
+
+            console.log("Ingelogde gebruiker:", gebruikersnaam)
+            console.log("Energielevel:", energielevel)
+            console.log("Leefstijl:", leefstijl)
+            console.log("Grootte:", grootte)
+            console.log("Slaapritme:", slaapritme)
+
+            const query = {
+                $or: [
+                    //er worden meerdere voorwaarden(4) gecombineert. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
+
+                    { "eigenschappen.energielevel": energielevel },
+                    { "eigenschappen.leefstijl": leefstijl },
+                    { "eigenschappen.grootte": grootte },
+                    { "eigenschappen.slaapritme": slaapritme },
+                ],
+            }
+
+            const producten = await Product.find(query) // Zoek producten in de database die overeenkomen met de voorkeuren
+            res.render("products", {
+                product: producten.map((product) => product.toJSON()),
+            })
+        } else {
+            console.log("Gebruiker niet gevonden")
+            res.render("gebruiker-niet-gevonden")
+        }
     } catch (error) {
-        console.log(error)
+        console.error(error)
     } finally {
         console.log("got all products for normal user")
     }
 })
 
-//
 // Admin pagina's
 //
 app.get("/producten-overzicht", async (req, res) => {
@@ -443,9 +465,29 @@ app.post("/voorkeuren", (req, res) => {
         })
 })
 
-// voorkeuren route
 app.get("/voorkeuren-opgeslagen", async (req, res) => {
-    res.render("voorkeuren-opgeslagen")
+    try {
+        const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
+
+        // Zoek de gebruiker in de database op basis van de gebruikersnaam
+        const gebruiker = await User.findOne({ gebruikersnaam })
+
+        if (gebruiker) {
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // je haalt de voorkeuren op uit het gebruikersobject
+
+            console.log("Ingelogde gebruiker:", gebruikersnaam)
+            console.log("Energielevel:", energielevel)
+            console.log("Leefstijl:", leefstijl)
+            console.log("Grootte:", grootte)
+            console.log("Slaapritme:", slaapritme)
+
+            res.render("voorkeuren-opgeslagen", { energielevel, leefstijl, grootte, slaapritme })
+        } else {
+            console.log("Gebruiker niet gevonden")
+        }
+    } catch (error) {
+        console.error("Fout bij het ophalen van gebruikersgegevens:", error)
+    }
 })
 
 // Confirmation page
@@ -477,7 +519,6 @@ app.get("/confirm", async (req, res) => {
     res.render("confirm", { weekdaysStr, doggo })
 })
 
-//
 // 404
 //
 app.get("*", (req, res) => {
