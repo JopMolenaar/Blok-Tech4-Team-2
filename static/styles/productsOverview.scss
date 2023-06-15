@@ -9,7 +9,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
     height: calc(100vh - 4em);
     width: 100%;
     display: grid;
-    grid-template-columns: 24em 1fr;
+    grid-template-columns: 12em 1fr;
     grid-template-rows: 6.25em 1fr;
     flex-direction: column;
     overflow-y: hidden;
@@ -27,7 +27,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         margin: 1em;
         height: fit-content;
         h1 {
-            font-size: 2em;
+            font-size: 1em;
             margin: 0;
             min-width: fit-content;
             flex-wrap: wrap;
@@ -42,7 +42,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
-        font-size: 1.3em;
+        font-size: 1em;
         display: grid;
         width: 98%;
         height: fit-content;
@@ -128,21 +128,21 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         flex-direction: column;
         padding: 2em;
         padding-top: 0;
-        font-size: 1.1em;
+        font-size: 0.7em;
         position: relative;
         max-width: 12em;
         h2 {
             width: 100%;
             text-align: center;
             height: fit-content;
-            font-size: 1.5em;
+            font-size: 1em;
         }
         section {
             border-bottom: lightgrey solid 3px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             h3 {
-                font-size: 1.2em;
+                font-size: 1em;
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
