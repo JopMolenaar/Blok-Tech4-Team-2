@@ -41,11 +41,7 @@ const userSchema = new mongoose.Schema({
         grootte: String,
         slaapritme: String,
     },
-    wishlist: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-        }
-    ]
+    wishlist: String
 })
 
 // is middleware en vuurt deze function als er een user wordt gesaved
@@ -241,6 +237,7 @@ app.post("/signUp", (req, res) => {
         leeftijd: leeftijd,
         gebruikersnaam: gebruikersnaam,
         wachtwoord: wachtwoord,
+        wishlist: ""
     })
 
     // Save the new user to the database
@@ -471,13 +468,15 @@ app.get("/confirm", async (req, res) => {
 app.post("/wishlist/:id", async (req, res) => {
     // Get the product details from the request body
     try {
+        console.log(req.session.gebruikersnaam)
+        console.log(req.params.id)
         User.findOneAndUpdate(
             { gebruikersnaam: req.session.gebruikersnaam },
             {
-                wishlist: [req.params.id]
+                "wishlist": `${req.params.id}`
                 // push to wishlist?
             },
-            { new: true }
+            // { new: true }
         )
         setTimeout(() => {
             res.redirect("/wishlist");
@@ -493,12 +492,23 @@ app.post("/wishlist/:id", async (req, res) => {
 app.get("/wishlist", async (req, res) => {
     try {
         const user = await User.findOne({ gebruikersnaam: req.session.gebruikersnaam })
+        console.log(user)
         const wishlist = user.wishlist 
-        console.log("hoi1",wishlist)
-        const records = await Product.find({ '_id': { $in: wishlist } })
-        res.render('wishlist', { products: records})
+        console.log("hoi1", wishlist)
+        const records = await Product.findById(wishlist)
+        const getItToJson = []
+
+        getItToJson.push(records)
+
+        res.render("wishlist", {
+
+            product: getItToJson.map((product) => product.toJSON()),
+
+        })
+        // const records = await Product.find({ '_id': { $in: wishlist } })
+        // res.render('wishlist', {product: records.map((product) => product.toJSON())})
     } catch (error) {
-        console.error("Error retrieving wishlist:", error);
+        console.error("Error retrieving wishlist:", error)
         res.redirect("/products");
     }
 });
