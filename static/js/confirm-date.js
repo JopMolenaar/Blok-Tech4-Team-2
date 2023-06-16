@@ -1,28 +1,23 @@
-// const getFormDate = document.querySelector('#formDate')
+const getDateInput = document.querySelector("#date-input")
 
-// // Get the date for tomorrow
-// const tomorrow = new Date()
-// tomorrow.setDate(tomorrow.getDate() + 1)
+// Get the current date and add 1 for tomorrow
+const day = new Date()
+const tomorrow = new Date(day)
+tomorrow.setDate(tomorrow.getDate() + 1)
 
-// // Set the min date to tomorrow
-// const minDate = tomorrow.toISOString().split('T')[0]
+// Get the min input date
+const minDate = tomorrow.toISOString().split("T")[0]
+getDateInput.min = minDate
+getDateInput.value = minDate
 
-// // Set the date to only weekdays
+// Calculate maxDate as the last weekday of the year
+const maxDate = new Date(day.getFullYear(), 11, 31) // Set to last day of the current year
 
-// const restrictWeekdays = () => {
-//     const dateInput = document.querySelector("formDate")
-//     const selectedDate = new Date(dateInput.value)
+while (maxDate.getDay() === 0 || maxDate.getDay() === 6) {
+    maxDate.setDate(maxDate.getDate() - 1)
+}
 
-//     if (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) {
-//       // If selected date is Saturday or Sunday, add or subtract days to select the nearest weekday
-//       if (selectedDate.getDay() === 0) {
-//         selectedDate.setDate(selectedDate.getDate() + 1) // Add one day to select Monday
-//       } else {
-//         selectedDate.setDate(selectedDate.getDate() - 1) // Subtract one day to select Friday
-//       }
+const maxDateStr = maxDate.toISOString().split("T")[0]
+getDateInput.max = maxDateStr
 
-//       // Format the date as "YYYY-MM-DD" to set as the new value
-//       const formattedDate = selectedDate.toISOString().substring(0, 10)
-//       dateInput.value = formattedDate
-//     }
-//   }
+// This does'nt work :C

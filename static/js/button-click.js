@@ -1,5 +1,5 @@
 const allButtons = document.querySelectorAll("#button")
-const formButtons = document.querySelectorAll('#input[type="submit"]')
+const formButtons = document.querySelectorAll('input[type="submit"]')
 
 allButtons.forEach((button) => {
     button.addEventListener("click", () => {
