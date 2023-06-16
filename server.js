@@ -10,6 +10,9 @@ const PORT = 3000
 const mongoose = require("mongoose")
 const { engine } = require("express-handlebars")
 const { ObjectId } = mongoose.Types
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", "./views")
