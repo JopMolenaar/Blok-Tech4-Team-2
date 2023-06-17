@@ -522,8 +522,6 @@ app.get("/confirm", async (req, res) => {
 
 app.get('/wishlist', async (req, res) => {
     try {
-        // Connect to the MongoDB  
-        // Find the user by email and populate the watchlist field with movie details
         const user = await User.find({gebruikersnaam: req.session.gebruikersnaam})
         if (!user) {
           throw new Error('User not found');
@@ -531,22 +529,18 @@ app.get('/wishlist', async (req, res) => {
         let lol = user[0]
         let iets2 = lol.wishlist
         console.log(iets2);
-        // let iets = lol.wishlist[0]
         const multipleP = await Product.find({ _id: { $in: iets2 } });
-        // const product = await Product.findById(iets)
-        // console.log(product);
         console.log(multipleP);
         
         res.render('wishlist', {wishlist: multipleP.map((product) => product.toJSON()),})
       } catch (error) {
-        console.error('Error retrieving watchlist movies:', error);
+        console.error('Error retrieving wishlist products:', error);
         throw error;
       }
 })
 
 app.post('/wishlist-add/:id', async (req, res) => {
     try {
-        // const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, {  "wishlist":  [`${req.params.id}`]})
         const userUpdate = await User.findOneAndUpdate(
             { gebruikersnaam: req.session.gebruikersnaam },
             { $push: { wishlist: req.params.id } }

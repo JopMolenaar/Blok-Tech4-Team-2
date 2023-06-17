@@ -125,7 +125,7 @@
   width: 100%;
   text-align: center;
   height: fit-content;
-  font-size: 1em;
+  font-size: 1.1em;
 }
 #productpage > section:nth-child(3) section {
   border-bottom: lightgrey solid 3px;
@@ -206,4 +206,4 @@
   transform: translate(-50%, -50%);
   width: 10.625em;
   color: rgb(197, 0, 0);
-}/*# sourceMappingURL=productsOverview.css.map */
+}
