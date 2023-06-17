@@ -244,7 +244,7 @@ app.post("/signUp", (req, res) => {
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/products")
+                res.redirect("/voorkeuren")
             })
         })
         .catch((error) => {

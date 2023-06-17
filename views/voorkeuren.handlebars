@@ -1,9 +1,10 @@
 <head>
-    <h1>Kies uw voorkeur</h1>
+
 </head>
 <main>
-    <p>U zal elk onderdeel in moeten vullen</p>
     <form id="voorkeurenForm" action="/voorkeuren" method="POST">
+        <h1 class="voorkeurenH">Kies uw voorkeur</h1>
+        <p class="voorkeurenP">U zal elk onderdeel in moeten vullen</p>
         <label class="voorkeurenLabel" for="energielevel">Hoe actief mag het dier zijn?</label>
         <select id="energielevel" name="energielevel">
             <option>--</option>
@@ -11,9 +12,7 @@
             <option value="actief">Normaal</option>
             <option value="actief">Actief</option>
         </select>
-        <div id="AantalSection1">
-            <p id="styleText1"></p>
-        </div>
+        <p id="styleText1"></p>
 
         <label class="voorkeurenLabel" for="leefstijl">Wil je liever een binnen of buiten dier?</label>
         <select id="leefstijl" name="leefstijl">
@@ -22,9 +21,7 @@
             <option value="Buiten">Buiten dier</option>
             <option value="Beiden">Binnen/buiten dier</option>
         </select>
-        <div id="AantalSection2">
-            <p id="styleText2"></p>
-        </div>
+        <p id="styleText2"></p>
 
         <label class="voorkeurenLabel" for="grootte">Hoe groot mag het dier zijn?</label>
         <select id="grootte" name="grootte">
@@ -34,9 +31,7 @@
             <option value="Groot">Groot</option>
             <option value="Size doesn't matter">Geen voorkeur</option>
         </select>
-        <div id="AantalSection3">
-            <p id="styleText3"></p>
-        </div>
+        <p id="styleText3"></p>
 
         <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
         <select id="slaapritme" name="slaapritme">
@@ -46,9 +41,7 @@
             <option value="ochtend/avond">S'avonds</option>
             <option value="geen voorkeur">S'nachts</option>
         </select>
-        <div id="AantalSection4">
-            <p id="styleText4"></p>
-        </div>
+        <p id="styleText4"></p>
 
         <button id="nextButton" type="submit">Submit</button>
     </form>
