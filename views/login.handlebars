@@ -1,29 +1,31 @@
 <html>  
 <body class="background-image">
+    <main>
+        <form id="loginForm" action="/login" method="POST">
+            <h1 class="loginH">Welkom bij dierenshop!</h1>
+            <fieldset>
+                <label for="username">Gebruikersnaam:</label>
+                <input type="username" id="gebruikersnaam" name="gebruikersnaam" required />
+            </fieldset>
 
-    <form id="loginForm" action="/login" method="POST">
-        <h1 class="loginH">Welkom bij dierenshop!</h1>
-        <fieldset>
-            <label for="username">Gebruikersnaam:</label>
-            <input type="username" id="gebruikersnaam" name="gebruikersnaam" required />
-        </fieldset>
+            <fieldset>
+                <label for="password">Wachtwoord:</label>
+                <input type="password" id="wachtwoord" name="wachtwoord" required />
+                {{#if error}}
+                    <p class="error-message">{{error}}</p>
+                {{/if}}
+            </fieldset>
 
-        <fieldset>
-            <label for="password">Wachtwoord:</label>
-            <input type="password" id="wachtwoord" name="wachtwoord" required />
-            {{#if error}}
-                <p class="error-message">{{error}}</p>
-            {{/if}}
-        </fieldset>
+            <div>
+                <button type="submit">Login</button>
+                <a class="googleButton" href="/auth/google">login met Google</a>
+            </div>
 
-        <div>
-            <button type="submit">Login</button>
-        </div>
+            <h3 class="formH3" >Of</h3>
+            <a href="/signUp" class="formButton" type="submit">Maak een account</a>
+        </form>
 
-        <h3 class="formH3" >Of</h3>
-        <a href="/signUp" class="formButton" type="submit">Maak een account</a>
-    </form>
-
-    <script src="/js/login.js"></script>
+        <script src="/js/login.js"></script>
+    </main>
 </body>
 </html>

@@ -10,8 +10,8 @@ const PORT = 3000
 const mongoose = require("mongoose")
 const { engine } = require("express-handlebars")
 const { ObjectId } = mongoose.Types
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy
 
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
 	leeftijd: Number,
 	gebruikersnaam: String,
 	wachtwoord: String,
+	googleId: String,
 	voorkeuren: {
 		energielevel: String,
 		leefstijl: String,
@@ -50,6 +51,11 @@ const userSchema = new mongoose.Schema({
 // ARROW FUNCTION WERKT HIER NIET, DAAROM DE "function" ZOALS IN ES5
 userSchema.pre("save", async function (next) {
 	try {
+		if (!this.isModified("wachtwoord")) {
+			// Skip hashing if the password is not modified
+			return next()
+		}
+
 		const salt = await bcrypt.genSalt(10)
 		const hashedPassword = await bcrypt.hash(this.wachtwoord, salt)
 		this.wachtwoord = hashedPassword
@@ -58,6 +64,7 @@ userSchema.pre("save", async function (next) {
 		next(error)
 	}
 })
+
 
 // Create the User model
 const User = mongoose.model("User", userSchema, "users")
@@ -119,7 +126,7 @@ app.get("/login", async (req, res) => {
 app.get("/signUp", async (req, res) => {
 	// Check if the user is already logged in
 	if (req.session.loggedIn) {
-		res.redirect("/products")
+		res.redirect("/voorkeuren")
 	} else {
 		res.render("signUp")
 	}
@@ -159,7 +166,7 @@ app.post("/admin-logout", (req, res) => {
 })
 
 // Regular user login
-app.post("/login", (req, res) => {
+app.post("/login",(req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
 
 	console.log("Login username:", gebruikersnaam)
@@ -462,6 +469,78 @@ app.get("/confirm", async (req, res) => {
 
 	res.render("confirm", { weekdaysStr, doggo })
 })
+
+const GoogleStrategy = require("passport-google-oauth20").Strategy
+const GOOGLE_CLIENT_ID = "593422950502-97fr9pua64objfd3htu6n4u4oa6i2usm.apps.googleusercontent.com"
+const GOOGLE_CLIENT_SECRET = "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"
+
+// Configure Passport to use the Google strategy
+passport.use(
+	new GoogleStrategy(
+		{
+			clientID: GOOGLE_CLIENT_ID,
+			clientSecret: GOOGLE_CLIENT_SECRET,
+			callbackURL: "/auth/google/callback",
+		},
+		async (accessToken, refreshToken, profile, done) => {
+			try {
+				// Check if the user already exists in the database
+				let user = await User.findOne({ googleId: profile.id })
+
+				if (user) {
+					// User already exists, return it
+					done(null, user)
+				} else {
+					// Create a new user in the database
+					user = await User.create({
+						googleId: profile.id,
+						name: profile.displayName,
+						email: profile.emails[0].value,
+					})
+
+					// Return the newly created user
+					done(null, user)
+				}
+			} catch (err) {
+				done(err, null)
+			}
+		}
+	)
+)
+
+// Initialize Passport and session
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Serialize and deserialize user
+passport.serializeUser((user, done) => {
+	// Serialize the user object to store in the session
+	done(null, user.id)
+})
+
+// Deserialize user using async/await
+passport.deserializeUser(async (id, done) => {
+	try {
+	// Deserialize the user object from the session
+		const user = await User.findById(id)
+		done(null, user)
+	} catch (err) {
+		done(err, null)
+	}
+})
+  
+// Google authentication route
+app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }))
+
+// Google authentication callback route
+app.get(
+	"/auth/google/callback",
+	passport.authenticate("google", { failureRedirect: "/login" }),
+	(req, res) => {
+		// Authentication succeeded, redirect to the desired page
+		res.redirect("/products")
+	}
+)
 
 //
 // 404
