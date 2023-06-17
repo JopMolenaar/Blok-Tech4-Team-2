@@ -20,5 +20,9 @@
             <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
         </section>
     </section>
+    <form action="/wishlist-add/{{this._id}}" method="post">
+        <button type="submit" class="add-to-watchlist">Add to Watchlist</button>
+    </form>
+
 
 {{/each}}

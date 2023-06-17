@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
         grootte: String,
         slaapritme: String,
     },
+    wishlist: [{ type: ObjectId, ref: 'Product' }]
 })
 
 // is middleware en vuurt deze function als er een user wordt gesaved
@@ -517,6 +518,39 @@ app.get("/confirm", async (req, res) => {
     const weekdaysStr = weekdays.toISOString().split("T")[0]
 
     res.render("confirm", { weekdaysStr, doggo })
+})
+
+app.get('/wishlist', async (req, res) => {
+    try {
+        const user = await User.find({gebruikersnaam: req.session.gebruikersnaam})
+        if (!user) {
+          throw new Error('User not found');
+        }
+        let lol = user[0]
+        let iets2 = lol.wishlist
+        console.log(iets2);
+        const multipleP = await Product.find({ _id: { $in: iets2 } });
+        console.log(multipleP);
+        
+        res.render('wishlist', {wishlist: multipleP.map((product) => product.toJSON()),})
+      } catch (error) {
+        console.error('Error retrieving wishlist products:', error);
+        throw error;
+      }
+})
+
+app.post('/wishlist-add/:id', async (req, res) => {
+    try {
+        const userUpdate = await User.findOneAndUpdate(
+            { gebruikersnaam: req.session.gebruikersnaam },
+            { $push: { wishlist: req.params.id } }
+        );
+        console.log(userUpdate);
+        res.redirect("/products")
+    } catch (error) {
+        console.error('Error adding movie to wishlist:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 })
 
 // 404
