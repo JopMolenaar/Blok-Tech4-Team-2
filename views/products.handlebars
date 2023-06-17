@@ -18,9 +18,9 @@
                 class="{{this.eigenschappen.activiteit}}
                     {{this.eigenschappen.leefstijl}}
                     {{this.eigenschappen.grootte}}
-                    {{this.eigenschappen.activiteit}}
+                    {{this.eigenschappen.dag}}
                     {{this.soort}}
-                    {{this.leeftijd}}"
+                    _{{this.leeftijd}}"
             >
                 <a href="/producten-overzicht/detail/{{this._id}}">
                     <div>
@@ -28,11 +28,13 @@
                     </div>
                     <section>
                         <h3 class="visually-hidden">Gegevens:</h3>
-                        <p><b>Naam:</b> {{this.naam}}</p>
-                        <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
+
+                        <p><b>Naam:</b> {{naam}}</p>
+                        <p><b>Leeftijd:</b> {{leeftijd}}</p>
                         <p><b>Soort:</b> {{this.soort}}</p>
                         <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
                     </section>
+                    {{#productInfo}}{{/productInfo}}
 
                     <section>
                         <h4 class="visually-hidden">Eigenschappen:</h4>
@@ -43,9 +45,11 @@
                     </section>
                 </a>
             </li>
+
         {{/each}}
     </ul>
     <section>
+
         <h2>Filter products</h2>
         <p id="javascriptOff">Turn on Javascript to use the filter function</p>
 
@@ -67,7 +71,7 @@
             </div>
             <div class="range-input">
                 <input type="range" class="range-min" min="0" max="100" value="0" />
-                <input type="range" class="range-max" min="0" max="100" value="100" />
+                <input type="range" class="range-max" min="0" max="99" value="99" />
             </div>
         </section>
         <section class="soort">
@@ -83,11 +87,11 @@
         <section>
             <h3>Activiteit</h3>
             <label for="">
-                <input type="radio" name="activiteit" value="actief" />
+                <input type="checkbox" name="activiteit" value="Actief" />
                 Actief
             </label>
             <label for="">
-                <input type="radio" name="activiteit" value="rustig" />
+                <input type="checkbox" name="activiteit" value="Rustig" />
                 Rustig
             </label>
         </section>
@@ -95,15 +99,15 @@
         <section>
             <h3>Leefstijl</h3>
             <label for="">
-                <input type="radio" name="leefstijl" value="binnen" />
+                <input type="checkbox" name="leefstijl" value="Binnen" />
                 Binnen
             </label>
             <label for="">
-                <input type="radio" name="leefstijl" value="buiten" />
+                <input type="checkbox" name="leefstijl" value="Buiten" />
                 Buiten
             </label>
             <label for="">
-                <input type="radio" name="leefstijl" value="beiden" />
+                <input type="checkbox" name="leefstijl" value="Beiden" />
                 Beiden
             </label>
         </section>
@@ -111,30 +115,31 @@
         <section>
             <h3>Grootte</h3>
             <label for="">
-                <input type="radio" name="grootte" value="klein" />
+                <input type="checkbox" name="grootte" value="Klein" />
                 Klein
             </label>
             <label for="">
-                <input type="radio" name="grootte" value="middel" />
+                <input type="checkbox" name="grootte" value="Middel" />
                 Middel
             </label>
             <label for="">
-                <input type="radio" name="grootte" value="groot" />
+                <input type="checkbox" name="grootte" value="Groot" />
                 Groot
             </label>
         </section>
         <section>
             <h3>Dag of s'nachts</h3>
             <label for="">
-                <input type="radio" name="dagnacht" value="dag" />
+                <input type="checkbox" name="dagnacht" value="Dag" />
                 Overdag
             </label>
             <label for="">
-                <input type="radio" name="dagnacht" value="nacht" />
+                <input type="checkbox" name="dagnacht" value="Nacht" />
                 S'nachts
             </label>
         </section>
     </section>
+
 </main>
 
 <script src="/js/filter.js"></script>

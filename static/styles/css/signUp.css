@@ -95,6 +95,11 @@
   border-width: 0.1em;
   border-style: solid;
 }
+#signupForm input:required:-ms-input-placeholder {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
 #signupForm input:required:valid,
 #signupForm input:required:placeholder-shown {
   border-color: #98e6bf;
@@ -124,4 +129,4 @@
 
 .question {
   margin-bottom: 1.25em;
-}/*# sourceMappingURL=signUp.css.map */
+}
