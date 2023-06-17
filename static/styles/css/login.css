@@ -1,0 +1,119 @@
+/* General styling */
+.background-image {
+  background-image: url("/images/dog.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.loginH {
+  text-align: center;
+  color: #242424;
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+.formH3 {
+  text-align: center;
+  font-size: 1em;
+}
+
+/* loginForm styling */
+#loginForm fieldset {
+  border: none;
+  padding: 0;
+}
+
+#loginForm {
+  border: 0em solid #4e4c67;
+  border-radius: 0.4em;
+  background-color: rgba(255, 255, 255, 0.6274509804);
+  max-width: 25em;
+  padding: 1.25em;
+  margin-top: 2em;
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#loginForm label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin: 0;
+  text-align: center;
+}
+#loginForm input[type=text],
+#loginForm input[type=password],
+#loginForm input[type=username] {
+  border: 0.01em solid #dcd6f7;
+  border-radius: 0.1875em;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  display: block;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+#loginForm button[type=submit] {
+  background-color: #dcd6f7;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  margin: 1em auto;
+}
+#loginForm button[type=submit]:hover {
+  background-color: #a6b1e1;
+}
+#loginForm input:required:invalid {
+  color: #4e4c67;
+  border-color: #4e4c67;
+  border-width: 0.1em;
+  border-style: solid;
+}
+#loginForm input:required:-moz-placeholder-shown {
+  border-color: #98e6bf;
+  border-width: 0.1em;
+  border-style: solid;
+}
+#loginForm input:required:-ms-input-placeholder {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
+#loginForm input:required:valid,
+#loginForm input:required:placeholder-shown {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
+
+/* Neutral form styling */
+.formButton {
+  background-color: #dcd6f7;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  margin: 1em auto;
+  font-weight: bold;
+  width: 75%;
+}
+.formButton:hover {
+  background-color: #a6b1e1;
+}
+
+.question {
+  margin-bottom: 1.25em;
+}

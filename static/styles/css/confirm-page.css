@@ -1,0 +1,41 @@
+#confirmPage {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  align-items: center;
+  text-align: center;
+}
+#confirmPage section {
+  display: grid;
+  margin: auto;
+  width: 80%;
+}
+#confirmPage ul {
+  list-style: none;
+}
+#confirmPage .dogcontainer {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+#confirmPage img {
+  width: 100%;
+  height: auto;
+}
+#confirmPage .liIMG {
+  display: grid;
+  justify-self: end;
+}
+#confirmPage .dogInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-items: start;
+  text-align: start;
+  gap: 0.5rem;
+}
+#confirmPage .dogInfo li {
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+}

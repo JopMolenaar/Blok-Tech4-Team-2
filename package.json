@@ -23,10 +23,16 @@
         "passport": "^0.6.0",
         "passport-local": "^1.0.0",
         "path": "^0.12.7",
+        "sass": "^1.63.4",
         "scss": "^0.2.4",
         "slug": "^8.2.2"
     },
     "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^8.0.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-livereload": "^4.0.2",
+        "gulp-sass": "^5.1.0",
         "nodemon": "^2.0.22"
     }
 }
