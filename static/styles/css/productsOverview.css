@@ -17,13 +17,11 @@
   align-items: center;
   flex-direction: column;
   margin: 1em;
-  height: -moz-fit-content;
   height: fit-content;
 }
 #productpage > section:nth-child(1) h1 {
   font-size: 1em;
   margin: 0;
-  min-width: -moz-fit-content;
   min-width: fit-content;
   flex-wrap: wrap;
   height: 2em;
@@ -38,7 +36,6 @@
   font-size: 1em;
   display: grid;
   width: 98%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 0;
   gap: 2em;
@@ -84,12 +81,10 @@
 }
 #productpage ul li a div img {
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 #productpage ul li a section:nth-child(2) p,
 #productpage ul li a section:nth-child(3) p {
-  height: -moz-fit-content;
   height: fit-content;
   margin: 0;
   margin: 0.2em;
@@ -129,9 +124,8 @@
 #productpage > section:nth-child(3) h2 {
   width: 100%;
   text-align: center;
-  height: -moz-fit-content;
   height: fit-content;
-  font-size: 1em;
+  font-size: 1.1em;
 }
 #productpage > section:nth-child(3) section {
   border-bottom: lightgrey solid 3px;
@@ -212,4 +206,4 @@
   transform: translate(-50%, -50%);
   width: 10.625em;
   color: rgb(197, 0, 0);
-}/*# sourceMappingURL=productsOverview.css.map */
+}

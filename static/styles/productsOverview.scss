@@ -135,7 +135,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             width: 100%;
             text-align: center;
             height: fit-content;
-            font-size: 1em;
+            font-size: 1.1em;
         }
         section {
             border-bottom: lightgrey solid 3px;
@@ -211,24 +211,6 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                 }
             }
         }
-        // section {
-        //     display: flex;
-        //     flex-direction: column;
-        //     gap: 0.3em;
-        //     label {
-        //         margin-left: 0.5em;
-        //         input {
-        //             margin: 0;
-        //             padding: 0;
-        //             width: 1.5em;
-        //             border-radius: 0.15em;
-        //             transform: translateY(-0.075em);
-        //             display: grid;
-        //             place-content: center;
-        //         }
-        //     }
-        // }
-
         #javascriptOff {
             position: absolute;
             top: 50%;
@@ -237,15 +219,5 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             width: 10.625em;
             color: $color-error;
         }
-        // label {
-        //     display: none;
-        //     width: 100%;
-        //     justify-content: space-between;
-        //     select {
-        //         width: 40%;
-        //         height: 100%;
-        //         border: $color-border 2px solid;
-        //     }
-        // }
     }
 }
