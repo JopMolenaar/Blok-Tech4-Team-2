@@ -1,4 +1,8 @@
 /* General styling */
+.error-message {
+  text-align: center;
+}
+
 .background-image {
   background-image: url("/images/dog.jpg");
   background-size: cover;
