@@ -8,6 +8,10 @@ $hover-color: #a6b1e1;
 $input-border-color: #dcd6f7;
 $placeholder-border-color: #98e6bf;
 
+.error-message{
+  text-align: center;
+}
+
 .background-image {
   background-image: $background-image;
   background-size: cover;
@@ -45,7 +49,9 @@ $placeholder-border-color: #98e6bf;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 
   label {
     display: block;
@@ -112,6 +118,31 @@ $placeholder-border-color: #98e6bf;
   }
 }
 
+.googleButton {
+  background-color: #ffff;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4em;
+  color: $primary-color;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  margin: 1em auto;
+  font-weight: bold;
+  width: 75%;
+
+  background-image: url("/images/google.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 1em;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
 /* Neutral form styling */
 
 .formButton {
@@ -137,3 +168,4 @@ $placeholder-border-color: #98e6bf;
 .question {
   margin-bottom: 1.25em;
 }
+

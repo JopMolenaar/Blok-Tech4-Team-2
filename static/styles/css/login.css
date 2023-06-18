@@ -1,4 +1,8 @@
 /* General styling */
+.error-message {
+  text-align: center;
+}
+
 .background-image {
   background-image: url("/images/dog.jpg");
   background-size: cover;
@@ -35,6 +39,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 #loginForm label {
@@ -92,6 +98,29 @@
   border-color: #98e6bf;
   border-width: 0.2em;
   border-style: solid;
+}
+
+.googleButton {
+  background-color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  margin: 1em auto;
+  font-weight: bold;
+  width: 75%;
+  background-image: url("/images/google.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 1em;
+}
+.googleButton:hover {
+  background-color: #a6b1e1;
 }
 
 /* Neutral form styling */
