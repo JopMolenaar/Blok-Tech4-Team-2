@@ -118,30 +118,7 @@ $placeholder-border-color: #98e6bf;
   }
 }
 
-.googleButton {
-  background-color: #ffff;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 0.4em;
-  color: $primary-color;
-  cursor: pointer;
-  display: block;
-  font-size: 1em;
-  padding: 0.625em;
-  margin: 1em auto;
-  font-weight: bold;
-  width: 75%;
 
-  background-image: url("/images/google.png");
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 3.5em;
-
-  &:hover {
-    background-color: $hover-color;
-  }
-}
 
 /* Neutral form styling */
 
