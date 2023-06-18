@@ -28,6 +28,8 @@
 }
 
 #signupForm section {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -45,6 +47,8 @@
   position: absolute;
   left: 100%;
   top: 0%;
+  -webkit-transform: translate(-100%, 0%);
+  -ms-transform: translate(-100%, 0%);
   transform: translate(-100%, 0%);
 }
 #signupForm label {
@@ -60,7 +64,7 @@
 #signupForm input[type=wachtwoord],
 #signupForm input[type=gebruikersnaam],
 #signupForm input[type=username] {
-  border: 0.01em solid #dcd6f7;
+  border: 0.01em solid #a299c8;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -70,13 +74,14 @@
   margin-top: 0.5em;
 }
 #signupForm button[type=submit] {
-  background-color: #dcd6f7;
+  background-color: #a299c8;
   border: none;
   border-radius: 0.4em;
   color: #242424;
   cursor: pointer;
   display: block;
   font-size: 1em;
+  font-weight: bold;
   padding: 0.625em;
   width: 80%;
   margin: 1em;
@@ -109,7 +114,7 @@
 
 /* Neutral form styling */
 .formButton {
-  background-color: #dcd6f7;
+  background-color: #a299c8;
   text-align: center;
   text-decoration: none;
   border: none;

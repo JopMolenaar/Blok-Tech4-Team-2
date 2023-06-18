@@ -1,11 +1,11 @@
 /* General styling */
 
-$background-image: url("/images/dog.jpg");
+$background-image: url("/images/nature.jpg");
 $primary-color: #242424;
 $secondary-color: #4e4c67;
 $background-color: #ffffffa0;
 $hover-color: #a6b1e1;
-$input-border-color: #dcd6f7;
+$input-border-color: #a299c8;
 $placeholder-border-color: #98e6bf;
 
 .error-message{
@@ -81,6 +81,7 @@ $placeholder-border-color: #98e6bf;
     cursor: pointer;
     display: block;
     font-size: 1em;
+    font-weight: bold;
     padding: 0.625em;
     width: 80%;
     margin: 1em auto;

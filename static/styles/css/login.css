@@ -4,7 +4,7 @@
 }
 
 .background-image {
-  background-image: url("/images/dog.jpg");
+  background-image: url("/images/nature.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -34,11 +34,12 @@
   background-color: rgba(255, 255, 255, 0.6274509804);
   max-width: 25em;
   padding: 1.25em;
-  margin-top: 2em;
   display: block;
   position: absolute;
   left: 50%;
   top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 #loginForm label {
@@ -51,7 +52,7 @@
 #loginForm input[type=text],
 #loginForm input[type=password],
 #loginForm input[type=username] {
-  border: 0.01em solid #dcd6f7;
+  border: 0.01em solid #a299c8;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -61,13 +62,14 @@
   margin-top: 0.5em;
 }
 #loginForm button[type=submit] {
-  background-color: #dcd6f7;
+  background-color: #a299c8;
   border: none;
   border-radius: 0.4em;
   color: #242424;
   cursor: pointer;
   display: block;
   font-size: 1em;
+  font-weight: bold;
   padding: 0.625em;
   width: 80%;
   margin: 1em auto;
@@ -115,7 +117,7 @@
   background-image: url("/images/google.png");
   background-repeat: no-repeat;
   background-position: left center;
-  background-size: 4em;
+  background-size: 3.5em;
 }
 .googleButton:hover {
   background-color: #a6b1e1;
@@ -123,7 +125,7 @@
 
 /* Neutral form styling */
 .formButton {
-  background-color: #dcd6f7;
+  background-color: #a299c8;
   text-align: center;
   text-decoration: none;
   border: none;
