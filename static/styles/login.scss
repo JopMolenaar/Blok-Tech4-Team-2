@@ -3,10 +3,13 @@
 $background-image: url("/images/nature.jpg");
 $primary-color: #242424;
 $secondary-color: #4e4c67;
-$background-color: #ffffffa0;
-$hover-color: #a6b1e1;
-$input-border-color: #a299c8;
-$placeholder-border-color: #98e6bf;
+$background-color: #312741a0;
+$google-hover-color: #E1E1E1;
+$google-input-border-color: #ffff;
+$input-border-color: #98e6bf;
+$color-primary-button: #dcd6f7;
+$color-primary-button-hover: #a6b1e1;
+$lack-of-color: #ffff;
 
 .error-message{
   text-align: center;
@@ -18,9 +21,9 @@ $placeholder-border-color: #98e6bf;
   background-position: center;
 }
 
-.loginH {
+#loginForm .loginH {
   text-align: center;
-  color: $primary-color;
+  color: $lack-of-color;
   font-size: 1.5em;
   margin: 0;
   margin-bottom: 1em;
@@ -29,6 +32,7 @@ $placeholder-border-color: #98e6bf;
 .formH3 {
   text-align: center;
   font-size: 1em;
+  color: $lack-of-color;
 }
 
 /* loginForm styling */
@@ -36,6 +40,7 @@ $placeholder-border-color: #98e6bf;
 #loginForm fieldset{
   border: none;
   padding: 0;
+  color: $lack-of-color;
 }
 
 #loginForm {
@@ -55,7 +60,7 @@ $placeholder-border-color: #98e6bf;
   label {
     display: block;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 1em;
     margin: 0;
     text-align: center;
   }
@@ -74,7 +79,7 @@ $placeholder-border-color: #98e6bf;
   }
 
   button[type="submit"] {
-    background-color: $input-border-color;
+    background-color: $color-primary-button;
     border: none;
     border-radius: 0.4em;
     color: $primary-color;
@@ -88,7 +93,7 @@ $placeholder-border-color: #98e6bf;
   }
 
   button[type="submit"]:hover {
-    background-color: $hover-color;
+    background-color: $color-primary-button-hover;
   }
 
   input:required:invalid {
@@ -99,27 +104,27 @@ $placeholder-border-color: #98e6bf;
   }
 
   input:required:-moz-placeholder-shown {
-    border-color: $placeholder-border-color;
+    border-color: $input-border-color;
     border-width: 0.1em;
     border-style: solid;
   }
 
   input:required:-ms-input-placeholder {
-    border-color: $placeholder-border-color;
+    border-color: $input-border-color;
     border-width: 0.2em;
     border-style: solid;
   }
 
   input:required:valid,
   input:required:placeholder-shown {
-    border-color: $placeholder-border-color;
+    border-color: $input-border-color;
     border-width: 0.2em;
     border-style: solid;
   }
 }
 
 .googleButton {
-  background-color: #ffff;
+  background-color: $google-input-border-color;
   text-align: center;
   text-decoration: none;
   border: none;
@@ -139,14 +144,14 @@ $placeholder-border-color: #98e6bf;
   background-size: 3.5em;
 
   &:hover {
-    background-color: $hover-color;
+    background-color: $google-hover-color;
   }
 }
 
 /* Neutral form styling */
 
 .formButton {
-  background-color: $input-border-color;
+  background-color: $color-primary-button;
   text-align: center;
   text-decoration: none;
   border: none;
@@ -161,7 +166,7 @@ $placeholder-border-color: #98e6bf;
   width: 75%;
 
   &:hover {
-    background-color: $hover-color;
+    background-color: $color-primary-button-hover;
   }
 }
 

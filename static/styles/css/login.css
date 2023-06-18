@@ -9,9 +9,9 @@
   background-position: center;
 }
 
-.loginH {
+#loginForm .loginH {
   text-align: center;
-  color: #242424;
+  color: white;
   font-size: 1.5em;
   margin: 0;
   margin-bottom: 1em;
@@ -20,18 +20,20 @@
 .formH3 {
   text-align: center;
   font-size: 1em;
+  color: white;
 }
 
 /* loginForm styling */
 #loginForm fieldset {
   border: none;
   padding: 0;
+  color: white;
 }
 
 #loginForm {
   border: 0em solid #4e4c67;
   border-radius: 0.4em;
-  background-color: rgba(255, 255, 255, 0.6274509804);
+  background-color: rgba(49, 39, 65, 0.6274509804);
   max-width: 25em;
   padding: 1.25em;
   display: block;
@@ -45,14 +47,14 @@
 #loginForm label {
   display: block;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: 0;
   text-align: center;
 }
 #loginForm input[type=text],
 #loginForm input[type=password],
 #loginForm input[type=username] {
-  border: 0.01em solid #a299c8;
+  border: 0.01em solid #98e6bf;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -62,7 +64,7 @@
   margin-top: 0.5em;
 }
 #loginForm button[type=submit] {
-  background-color: #a299c8;
+  background-color: #dcd6f7;
   border: none;
   border-radius: 0.4em;
   color: #242424;
@@ -120,12 +122,12 @@
   background-size: 3.5em;
 }
 .googleButton:hover {
-  background-color: #a6b1e1;
+  background-color: #E1E1E1;
 }
 
 /* Neutral form styling */
 .formButton {
-  background-color: #a299c8;
+  background-color: #dcd6f7;
   text-align: center;
   text-decoration: none;
   border: none;
