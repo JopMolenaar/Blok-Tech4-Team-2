@@ -1,47 +1,50 @@
 <body class="background-image2">
-    <form id="signupForm" action="/signup" method="POST">
-    <h1 class="signupH">Vul de onderstaande informatie in om een account te maken</h1>
+    <main>
+        <form id="signupForm" action="/signup" method="POST">
+        <h1 class="signupH">Vul de onderstaande informatie in om een account te maken</h1>
+        <p>Of</p>
 
-        {{#if error}}
-            <p class="error-message">{{error}}</p>
-        {{/if}}
+            {{#if error}}
+                <p class="error-message">{{error}}</p>
+            {{/if}}
 
-        <fieldset>
-            <label for="naam">Naam:</label>
-            <input type="naam" id="naam" name="naam" required />
-        </fieldset>
+            <fieldset>
+                <label for="naam">Naam:</label>
+                <input type="naam" id="naam" name="naam" required />
+            </fieldset>
 
-        <fieldset>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-        </fieldset>
+            <fieldset>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+            </fieldset>
 
-        <fieldset>
-            <label for="age">Leeftijd:</label>
-            <input type="leeftijd" id="leeftijd" name="leeftijd" required />
-        </fieldset>
+            <fieldset>
+                <label for="age">Leeftijd:</label>
+                <input type="leeftijd" id="leeftijd" name="leeftijd" required />
+            </fieldset>
 
-        <fieldset>
-            <label for="username">Gebruikersnaam:</label>
-            <input type="gebruikersnaam" id="gebruikersnaam" name="gebruikersnaam" required />
-        </fieldset>
+            <fieldset>
+                <label for="username">Gebruikersnaam:</label>
+                <input type="gebruikersnaam" id="gebruikersnaam" name="gebruikersnaam" required />
+            </fieldset>
 
-        <fieldset>
-            <label for="wachtwoord">Wachtwoord:</label>
-            <input type="wachtwoord" id="wachtwoord" name="wachtwoord" required />
-        </fieldset>
+            <fieldset>
+                <label for="wachtwoord">Wachtwoord:</label>
+                <input type="wachtwoord" id="wachtwoord" name="wachtwoord" required />
+            </fieldset>
 
-        <fieldset>
-            <label for="wachtwoordBevestigen">Wachtwoord bevestigen:</label>
-            <input type="wachtwoord" id="wachtwoordBevestigen" name="wachtwoordBevestigen" required />
-        </fieldset>
+            <fieldset>
+                <label for="wachtwoordBevestigen">Wachtwoord bevestigen:</label>
+                <input type="wachtwoord" id="wachtwoordBevestigen" name="wachtwoordBevestigen" required />
+            </fieldset>
 
-        <section>
-            <button id="signUp" type="submit">Sign Up</button>
-            <p>of</p>
-            <a class="formButton" href="/login" id="loginButton" type="button">Log in</a>
-        </section>
-    </form>
-
-    <script src="javascript/signup.js"></script>
+            <section>
+                <button id="signUp" type="submit">Sign Up</button>
+                <p>of</p>
+                <a class="formButton" href="/login" id="loginButton" type="button">Log in</a>
+            </section>
+        </form>
+    </main>
+    
+    <script src="/js/signup.js"></script>
 </body>
