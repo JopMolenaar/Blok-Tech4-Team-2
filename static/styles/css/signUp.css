@@ -1,6 +1,6 @@
 /* General styling */
 .background-image2 {
-  background-image: url("/images/kitten3.jpg");
+  background-image: url("/images/paws2.jpg");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
@@ -39,8 +39,7 @@
 
 #signupForm {
   border: 0em solid #4e4c67;
-  border-radius: 0.4em;
-  background-color: rgba(255, 255, 255, 0.6274509804);
+  background-color: #ffffff;
   max-width: 25em;
   padding: 1.25em;
   display: block;
@@ -56,7 +55,8 @@
   font-weight: bold;
   font-size: 0.8em;
   margin: 0;
-  text-align: center;
+  text-align: left;
+  padding-left: 3.5em;
 }
 #signupForm input[type=naam],
 #signupForm input[type=email],
@@ -64,7 +64,7 @@
 #signupForm input[type=wachtwoord],
 #signupForm input[type=gebruikersnaam],
 #signupForm input[type=username] {
-  border: 0.01em solid #a299c8;
+  border: 0.01em solid #dcd6f7;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -74,7 +74,7 @@
   margin-top: 0.5em;
 }
 #signupForm button[type=submit] {
-  background-color: #a299c8;
+  background-color: #dcd6f7;
   border: none;
   border-radius: 0.4em;
   color: #242424;
