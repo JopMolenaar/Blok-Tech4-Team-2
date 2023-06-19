@@ -1,5 +1,5 @@
-.background-image3 {
-  background-image: url("/images/bunny.png");
+.background-image2 {
+  background-image: url("../images/paws2.jpg");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
@@ -7,31 +7,34 @@
 
 #voorkeurenForm {
   border: 0em solid #4e4c67;
-  border-radius: 0.4em;
-  background-color: rgba(255, 255, 255, 0.6274509804);
+  background-color: #ffffff;
   max-width: 25em;
   padding: 1.25em;
   display: block;
   position: absolute;
-  left: 95%;
-  top: 10em;
+  left: 100%;
+  top: 1em;
+  -webkit-transform: translate(-100%, 0%);
+  -ms-transform: translate(-100%, 0%);
   transform: translate(-100%, 0%);
+}
+#voorkeurenForm label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin: 0;
+  text-align: left;
+  padding-left: 3.5em;
 }
 #voorkeurenForm p {
   display: block;
   font-weight: bold;
   font-size: 0.8em;
-  margin-left: 66px;
-  color: #a6b1e1;
-  display: block;
-  font-weight: bold;
-  font-size: 0.8em;
-  margin-left: 66px;
   color: #a6b1e1;
 }
 
 select {
-  border: 0.01em solid #dcd6f7;
+  border: 0.01em solid #4e4c67;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -49,9 +52,6 @@ select option {
   display: block;
   margin: 1em auto;
   margin-top: 0.5em;
-}
-select option:hover {
-  background-color: #444444;
 }
 
 button {
@@ -89,6 +89,6 @@ button {
   margin: 1em auto;
 }
 
-.alert {
-  color: red;
+.selected {
+  background-color: #a6b1e1;
 }
