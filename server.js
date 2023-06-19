@@ -221,53 +221,53 @@ app.post("/logout", (req, res) => {
 
 // Signup as a new user
 app.post("/signUp", (req, res) => {
-	const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
-	console.log(gebruikersnaam)
-	console.log("post request werkt")
-	// Check if username is filled in
-	if (!gebruikersnaam) {
-		req.session.error = "Vul een gebruikersnaam in"
-		res.redirect("/signup") // Redirect to the signup page
-		return
-	}
+    const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
+    console.log(gebruikersnaam)
+    console.log("post request werkt")
+    // Check if username is filled in
+    if (!gebruikersnaam) {
+        req.session.error = "Vul een gebruikersnaam in"
+        res.redirect("/signup") // Redirect to the signup page
+        return
+    }
 
-	// Check if password and confirm password match
-	if (wachtwoord !== wachtwoordBevestigen) {
-		req.session.error = "Wachtwoorden komen niet overeen"
-		res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
-		return
-	}
+    // Check if password and confirm password match
+    if (wachtwoord !== wachtwoordBevestigen) {
+        req.session.error = "Wachtwoorden komen niet overeen"
+        res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
+        return
+    }
 
-	// Create a new user object with the filled-in information
-	const newUser = new User({
-		naam: naam,
-		email: email,
-		leeftijd: leeftijd,
-		gebruikersnaam: gebruikersnaam,
-		wachtwoord: wachtwoord,
-	})
+    // Create a new user object with the filled-in information
+    const newUser = new User({
+        naam: naam,
+        email: email,
+        leeftijd: leeftijd,
+        gebruikersnaam: gebruikersnaam,
+        wachtwoord: wachtwoord,
+    })
 
-	// Save the new user to the database
-	newUser
-		.save()
-		.then(() => {
-			console.log("new user")
-			req.session.loggedIn = true
-			req.session.gebruikersnaam = gebruikersnaam
-			req.session.save(() => {
-				res.redirect("/products")
-			})
-		})
-		.catch((error) => {
-			console.error("Error gebruiker aanmaken:", error)
-			if (error.code === 11000) {
-				// Duplicate key error
-				req.session.error = "Email al in gebruik"
-			} else {
-				req.session.error = "Gebruiker niet kunnen registreren"
-			}
-			res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
-		})
+    // Save the new user to the database
+    newUser
+        .save()
+        .then(() => {
+            console.log("new user")
+            req.session.loggedIn = true
+            req.session.gebruikersnaam = gebruikersnaam
+            req.session.save(() => {
+                res.redirect("/voorkeuren")
+            })
+        })
+        .catch((error) => {
+            console.error("Error gebruiker aanmaken:", error)
+            if (error.code === 11000) {
+                // Duplicate key error
+                req.session.error = "Email al in gebruik"
+            } else {
+                req.session.error = "Gebruiker niet kunnen registreren"
+            }
+            res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
+        })
 })
 
 app.get("/voorkeuren", async (req, res) => {
