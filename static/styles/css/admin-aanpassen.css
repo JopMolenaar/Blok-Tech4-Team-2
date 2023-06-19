@@ -9,41 +9,40 @@ form {
   height: min-content;
 }
 
-#productpageAdminAdd {
+#admin-aanpassen {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 4em;
+  padding-top: 2em;
   gap: 2em;
-  height: calc(100% - 8em);
+  height: calc(100% - 6em);
   background: rgb(230, 219, 243);
 }
-#productpageAdminAdd div {
-  display: flex;
+#admin-aanpassen div {
   gap: 1em;
   padding: 1em;
   background-color: #eeeeee;
   padding-bottom: 0em;
-  flex-direction: column;
+  position: relative;
   height: fit-content;
   border-radius: 10px;
 }
-#productpageAdminAdd div > section {
+#admin-aanpassen div > section {
   display: flex;
   justify-content: center;
   position: relative;
 }
-#productpageAdminAdd div > section h1 {
+#admin-aanpassen div > section h1 {
   margin-top: 0.5em;
 }
-#productpageAdminAdd div > section a {
+#admin-aanpassen div > section a {
   position: absolute;
   left: 0;
   top: 0;
 }
-#productpageAdminAdd div form {
+#admin-aanpassen div form {
   margin: 0;
-  width: 27em;
+  width: 33.7em;
   padding-bottom: 1em;
   height: fit-content;
   display: flex;
@@ -52,23 +51,38 @@ form {
   justify-content: start;
   align-items: flex-start;
 }
-#productpageAdminAdd div form section {
-  width: 100%;
+#admin-aanpassen div form section:nth-child(6) {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-#productpageAdminAdd div form section h2 {
+#admin-aanpassen div form section:nth-child(6) h2 {
   font-size: 1em;
   grid-column-start: 1;
   grid-column-end: 3;
   font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 }
-#productpageAdminAdd div form label {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+#admin-aanpassen div form section:nth-child(6) fieldset {
+  height: fit-content;
 }
-#productpageAdminAdd div form > input {
+#admin-aanpassen div form div {
+  background: none;
+  order: 1;
+  position: absolute;
+  top: 2em;
+  right: -3em;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+#admin-aanpassen div form div img {
+  width: 10em;
+  height: auto;
+}
+#admin-aanpassen div form div .otherImg {
+  display: flex;
+  flex-direction: column;
+}
+#admin-aanpassen div form > input {
   place-self: end;
   margin-top: 0.5em;
 }
