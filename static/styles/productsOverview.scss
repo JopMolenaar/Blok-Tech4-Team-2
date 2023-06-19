@@ -4,7 +4,8 @@ $color-border: black;
 $color-text: black;
 $color-border-bottom-form: rgb(187, 187, 187);
 $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
+$color-backgroundPurple: rgb(230, 219, 243);
+$color-white: #eeeeee;
 #productpage {
     height: calc(100vh - 4em);
     width: 100%;
@@ -13,6 +14,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
     grid-template-rows: 6.25em 1fr;
     flex-direction: column;
     overflow-y: hidden;
+    background-color: $color-backgroundPurple;
 
     // heading of list section
     > section:nth-child(1) {
@@ -38,6 +40,9 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         }
     }
     // list
+    > ul::-webkit-scrollbar {
+        display: none;
+    }
     > ul {
         grid-column-start: 2;
         grid-column-end: 3;
@@ -69,7 +74,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             width: 100%;
             // margin: 1em;
             max-width: 22em;
-            height: 20em;
+            height: 21em;
             overflow: hidden;
             position: relative;
             a {
@@ -97,7 +102,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                     margin: 0;
                     margin: 0.2em;
                     padding: 0.3em;
-                    max-width: 9.375em;
+                    max-width: 9em;
                     overflow: hidden;
                     font-size: 1em;
                 }
@@ -119,13 +124,13 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                     p:nth-child(3),
                     p:nth-child(4) {
                         position: absolute;
-                        top: -3.65em;
+                        top: -4.28em;
                         left: -0.2em;
                         font-size: 1em;
                         background: rgba(255, 255, 255, 0.7);
                     }
                     p:nth-child(4) {
-                        top: -1.9em;
+                        top: -2.2em;
                     }
                 }
                 section:nth-child(3) {
@@ -144,6 +149,9 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                         width: 90%;
                         padding: 0;
                         gap: 0.3em;
+                        li {
+                            list-style-type: square;
+                        }
                     }
                 }
             }
@@ -155,14 +163,14 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         grid-column-end: 2;
         grid-row-start: 1;
         grid-row-end: 3;
-        border-right: solid $color-border 1px;
         display: flex;
         flex-direction: column;
         padding: 2em;
         padding-top: 0;
         font-size: 0.7em;
         position: relative;
-        max-width: 12em;
+        max-width: 13em;
+        background-color: $color-white;
         h2 {
             width: 100%;
             text-align: center;

@@ -1,20 +1,20 @@
 @font-face {
   font-family: "poppins-bold";
-  src: url(../fonts/Poppins-Bold.woff2);
+  src: url(../../fonts/Poppins-Bold.woff2);
   font-weight: bolder;
 }
 @font-face {
   font-family: "poppins-semi-bold";
-  src: url(../fonts/Poppins-SemiBold.woff2);
+  src: url(../../fonts/Poppins-SemiBold.woff2);
   font-weight: bold;
 }
 @font-face {
   font-family: "poppins-medium";
-  src: url(../fonts/Poppins-Medium.woff2);
+  src: url(../../fonts/Poppins-Medium.woff2);
 }
 @font-face {
   font-family: "poppins-regular";
-  src: url(../fonts/Poppins-Regular.woff2);
+  src: url(../../fonts/Poppins-Regular.woff2);
 }
 body {
   margin: 0;
@@ -40,6 +40,10 @@ body {
 a {
   text-decoration: none;
   transition: all 0.3s ease;
+}
+
+b {
+  font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 }
 
 button,
