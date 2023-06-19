@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <form id="logout" action="/logout" method="POST">
+        <form id="logout" action="/admin-logout" method="POST">
             <button type="submit">Logout</button>
         </form>
     </nav>
@@ -8,7 +8,10 @@
 
 <main id="admin-aanpassen">
     <div>
-        <a class="buttonPrimary" href="/producten-overzicht">Back</a>
+        <section>
+            <h1>Product aanpassen</h1>
+            <a class="buttonPrimary" href="/producten-overzicht">back</a>
+        </section>
         {{#each product}}
             <form action="/producten-overzicht/change" method="post" enctype="multipart/form-data">
                 <section class="visually-hidden">
@@ -40,7 +43,7 @@
                     <h2>Selecteer de karakter eigenschappen:</h2>
                     <fieldset>
                         <legend>Activiteit</legend>
-                        <p>It is {{this.eigenschappen.activiteit}}</p>
+                        <p class="visually-hidden">It is {{this.eigenschappen.activiteit}}</p>
                         <label for="actief">
                             <input type="radio" name="activiteit" value="actief" />
                             Actief
@@ -52,23 +55,23 @@
                     </fieldset>
                     <fieldset>
                         <legend>Leefstijl</legend>
-                        <p>It is {{this.eigenschappen.leefstijl}}</p>
+                        <p class="visually-hidden">It is {{this.eigenschappen.leefstijl}}</p>
                         <label for="binnen">
                             <input type="radio" name="leefstijl" value="binnen" />
                             Binnen
                         </label>
                         <label for="buiten">
-                            <input type="radio" name="leefstijl" value="Buiten" />
+                            <input type="radio" name="leefstijl" value="buiten" />
                             Buiten
                         </label>
                         <label for="beiden">
-                            <input type="radio" name="leefstijl" value="Beiden" />
+                            <input type="radio" name="leefstijl" value="beiden" />
                             Beiden
                         </label>
                     </fieldset>
                     <fieldset>
                         <legend>Grootte</legend>
-                        <p>It is {{this.eigenschappen.grootte}}</p>
+                        <p class="visually-hidden">It is {{this.eigenschappen.grootte}}</p>
                         <label for="groot">
                             <input type="radio" name="grootte" value="groot" />
                             Groot
@@ -84,7 +87,7 @@
                     </fieldset>
                     <fieldset>
                         <legend>Dag</legend>
-                        <p>It is {{this.eigenschappen.dag}}</p>
+                        <p class="visually-hidden">It is {{this.eigenschappen.dag}}</p>
                         <label for="dag">
                             <input type="radio" name="dag" value="dag" />
                             Dag dieren
@@ -107,5 +110,6 @@
             </form>
         {{/each}}
     </div>
-
 </main>
+
+<script src="/js/checkForAdmin.js"></script>

@@ -19,13 +19,26 @@ form {
   background: rgb(230, 219, 243);
 }
 #admin-aanpassen div {
-  display: flex;
   gap: 1em;
   padding: 1em;
   background-color: #eeeeee;
   padding-bottom: 0em;
+  position: relative;
   height: fit-content;
   border-radius: 10px;
+}
+#admin-aanpassen div > section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+#admin-aanpassen div > section h1 {
+  margin-top: 0.5em;
+}
+#admin-aanpassen div > section a {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #admin-aanpassen div form {
   margin: 0;
@@ -48,11 +61,15 @@ form {
   grid-column-end: 3;
   font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 }
+#admin-aanpassen div form section:nth-child(6) fieldset {
+  height: fit-content;
+}
 #admin-aanpassen div form div {
+  background: none;
   order: 1;
   position: absolute;
   top: 2em;
-  right: -1em;
+  right: -3em;
   display: flex;
   flex-direction: column;
   width: fit-content;
