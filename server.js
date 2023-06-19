@@ -491,14 +491,14 @@ app.get("/voorkeuren-opgeslagen", async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm", async (req, res) => {
-    const doggo = {
-        naam: "Barry",
-        soort: "Golden retriever",
-        leeftijd: "1",
-        beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
-    }
+const doggo = {
+    naam: "Barry",
+    soort: "Golden retriever",
+    leeftijd: "1",
+    beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+}
 
+app.get("/confirm-form", async (req, res) => {
     const today = new Date()
     const weekdays = new Date()
     weekdays.setDate(today.getDate() + 7)
@@ -516,7 +516,28 @@ app.get("/confirm", async (req, res) => {
 
     const weekdaysStr = weekdays.toISOString().split("T")[0]
 
-    res.render("confirm", { weekdaysStr, doggo })
+    res.render("confirm-form", { weekdaysStr, doggo })
+})
+
+//Post the form information
+app.post("/meet", async (req, res, next) => {
+    console.log(req.body)
+    try {
+        const person = {
+            naam: req.body.naam,
+            date: req.body.date,
+            time: req.body.time,
+        }
+        res.redirect("confirm-form", { person, doggo })
+    } catch (err) {
+        next(err)
+    }
+})
+
+app.get("/confirm-form/confirm", async (req, res) => {
+    console.log(req.body)
+
+    res.render("confirm-form", { person, doggo })
 })
 
 // 404
