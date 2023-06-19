@@ -23,7 +23,7 @@ $error-color: red;
     display: block;
     position: absolute;
     left: 95%;
-    top: 10em;
+    top: 2em;
     transform: translate(-100%, 0%);
     p {
         display: block;
@@ -40,7 +40,7 @@ $error-color: red;
 }
 
 select {
-    border: 0.01em solid #dcd6f7;
+    border: 0.01em solid #f7d6d6;
     border-radius: 0.1875em;
     font-size: 1em;
     padding: 0.625em;
@@ -101,4 +101,8 @@ button {
 
 .alert {
     color: red;
+}
+
+.selected {
+    background-color: #a6b1e1;
 }
