@@ -20,27 +20,27 @@ $color-secondary-button-hover: #7dc2b2;
 // Fonts
 @font-face {
     font-family: "poppins-bold";
-    src: url(../fonts/Poppins-Bold.woff2);
+    src: url(../../fonts/Poppins-Bold.woff2);
     font-weight: bolder;
 }
 $font-header: "poppins-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-semi-bold";
-    src: url(../fonts/Poppins-SemiBold.woff2);
+    src: url(../../fonts/Poppins-SemiBold.woff2);
     font-weight: bold;
 }
 $font-button: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-medium";
-    src: url(../fonts/Poppins-Medium.woff2);
+    src: url(../../fonts/Poppins-Medium.woff2);
 }
 $font-caption: "poppins-medium", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-regular";
-    src: url(../fonts/Poppins-Regular.woff2);
+    src: url(../../fonts/Poppins-Regular.woff2);
 }
 $font-body: "poppins-regular", Arial, Helvetica, sans-serif;
 

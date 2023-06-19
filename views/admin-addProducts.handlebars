@@ -5,91 +5,93 @@
     </nav>
 </header>
 
-<main id="productpageAdminAdd">
-    <section>
-        <h1>Product toevoegen</h1>
-        <a href="/producten-overzicht">back</a>
-    </section>
-
-    <form action="/producten-overzicht/add" method="post" enctype="multipart/form-data">
-        <label>
-            Naam:
-            <input id="naam" name="naam" type="text" required />
-        </label>
-        <label>
-            Soort:
-            <input id="soort" name="soort" type="text" required />
-        </label>
-        <label>
-            Leeftijd:
-            <input id="leeftijd" name="leeftijd" type="number" required />
-        </label>
-        <label>
-            Afbeelding:
-            <input name="image" type="file" accept="image" required />
-        </label>
-        <label>
-            Beschrijving:
-            <textarea required name="beschrijving" cols="30" rows="1"></textarea>
-        </label>
+<body>
+    <main id="productpageAdminAdd">
         <section>
-            <h2>Selecteer de karakter eigenschappen:</h2>
-            <fieldset>
-                <legend>Activiteit</legend>
-                <label for="actief">
-                    <input type="radio" name="activiteit" value="actief" />
-                    Actief
-                </label>
-                <label for="rustig">
-                    <input type="radio" name="activiteit" value="rustig" />
-                    Rustig
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Leefstijl</legend>
-                <label for="binnen">
-                    <input type="radio" name="leefstijl" value="binnen" />
-                    Binnen
-                </label>
-                <label for="buiten">
-                    <input type="radio" name="leefstijl" value="Buiten" />
-                    Buiten
-                </label>
-                <label for="beiden">
-                    <input type="radio" name="leefstijl" value="Beiden" />
-                    Beiden
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Grootte</legend>
-                <label for="groot">
-                    <input type="radio" name="grootte" value="groot" />
-                    Groot
-                </label>
-                <label for="middel">
-                    <input type="radio" name="grootte" value="middel" />
-                    Middel
-                </label>
-                <label for="klein">
-                    <input type="radio" name="grootte" value="klein" />
-                    Klein
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Dag</legend>
-                <label for="dag">
-                    <input type="radio" name="dag" value="dag" />
-                    Dag dieren
-                </label>
-                <label for="nacht">
-                    <input type="radio" name="dag" value="nacht" />
-                    Nacht dieren
-                </label>
-            </fieldset>
+            <h1>Product toevoegen</h1>
+            <a href="/producten-overzicht">back</a>
         </section>
-        <input type="submit" value="add" />
-    </form>
-    {{#if error}}
-        <p id="errorMessage">{{error}}</p>
-    {{/if}}
-</main>
+
+        <form action="/producten-overzicht/add" method="post" enctype="multipart/form-data">
+            <label>
+                Naam:
+                <input id="naam" name="naam" type="text" required />
+            </label>
+            <label>
+                Soort:
+                <input id="soort" name="soort" type="text" required />
+            </label>
+            <label>
+                Leeftijd:
+                <input id="leeftijd" name="leeftijd" type="number" required />
+            </label>
+            <label>
+                Afbeelding:
+                <input name="image" type="file" accept="image" required />
+            </label>
+            <label>
+                Beschrijving:
+                <textarea required name="beschrijving" cols="30" rows="1"></textarea>
+            </label>
+            <section>
+                <h2>Selecteer de karakter eigenschappen:</h2>
+                <fieldset>
+                    <legend>Activiteit</legend>
+                    <label for="actief">
+                        <input type="radio" name="activiteit" value="actief" />
+                        Actief
+                    </label>
+                    <label for="rustig">
+                        <input type="radio" name="activiteit" value="rustig" />
+                        Rustig
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Leefstijl</legend>
+                    <label for="binnen">
+                        <input type="radio" name="leefstijl" value="binnen" />
+                        Binnen
+                    </label>
+                    <label for="buiten">
+                        <input type="radio" name="leefstijl" value="Buiten" />
+                        Buiten
+                    </label>
+                    <label for="beiden">
+                        <input type="radio" name="leefstijl" value="Beiden" />
+                        Beiden
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Grootte</legend>
+                    <label for="groot">
+                        <input type="radio" name="grootte" value="groot" />
+                        Groot
+                    </label>
+                    <label for="middel">
+                        <input type="radio" name="grootte" value="middel" />
+                        Middel
+                    </label>
+                    <label for="klein">
+                        <input type="radio" name="grootte" value="klein" />
+                        Klein
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Dag</legend>
+                    <label for="dag">
+                        <input type="radio" name="dag" value="dag" />
+                        Dag dieren
+                    </label>
+                    <label for="nacht">
+                        <input type="radio" name="dag" value="nacht" />
+                        Nacht dieren
+                    </label>
+                </fieldset>
+            </section>
+            <input type="submit" value="add" />
+        </form>
+        {{#if error}}
+            <p id="errorMessage">{{error}}</p>
+        {{/if}}
+    </main>
+</body>
