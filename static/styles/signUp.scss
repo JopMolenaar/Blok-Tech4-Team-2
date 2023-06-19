@@ -1,9 +1,9 @@
 /* General styling */
 
-$background-image: url("/images/kitten3.jpg");
+$background-image: url("/images/paws2.jpg");
 $primary-color: #242424;
 $secondary-color: #4e4c67;
-$background-color: #ffffffa0;
+$background-color: #ffffff;
 $hover-color: #a6b1e1;
 $input-border-color: #dcd6f7;
 $placeholder-border-color: #98e6bf;
@@ -49,7 +49,6 @@ $placeholder-border-color: #98e6bf;
 
 #signupForm {
     border: 0em solid $secondary-color;
-    border-radius: 0.4em;
     background-color: $background-color;
     max-width: 25em;
     padding: 1.25em;
@@ -66,7 +65,8 @@ $placeholder-border-color: #98e6bf;
       font-weight: bold;
       font-size: 0.8em;
       margin: 0;
-      text-align: center;
+      text-align: left;
+      padding-left: 3.5em;
     }
   
     input[type="naam"],
@@ -94,6 +94,7 @@ $placeholder-border-color: #98e6bf;
       cursor: pointer;
       display: block;
       font-size: 1em;
+      font-weight: bold;
       padding: 0.625em;
       width: 80%;
       margin: 1em;
@@ -129,30 +130,3 @@ $placeholder-border-color: #98e6bf;
       border-style: solid;
     }
   }
-
-  /* Neutral form styling */
-
-.formButton {
-    background-color: $input-border-color;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 0.4em;
-    color: $primary-color;
-    cursor: pointer;
-    display: block;
-    font-size: 1em;
-    padding: 0.625em;
-    margin: 1em auto;
-    font-weight: bold;
-    width: 75%;
-  
-    &:hover {
-      background-color: $hover-color;
-    }
-  }
-  
-  .question {
-    margin-bottom: 1.25em;
-  }
-  

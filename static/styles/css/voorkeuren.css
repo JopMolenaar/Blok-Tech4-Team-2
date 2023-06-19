@@ -1,32 +1,94 @@
+.background-image3 {
+  background-image: url("/images/bunny.png");
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
 #voorkeurenForm {
-  border: 1px solid #ccc;
-  border-radius: 0.2em;
-  box-shadow: 0em 0em 0.3125em rgba(0, 0, 0, 0.1);
-  background-color: #d5eeff;
+  border: 0em solid #4e4c67;
+  border-radius: 0.4em;
+  background-color: rgba(255, 255, 255, 0.6274509804);
   max-width: 25em;
   padding: 1.25em;
-  margin: 0 auto;
-  text-align: center;
-}
-#voorkeurenForm select {
-  margin-bottom: 2em;
-  padding: 0.3125em;
-  font-size: 1em;
-  background-color: #fbf5ff;
-  border-radius: 0.2em;
-  text-align: center;
-}
-#voorkeurenForm button {
   display: block;
-  margin: 0 auto;
+  position: absolute;
+  left: 95%;
+  top: 10em;
+  transform: translate(-100%, 0%);
+}
+#voorkeurenForm p {
+  display: block;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-left: 66px;
+  color: #a6b1e1;
+  display: block;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-left: 66px;
+  color: #a6b1e1;
+}
+
+select {
+  border: 0.01em solid #dcd6f7;
+  border-radius: 0.1875em;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  display: block;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+select option {
+  border: 0.01em solid #242424;
+  border-radius: 0.1875em;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  display: block;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+select option:hover {
+  background-color: #444444;
+}
+
+button {
+  background-color: #dcd6f7;
+  border-radius: 0.4em;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  border: 0.01em solid #dcd6f7;
+  margin: 1em auto;
 }
 
 .voorkeurenLabel {
   display: block;
   font-weight: bold;
-  margin-bottom: 0.625em;
+  font-size: 0.8em;
+  margin: 0;
+  text-align: center;
 }
 
-.error-message {
+.voorkeurenH {
+  text-align: center;
+  color: #242424;
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+.voorkeurenP {
+  text-align: center;
+  color: #242424;
+  font-size: 1.2em;
+  margin: 1em auto;
+}
+
+.alert {
   color: red;
 }

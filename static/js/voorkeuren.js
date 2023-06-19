@@ -16,7 +16,7 @@ function updateButton() {
         }
     })
 
-    nextButton.style.backgroundColor = allDropdownsSelected ? "green" : "" // Achtergrondkleur verandert basis van de selectiestatus
+    nextButton.style.backgroundColor = allDropdownsSelected ? "#A6B1E1" : "" // Achtergrondkleur verandert basis van de selectiestatus
 }
 
 dropdowns.forEach((dropdown) => {

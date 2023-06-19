@@ -4,12 +4,12 @@
         <form id="loginForm" action="/login" method="POST">
             <h1 class="loginH">Welkom bij dierenshop!</h1>
             <fieldset>
-                <label for="username">Gebruikersnaam:</label>
+                <label for="gebruikersnaam">Gebruikersnaam:</label>
                 <input type="username" id="gebruikersnaam" name="gebruikersnaam" required />
             </fieldset>
 
             <fieldset>
-                <label for="password">Wachtwoord:</label>
+                <label for="wachtwoord">Wachtwoord:</label>
                 <input type="password" id="wachtwoord" name="wachtwoord" required />
                 {{#if error}}
                     <p class="error-message">{{error}}</p>
@@ -18,7 +18,7 @@
 
             <div>
                 <button type="submit">Login</button>
-                <a class="googleButton" href="/auth/google">login met Google</a>
+                <a class="googleButton" href="/auth/google">Login met Google</a>
             </div>
 
             <h3 class="formH3" >Of</h3>
