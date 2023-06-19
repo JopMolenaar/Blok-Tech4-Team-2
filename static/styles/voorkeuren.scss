@@ -1,13 +1,16 @@
-$background-image: url("/images/bunny.png");
 $border-color: #ccc;
-$input-border-color: #dcd6f7;
-$box-shadow-color: rgba(0, 0, 0, 0.1);
-$background-color: #d5eeff;
 $select-background-color: #fbf5ff;
 $label-margin-bottom: 0.625em;
-$error-color: red;
 
-.background-image3 {
+$background-image: url("../images/paws2.jpg");
+$primary-color: #242424;
+$secondary-color: #4e4c67;
+$background-color: #ffffff;
+$hover-color: #a6b1e1;
+$input-border-color: #dcd6f7;
+$placeholder-border-color: #98e6bf;
+
+.background-image2 {
     background-image: $background-image;
     background-size: cover;
     background-position: left;
@@ -15,32 +18,36 @@ $error-color: red;
 }
 
 #voorkeurenForm {
-    border: 0em solid #4e4c67;
-    border-radius: 0.4em;
-    background-color: rgba(255, 255, 255, 0.6274509804);
+    border: 0em solid $secondary-color;
+    background-color: $background-color;
     max-width: 25em;
     padding: 1.25em;
     display: block;
     position: absolute;
-    left: 95%;
-    top: 2em;
-    transform: translate(-100%, 0%);
+    left: 100%;
+    top: 1em;
+    -webkit-transform: translate(-100%, -0%);
+    -ms-transform: translate(-100%, -0%);
+    transform: translate(-100%, -0%);
+
+    label {
+        display: block;
+        font-weight: bold;
+        font-size: 0.8em;
+        margin: 0;
+        text-align: left;
+        padding-left: 3.5em;
+    }
     p {
         display: block;
         font-weight: bold;
         font-size: 0.8em;
-        margin-left: 66px;
-        color: #a6b1e1;
-        display: block;
-        font-weight: bold;
-        font-size: 0.8em;
-        margin-left: 66px;
         color: #a6b1e1;
     }
 }
 
 select {
-    border: 0.01em solid #f7d6d6;
+    border: 0.01em solid $secondary-color;
     border-radius: 0.1875em;
     font-size: 1em;
     padding: 0.625em;
@@ -57,10 +64,6 @@ select {
         display: block;
         margin: 1em auto;
         margin-top: 0.5em;
-
-        &:hover {
-            background-color: #444444;
-        }
     }
 }
 
@@ -97,10 +100,6 @@ button {
     color: #242424;
     font-size: 1.2em;
     margin: 1em auto;
-}
-
-.alert {
-    color: red;
 }
 
 .selected {
