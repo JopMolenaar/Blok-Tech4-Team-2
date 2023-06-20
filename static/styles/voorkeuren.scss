@@ -25,7 +25,7 @@ $placeholder-border-color: #98e6bf;
     display: block;
     position: absolute;
     left: 100%;
-    top: 1em;
+    top: 4em;
     -webkit-transform: translate(-100%, -0%);
     -ms-transform: translate(-100%, -0%);
     transform: translate(-100%, -0%);
@@ -42,29 +42,20 @@ $placeholder-border-color: #98e6bf;
         display: block;
         font-weight: bold;
         font-size: 0.8em;
+        margin: 0.5em;
         color: #a6b1e1;
     }
 }
 
 select {
-    border: 0.01em solid $secondary-color;
+    border: 0.01em solid #4e4c67;
     border-radius: 0.1875em;
     font-size: 1em;
-    padding: 0.625em;
+    padding: 0.5em;
     width: 80%;
     display: block;
     margin: 1em auto;
-    margin-top: 0.5em;
-    option {
-        border: 0.01em solid #242424;
-        border-radius: 0.1875em;
-        font-size: 1em;
-        padding: 0.625em;
-        width: 80%;
-        display: block;
-        margin: 1em auto;
-        margin-top: 0.5em;
-    }
+    margin-top: 0.2em;
 }
 
 button {
@@ -92,7 +83,7 @@ button {
     color: #242424;
     font-size: 1.5em;
     margin: 0;
-    margin-bottom: 1em;
+    margin-bottom: -0.5em;
 }
 
 .voorkeurenP {
