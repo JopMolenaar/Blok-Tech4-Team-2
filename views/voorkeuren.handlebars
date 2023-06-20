@@ -1,57 +1,57 @@
-<head>
-    <h1>Kies uw voorkeur</h1>
-</head>
-<main>
-    <p>U zal elk onderdeel in moeten vullen</p>
-    <form id="voorkeurenForm" action="/voorkeuren" method="POST">
-        <label class="voorkeurenLabel" for="energielevel">Hoe actief mag het dier zijn?</label>
-        <select id="energielevel" name="energielevel">
-            <option>--</option>
-            <option value="rustig">Rustig</option>
-            <option value="actief">Normaal</option>
-            <option value="actief">Actief</option>
-        </select>
-        <div id="AantalSection1">
+<body class="background-image2">
+    <header>
+        <img src="images/favicon.ico" alt="" />
+        <nav>
+            <form id="logout" action="/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+        </nav>
+    </header>
+    <main>
+        <form id="voorkeurenForm" action="/voorkeuren" method="POST">
+            <h1 class="voorkeurenH">Kies uw voorkeur</h1>
+            <p class="voorkeurenP">U zal elk onderdeel in moeten vullen</p>
+            <label class="voorkeurenLabel" for="energielevel">Hoe actief mag het dier zijn?</label>
+            <select id="energielevel" name="energielevel">
+                <option>--</option>
+                <option value="rustig">Rustig</option>
+                <option value="actief">Normaal</option>
+                <option value="actief">Actief</option>
+            </select>
             <p id="styleText1"></p>
-        </div>
 
-        <label class="voorkeurenLabel" for="leefstijl">Wil je liever een binnen of buiten dier?</label>
-        <select id="leefstijl" name="leefstijl">
-            <option>--</option>
-            <option value="Binnen">Binnen dier</option>
-            <option value="Buiten">Buiten dier</option>
-            <option value="Beiden">Binnen/buiten dier</option>
-        </select>
-        <div id="AantalSection2">
+            <label class="voorkeurenLabel" for="leefstijl">Wil je liever een binnen of buiten dier?</label>
+            <select id="leefstijl" name="leefstijl">
+                <option>--</option>
+                <option value="Binnen">Binnen dier</option>
+                <option value="Buiten">Buiten dier</option>
+                <option value="Beiden">Binnen/buiten dier</option>
+            </select>
             <p id="styleText2"></p>
-        </div>
 
-        <label class="voorkeurenLabel" for="grootte">Hoe groot mag het dier zijn?</label>
-        <select id="grootte" name="grootte">
-            <option>--</option>
-            <option value="Klein">Klein</option>
-            <option value="Middel">Middel</option>
-            <option value="Groot">Groot</option>
-            <option value="Size doesn't matter">Geen voorkeur</option>
-        </select>
-        <div id="AantalSection3">
+            <label class="voorkeurenLabel" for="grootte">Hoe groot mag het dier zijn?</label>
+            <select id="grootte" name="grootte">
+                <option>--</option>
+                <option value="Klein">Klein</option>
+                <option value="Middel">Middel</option>
+                <option value="Groot">Groot</option>
+                <option value="Size doesn't matter">Geen voorkeur</option>
+            </select>
             <p id="styleText3"></p>
-        </div>
 
-        <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
-        <select id="slaapritme" name="slaapritme">
-            <option>--</option>
-            <option value="nacht">S'ochtends</option>
-            <option value="dag">Overdag</option>
-            <option value="ochtend/avond">S'avonds</option>
-            <option value="geen voorkeur">S'nachts</option>
-        </select>
-        <div id="AantalSection4">
+            <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
+            <select id="slaapritme" name="slaapritme">
+                <option>--</option>
+                <option value="nacht">S'ochtends</option>
+                <option value="dag">Overdag</option>
+                <option value="ochtend/avond">S'avonds</option>
+                <option value="geen voorkeur">S'nachts</option>
+            </select>
             <p id="styleText4"></p>
-        </div>
 
-        <button id="nextButton" type="submit">Submit</button>
-    </form>
-    <script src="js/voorkeuren.js"></script>
-</main>
-<footer></footer>
+            <button id="nextButton" type="submit">Submit</button>
+        </form>
+        <script src="js/voorkeuren.js"></script>
+    </main>
+    <footer></footer>
+</body>

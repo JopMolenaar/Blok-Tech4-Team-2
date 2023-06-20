@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+a,
+form {
+  height: min-content;
+}
+
+#productpageAdminAdd {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 4em;
+  gap: 2em;
+  height: calc(100% - 8em);
+  background: rgb(230, 219, 243);
+}
+#productpageAdminAdd div {
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+  background-color: #eeeeee;
+  padding-bottom: 0em;
+  flex-direction: column;
+  height: fit-content;
+  border-radius: 10px;
+}
+#productpageAdminAdd div > section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+#productpageAdminAdd div > section h1 {
+  margin-top: 0.5em;
+}
+#productpageAdminAdd div > section a {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#productpageAdminAdd div form {
+  margin: 0;
+  width: 27em;
+  padding-bottom: 1em;
+  height: fit-content;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+}
+#productpageAdminAdd div form section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#productpageAdminAdd div form section h2 {
+  font-size: 1em;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
+}
+#productpageAdminAdd div form label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#productpageAdminAdd div form > input {
+  place-self: end;
+  margin-top: 0.5em;
+}

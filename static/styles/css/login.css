@@ -1,13 +1,17 @@
 /* General styling */
+.error-message {
+  text-align: center;
+}
+
 .background-image {
-  background-image: url("/images/dog.jpg");
+  background-image: url("/images/paws.jpg");
   background-size: cover;
   background-position: center;
 }
 
-.loginH {
+#loginForm .loginH {
   text-align: center;
-  color: #242424;
+  color: white;
   font-size: 1.5em;
   margin: 0;
   margin-bottom: 1em;
@@ -16,38 +20,52 @@
 .formH3 {
   text-align: center;
   font-size: 1em;
+  color: white;
 }
 
 /* loginForm styling */
 #loginForm fieldset {
   border: none;
   padding: 0;
+  color: white;
 }
 
 #loginForm {
-  border: 0em solid #4e4c67;
+  border: 0em solid #252154;
   border-radius: 0.4em;
-  background-color: rgba(255, 255, 255, 0.6274509804);
+  background-color: rgba(34, 26, 69, 0.3333333333);
   max-width: 25em;
   padding: 1.25em;
-  margin-top: 2em;
   display: block;
   position: absolute;
   left: 50%;
   top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+#loginForm::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.6em); /* Adjust the blur strength as needed */
+  z-index: -1;
+  border-radius: 0.4em;
 }
 #loginForm label {
   display: block;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: 0;
   text-align: center;
 }
 #loginForm input[type=text],
 #loginForm input[type=password],
 #loginForm input[type=username] {
-  border: 0.01em solid #dcd6f7;
+  border: 0.01em solid #98e6bf;
   border-radius: 0.1875em;
   font-size: 1em;
   padding: 0.625em;
@@ -64,6 +82,7 @@
   cursor: pointer;
   display: block;
   font-size: 1em;
+  font-weight: bold;
   padding: 0.625em;
   width: 80%;
   margin: 1em auto;
@@ -72,8 +91,8 @@
   background-color: #a6b1e1;
 }
 #loginForm input:required:invalid {
-  color: #4e4c67;
-  border-color: #4e4c67;
+  color: #252154;
+  border-color: #252154;
   border-width: 0.1em;
   border-style: solid;
 }
@@ -82,11 +101,39 @@
   border-width: 0.1em;
   border-style: solid;
 }
+#loginForm input:required:-ms-input-placeholder {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
 #loginForm input:required:valid,
 #loginForm input:required:placeholder-shown {
   border-color: #98e6bf;
   border-width: 0.2em;
   border-style: solid;
+}
+
+.googleButton {
+  background-color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  padding: 0.625em;
+  margin: 1em auto;
+  font-weight: bold;
+  width: 75%;
+  background-image: url("/images/google.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 3.5em;
+}
+.googleButton:hover {
+  background-color: #E1E1E1;
 }
 
 /* Neutral form styling */
@@ -111,4 +158,4 @@
 
 .question {
   margin-bottom: 1.25em;
-}/*# sourceMappingURL=login.css.map */
+}

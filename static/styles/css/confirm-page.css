@@ -35,8 +35,7 @@
   gap: 0.5rem;
 }
 #confirmPage .dogInfo li {
-  height: -moz-min-content;
   height: min-content;
   display: flex;
   flex-direction: column;
-}/*# sourceMappingURL=confirm-page.css.map */
+}

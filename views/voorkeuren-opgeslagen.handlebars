@@ -4,6 +4,17 @@
 </head>
 
 <body>
+    <header>
+        <img src="images/favicon.ico" alt="" />
+        <nav>
+            <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
+            <a href="/wishlist">Wishlist</a>
+            <form id="logout" action="/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+        </nav>
+    </header>
+
     <h1>Preferences</h1>
     <p><strong>Energielevel:</strong> {{energielevel}}</p>
     <p><strong>Leefstijl:</strong> {{leefstijl}}</p>

@@ -10,6 +10,9 @@ const PORT = 3000
 const mongoose = require("mongoose")
 const { engine } = require("express-handlebars")
 const { ObjectId } = mongoose.Types
+const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy
+
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", "./views")
@@ -35,18 +38,25 @@ const userSchema = new mongoose.Schema({
     leeftijd: Number,
     gebruikersnaam: String,
     wachtwoord: String,
+    googleId: String,
     voorkeuren: {
         energielevel: String,
         leefstijl: String,
         grootte: String,
         slaapritme: String,
     },
+    wishlist: [{ type: ObjectId, ref: "Product" }],
 })
 
 // is middleware en vuurt deze function als er een user wordt gesaved
 // ARROW FUNCTION WERKT HIER NIET, DAAROM DE "function" ZOALS IN ES5
 userSchema.pre("save", async function (next) {
     try {
+        if (!this.isModified("wachtwoord")) {
+            // Skip hashing if the password is not modified
+            return next()
+        }
+
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(this.wachtwoord, salt)
         this.wachtwoord = hashedPassword
@@ -244,7 +254,7 @@ app.post("/signUp", (req, res) => {
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/products")
+                res.redirect("/voorkeuren")
             })
         })
         .catch((error) => {
@@ -289,7 +299,7 @@ app.get("/products", async (req, res) => {
                 ],
             }
 
-            const producten = await Product.find(query) // Zoek producten in de database die overeenkomen met de voorkeuren
+            const producten = await Product.find(query)
             res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
@@ -299,6 +309,9 @@ app.get("/products", async (req, res) => {
         }
     } catch (error) {
         console.error(error)
+
+        // Handle the error and send an appropriate response to the client
+        res.status(500).send("An error occurred. Please try again later.")
     } finally {
         console.log("got all products for normal user")
     }
@@ -517,6 +530,104 @@ app.post("/meet", async (req, res, next) => {
         res.render("confirm", { person, doggo })
     } catch (err) {
         next(err)
+    }
+})
+
+const GoogleStrategy = require("passport-google-oauth20").Strategy
+const GOOGLE_CLIENT_ID = "593422950502-97fr9pua64objfd3htu6n4u4oa6i2usm.apps.googleusercontent.com"
+const GOOGLE_CLIENT_SECRET = "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"
+
+// Configure Passport to use the Google strategy
+passport.use(
+    new GoogleStrategy(
+        {
+            clientID: GOOGLE_CLIENT_ID,
+            clientSecret: GOOGLE_CLIENT_SECRET,
+            callbackURL: "/auth/google/callback",
+        },
+        async (accessToken, refreshToken, profile, done) => {
+            try {
+                // Check if the user already exists in the database
+                let user = await User.findOne({ googleId: profile.id })
+
+                if (user) {
+                    // User already exists, return it
+                    done(null, user)
+                } else {
+                    // Create a new user in the database
+                    user = await User.create({
+                        googleId: profile.id,
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                    })
+
+                    // Return the newly created user
+                    done(null, user)
+                }
+            } catch (err) {
+                done(err, null)
+            }
+        }
+    )
+)
+
+// Initialize Passport and session
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Serialize and deserialize user
+passport.serializeUser((user, done) => {
+    // Serialize the user object to store in the session
+    done(null, user.id)
+})
+
+// Deserialize user using async/await
+passport.deserializeUser(async (id, done) => {
+    try {
+        // Deserialize the user object from the session
+        const user = await User.findById(id)
+        done(null, user)
+    } catch (err) {
+        done(err, null)
+    }
+})
+
+// Google authentication route
+app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }))
+
+// Google authentication callback route
+app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/login" }), (req, res) => {
+    // Authentication succeeded, redirect to the desired page
+    res.redirect("/products")
+})
+
+app.get("/wishlist", async (req, res) => {
+    try {
+        const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
+        if (!user) {
+            throw new Error("User not found")
+        }
+        let lol = user[0]
+        let iets2 = lol.wishlist
+        console.log(iets2)
+        const multipleP = await Product.find({ _id: { $in: iets2 } })
+        console.log(multipleP)
+
+        res.render("wishlist", { wishlist: multipleP.map((product) => product.toJSON()) })
+    } catch (error) {
+        console.error("Error retrieving wishlist products:", error)
+        throw error
+    }
+})
+
+app.post("/wishlist-add/:id", async (req, res) => {
+    try {
+        const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $push: { wishlist: req.params.id } })
+        console.log(userUpdate)
+        res.redirect("/products")
+    } catch (error) {
+        console.error("Error adding movie to wishlist:", error)
+        res.status(500).json({ error: "Internal server error" })
     }
 })
 

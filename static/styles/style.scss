@@ -20,27 +20,27 @@ $color-secondary-button-hover: #7dc2b2;
 // Fonts
 @font-face {
     font-family: "poppins-bold";
-    src: url(../fonts/Poppins-Bold.woff2);
+    src: url(../../fonts/Poppins-Bold.woff2);
     font-weight: bolder;
 }
 $font-header: "poppins-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-semi-bold";
-    src: url(../fonts/Poppins-SemiBold.woff2);
+    src: url(../../fonts/Poppins-SemiBold.woff2);
     font-weight: bold;
 }
 $font-button: "poppins-semi-bold", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-medium";
-    src: url(../fonts/Poppins-Medium.woff2);
+    src: url(../../fonts/Poppins-Medium.woff2);
 }
 $font-caption: "poppins-medium", Arial, Helvetica, sans-serif;
 
 @font-face {
     font-family: "poppins-regular";
-    src: url(../fonts/Poppins-Regular.woff2);
+    src: url(../../fonts/Poppins-Regular.woff2);
 }
 $font-body: "poppins-regular", Arial, Helvetica, sans-serif;
 
@@ -68,6 +68,10 @@ body {
 a {
     text-decoration: none;
     transition: all 0.3s ease;
+}
+
+b {
+    font-family: $font-button;
 }
 
 button,
@@ -126,18 +130,30 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    section {
-        display: flex;
-        flex-direction: row;
-        width: 30em;
-        height: 4em;
-        align-items: center;
+    width: 100%;
+    img {
+        width: 4em;
+        height: auto;
     }
     nav {
+        place-content: end;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 30em;
+        width: 24em;
+        align-items: center;
+        a {
+            width: fit-content;
+            color: $color-text-black;
+            height: fit-content;
+        }
+        form {
+            width: fit-content;
+            margin: 0;
+            button {
+                width: fit-content;
+            }
+        }
     }
 }
 
