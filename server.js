@@ -515,10 +515,6 @@ app.get("/confirm-form", async (req, res) => {
     res.render("confirm-form", { doggo })
 })
 
-// app.get("/confirm-form/confirm", async (req, res) => {
-//     res.render("confirm-form-confirm", { person })
-// })
-
 //Post the form information
 app.post("/meet", async (req, res, next) => {
     try {

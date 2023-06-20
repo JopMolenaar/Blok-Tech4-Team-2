@@ -11,14 +11,14 @@
 
 <main id="thankYouPage">
 
+    {{#with person}}
     <section>
-        {{#with person}}
             <h1>Bedankt, {{name}} dat u een afspraak wilt maken om {{../doggo.naam}} te ontmoeten. </h1>
-        {{/with}}
+        
     </section>
 
     <section>
-
+        <h2>We zien u graag op {{date}}, om {{time}}</h2>
     </section>
-
+    {{/with}}
 </main>

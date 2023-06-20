@@ -97,28 +97,6 @@ summary {
     background-color: $color-primary-button-hover;
 }
 
-.buttonPrimary:active,
-.submitButton:active {
-    animation-name: fillButton;
-    animation-duration: 3s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes fillButton {
-    0% {
-        background-color: $color-primary-button-hover;
-    }
-    100% {
-        background-color: $color-input-normal;
-    }
-}
-
-.buttonPrimary:hover,
-.submitButton:hover {
-    background-color: $color-primary-button-hover;
-}
-
 img {
     width: 6.25em;
     height: auto;
