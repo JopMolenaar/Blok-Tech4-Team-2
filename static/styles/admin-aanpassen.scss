@@ -11,21 +11,20 @@ a,
 form {
     height: min-content;
 }
-#productpageAdminAdd {
+#admin-aanpassen {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 4em;
+    padding-top: 2em;
     gap: 2em;
-    height: calc(100% - 8em);
+    height: calc(100% - 6em);
     background: $color-backgroundPurple;
     div {
-        display: flex;
         gap: 1em;
         padding: 1em;
         background-color: $color-white;
         padding-bottom: 0em;
-        flex-direction: column;
+        position: relative;
         height: fit-content;
         border-radius: 10px;
         > section {
@@ -43,7 +42,7 @@ form {
         }
         form {
             margin: 0;
-            width: 27em;
+            width: 33.7em;
             padding-bottom: 1em;
             height: fit-content;
             display: flex;
@@ -51,8 +50,7 @@ form {
             flex-direction: column;
             justify-content: start;
             align-items: flex-start;
-            section {
-                width: 100%;
+            section:nth-child(6) {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 h2 {
@@ -61,11 +59,27 @@ form {
                     grid-column-end: 3;
                     font-family: $font;
                 }
+                fieldset {
+                    height: fit-content;
+                }
             }
-            label {
-                width: 100%;
+            div {
+                background: none;
+                order: 1;
+                position: absolute;
+                top: 2em;
+                right: -3em;
                 display: flex;
-                justify-content: space-between;
+                flex-direction: column;
+                width: fit-content;
+                img {
+                    width: 10em;
+                    height: auto;
+                }
+                .otherImg {
+                    display: flex;
+                    flex-direction: column;
+                }
             }
             > input {
                 place-self: end;

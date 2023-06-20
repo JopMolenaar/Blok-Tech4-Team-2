@@ -16,7 +16,7 @@ function updateButton() {
         }
     })
 
-    nextButton.style.backgroundColor = allDropdownsSelected ? "green" : "" // Achtergrondkleur verandert basis van de selectiestatus
+    nextButton.classList.toggle("selected", allDropdownsSelected) // Achtergrondkleur wordt gewijzigd op basis van de selectiestatus
 }
 
 dropdowns.forEach((dropdown) => {
@@ -24,8 +24,7 @@ dropdowns.forEach((dropdown) => {
 })
 
 nextButton.addEventListener("click", (event) => {
-    if (allDropdownsSelected) {
-    } else {
+    if (!allDropdownsSelected) {
         event.preventDefault()
         alert("Niet alle dropdowns zijn geselecteerd.")
     }

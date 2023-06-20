@@ -42,6 +42,10 @@ a {
   transition: all 0.3s ease;
 }
 
+b {
+  font-family: "poppins-semi-bold", Arial, Helvetica, sans-serif;
+}
+
 button,
 summary {
   cursor: pointer;
@@ -97,19 +101,31 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
-header section {
-  display: flex;
-  flex-direction: row;
-  width: 30em;
-  height: 4em;
-  align-items: center;
+header img {
+  width: 4em;
+  height: auto;
 }
 header nav {
+  place-content: end;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 30em;
+  width: 24em;
+  align-items: center;
+}
+header nav a {
+  width: fit-content;
+  color: #232323;
+  height: fit-content;
+}
+header nav form {
+  width: fit-content;
+  margin: 0;
+}
+header nav form button {
+  width: fit-content;
 }
 
 form {

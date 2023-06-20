@@ -70,6 +70,10 @@ a {
     transition: all 0.3s ease;
 }
 
+b {
+    font-family: $font-button;
+}
+
 button,
 summary {
     cursor: pointer;
@@ -126,18 +130,30 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    section {
-        display: flex;
-        flex-direction: row;
-        width: 30em;
-        height: 4em;
-        align-items: center;
+    width: 100%;
+    img {
+        width: 4em;
+        height: auto;
     }
     nav {
+        place-content: end;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 30em;
+        width: 24em;
+        align-items: center;
+        a {
+            width: fit-content;
+            color: $color-text-black;
+            height: fit-content;
+        }
+        form {
+            width: fit-content;
+            margin: 0;
+            button {
+                width: fit-content;
+            }
+        }
     }
 }
 

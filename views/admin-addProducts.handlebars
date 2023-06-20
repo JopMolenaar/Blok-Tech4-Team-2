@@ -1,15 +1,17 @@
 <header>
-    <section>
-    </section>
+    <img src="images/favicon.ico" alt="" />
     <nav>
+        <form id="logout" action="/admin-logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     </nav>
 </header>
 
-<body>
-    <main id="productpageAdminAdd">
+<main id="productpageAdminAdd">
+    <div>
         <section>
             <h1>Product toevoegen</h1>
-            <a href="/producten-overzicht">back</a>
+            <a class="buttonPrimary" href="/producten-overzicht">back</a>
         </section>
 
         <form action="/producten-overzicht/add" method="post" enctype="multipart/form-data">
@@ -88,10 +90,7 @@
                     </label>
                 </fieldset>
             </section>
-            <input type="submit" value="add" />
+            <input class="buttonPrimary" type="submit" value="add" />
         </form>
-        {{#if error}}
-            <p id="errorMessage">{{error}}</p>
-        {{/if}}
-    </main>
-</body>
+    </div>
+</main>
