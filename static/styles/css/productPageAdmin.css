@@ -1,0 +1,24 @@
+#productPageAdmin section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+#productPageAdmin ul {
+  width: 80%;
+  border: 1px solid #4e4c67;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  margin: 1rem auto;
+  padding: 0;
+}
+#productPageAdmin li {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+}
+#productPageAdmin img {
+  width: 5rem;
+}
