@@ -160,6 +160,7 @@
   background-color: #eeeeee;
 }
 #productpage > section:nth-child(3) h2 {
+  display: none;
   width: 100%;
   text-align: center;
   height: fit-content;
@@ -168,7 +169,7 @@
 #productpage > section:nth-child(3) section {
   border-bottom: lightgrey solid 3px;
   padding-bottom: 0.5em;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr;
 }
 #productpage > section:nth-child(3) section h3 {
@@ -177,11 +178,11 @@
   grid-column-end: 3;
 }
 #productpage > section:nth-child(3) section.soort {
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 #productpage > section:nth-child(3) > section:nth-child(3) {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: left;
   width: 95%;
@@ -245,6 +246,7 @@
   background-color: #17a2b8;
 }
 #productpage > section:nth-child(3) #javascriptOff {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
