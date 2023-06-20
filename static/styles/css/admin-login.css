@@ -47,8 +47,8 @@
   text-align: center;
 }
 #adminForm input[type=text],
-#adminForm input[type=wachtwoord],
-#adminForm input[type=gebruikersnaam] {
+#adminForm input[type=password],
+#adminForm input[type=username] {
   border: 0.01em solid #98e6bf;
   border-radius: 0.1875em;
   font-size: 1em;

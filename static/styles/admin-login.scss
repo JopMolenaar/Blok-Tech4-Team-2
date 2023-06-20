@@ -1,6 +1,5 @@
 /* General styling */
-
-$background-image: url("/images/paws.jpg");
+$background-image: url("/images/paws2.jpg");
 $primary-color: #242424;
 $secondary-color:#252154;
 $background-color: #221a4555;
@@ -10,6 +9,7 @@ $input-border-color: #98e6bf;
 $color-primary-button: #dcd6f7;
 $color-primary-button-hover: #a6b1e1;
 $lack-of-color: #ffff;
+$error-color: #CA1E1E;
 
 #adminForm .loginH {
   text-align: center;
@@ -62,8 +62,8 @@ $lack-of-color: #ffff;
   }
 
   input[type="text"],
-  input[type="wachtwoord"],
-  input[type="gebruikersnaam"] {
+  input[type="password"],
+  input[type="username"] {
     border: 0.01em solid $input-border-color;
     border-radius: 0.1875em;
     font-size: 1em;

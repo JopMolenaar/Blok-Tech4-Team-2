@@ -10,9 +10,11 @@ $input-border-color: #98e6bf;
 $color-primary-button: #dcd6f7;
 $color-primary-button-hover: #a6b1e1;
 $lack-of-color: #ffff;
+$error-color: #CA1E1E;
 
 .error-message{
   text-align: center;
+  color: $error-color;
 }
 
 .background-image {
