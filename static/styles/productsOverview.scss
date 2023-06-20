@@ -170,6 +170,7 @@ $color-white: #eeeeee;
         max-width: 14em;
         background-color: $color-white;
         h2 {
+            display: none;
             width: 100%;
             text-align: center;
             height: fit-content;
@@ -178,7 +179,7 @@ $color-white: #eeeeee;
         section {
             border-bottom: lightgrey solid 3px;
             padding-bottom: 0.5em;
-            display: grid;
+            display: none;
             grid-template-columns: 1fr 1fr;
             h3 {
                 font-size: 1em;
@@ -188,12 +189,12 @@ $color-white: #eeeeee;
         }
 
         section.soort {
-            display: flex;
+            display: none;
             flex-direction: column;
         }
 
         > section:nth-child(3) {
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: left;
             width: 95%;
@@ -258,6 +259,7 @@ $color-white: #eeeeee;
             }
         }
         #javascriptOff {
+            display: flex;
             position: absolute;
             top: 50%;
             left: 50%;
