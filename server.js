@@ -499,45 +499,25 @@ const doggo = {
 }
 
 app.get("/confirm-form", async (req, res) => {
-    const today = new Date()
-    const weekdays = new Date()
-    weekdays.setDate(today.getDate() + 7)
-
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    if (today.getDay() === 5) {
-        weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
-    }
-
-    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
-        weekdays.setDate(weekdays.getDate() + 1)
-    }
-
-    const weekdaysStr = weekdays.toISOString().split("T")[0]
-
-    res.render("confirm-form", { weekdaysStr, doggo })
+    res.render("confirm-form", { doggo })
 })
+
+// app.get("/confirm-form/confirm", async (req, res) => {
+//     res.render("confirm-form-confirm", { person })
+// })
 
 //Post the form information
 app.post("/meet", async (req, res, next) => {
-    console.log(req.body)
     try {
         const person = {
-            naam: req.body.naam,
+            name: req.body.name,
             date: req.body.date,
             time: req.body.time,
         }
-        res.redirect("confirm-form", { person, doggo })
+        res.render("confirm", { person, doggo })
     } catch (err) {
         next(err)
     }
-})
-
-app.get("/confirm-form/confirm", async (req, res) => {
-    console.log(req.body)
-
-    res.render("confirm-form", { person, doggo })
 })
 
 // 404
