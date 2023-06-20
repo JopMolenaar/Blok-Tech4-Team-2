@@ -1,18 +1,19 @@
-$color-background: white;
+$color-background: rgb(248, 248, 248);
 $color-error: rgb(197, 0, 0);
 $color-border: black;
 $color-text: black;
 $color-border-bottom-form: rgb(187, 187, 187);
 $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
+$color-backgroundPurple: rgb(230, 219, 243);
+$color-white: #eeeeee;
 #productpage {
     height: calc(100vh - 4em);
     width: 100%;
     display: grid;
-    grid-template-columns: 12em 1fr;
+    grid-template-columns: 14em 1fr;
     grid-template-rows: 6.25em 1fr;
     flex-direction: column;
-    overflow-y: hidden;
+    background-color: $color-backgroundPurple;
 
     // heading of list section
     > section:nth-child(1) {
@@ -25,9 +26,10 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         align-items: center;
         flex-direction: column;
         margin: 1em;
+        margin-bottom: 0;
         height: fit-content;
         h1 {
-            font-size: 1em;
+            font-size: 2em;
             margin: 0;
             min-width: fit-content;
             flex-wrap: wrap;
@@ -37,28 +39,31 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         }
     }
     // list
-    ul {
+    > ul::-webkit-scrollbar {
+        display: none;
+    }
+    > ul {
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
-        font-size: 1em;
+        font-size: 0.8em;
         display: grid;
         width: 98%;
         height: fit-content;
-        padding: 0;
+        padding: 0.4em;
         gap: 2em;
-        margin: 2em;
-        padding-bottom: 5em;
+        margin: 0em;
+        padding-bottom: 4em;
+        padding-top: 0;
         margin-left: auto;
         margin-right: auto;
-        max-width: 103.75em;
+        max-width: 65em;
         max-height: 90%;
         overflow-y: auto;
         grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
-        li {
+        > li {
             place-self: center;
-
             list-style-type: none;
             box-shadow: $shadow-box;
             background-color: $color-background;
@@ -67,7 +72,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             align-items: center;
             width: 100%;
             max-width: 22em;
-            height: 22em;
+            height: 21em;
             overflow: hidden;
             position: relative;
             a {
@@ -90,13 +95,12 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                         object-fit: cover;
                     }
                 }
-                section:nth-child(2) p,
-                section:nth-child(3) p {
+                section:nth-child(2) p {
                     height: fit-content;
                     margin: 0;
                     margin: 0.2em;
                     padding: 0.3em;
-                    max-width: 9.375em;
+                    max-width: 9em;
                     overflow: hidden;
                     font-size: 1em;
                 }
@@ -106,6 +110,26 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                     grid-row-start: 2;
                     grid-row-end: 3;
                     height: 100%;
+                    position: relative;
+                    p:nth-child(2) {
+                        position: absolute;
+                        top: -9.5em;
+                        left: -0.2em;
+                        font-size: 1.3em;
+                        background: rgba(255, 255, 255, 0.7);
+                        border-radius: 0px 0px 10px 0px;
+                    }
+                    p:nth-child(3),
+                    p:nth-child(4) {
+                        position: absolute;
+                        top: -4.28em;
+                        left: -0.2em;
+                        font-size: 1em;
+                        background: rgba(255, 255, 255, 0.7);
+                    }
+                    p:nth-child(4) {
+                        top: -2.2em;
+                    }
                 }
                 section:nth-child(3) {
                     grid-column-start: 2;
@@ -113,6 +137,20 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                     grid-row-start: 2;
                     grid-row-end: 3;
                     height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        height: 90%;
+                        width: 90%;
+                        padding: 0;
+                        gap: 0.3em;
+                        li {
+                            list-style-type: square;
+                        }
+                    }
                 }
             }
         }
@@ -123,22 +161,23 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
         grid-column-end: 2;
         grid-row-start: 1;
         grid-row-end: 3;
-        border-right: solid $color-border 1px;
         display: flex;
         flex-direction: column;
         padding: 2em;
         padding-top: 0;
-        font-size: 0.7em;
+        font-size: 0.8em;
         position: relative;
-        max-width: 12em;
+        max-width: 14em;
+        background-color: $color-white;
         h2 {
             width: 100%;
             text-align: center;
             height: fit-content;
-            font-size: 1.1em;
+            font-size: 1.5em;
         }
         section {
             border-bottom: lightgrey solid 3px;
+            padding-bottom: 0.5em;
             display: grid;
             grid-template-columns: 1fr 1fr;
             h3 {
@@ -148,13 +187,20 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             }
         }
 
+        section.soort {
+            display: flex;
+            flex-direction: column;
+        }
+
         > section:nth-child(3) {
             display: flex;
             flex-direction: column;
             align-items: left;
             width: 95%;
-            padding-bottom: 0.7em;
+            padding-bottom: 1em;
             .price-input {
+                border-bottom: none;
+                padding-bottom: 0.5em;
                 display: flex;
                 gap: 1em;
                 label {
@@ -185,7 +231,7 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
                 position: relative;
                 input {
                     position: absolute;
-                    top: -5px;
+                    top: -6px;
                     height: 5px;
                     width: 100%;
                     background: none;
@@ -219,5 +265,11 @@ $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8
             width: 10.625em;
             color: $color-error;
         }
+    }
+}
+
+@media (min-width: 45.625em) {
+    #productpage > ul {
+        font-size: 1em;
     }
 }

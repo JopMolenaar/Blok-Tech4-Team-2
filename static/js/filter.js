@@ -5,7 +5,7 @@ const jsOff = (document.getElementById("javascriptOff").style.display = "none")
 const rangeInput = document.querySelectorAll(".range-input input")
 const priceInput = document.querySelectorAll(".price-input input")
 const progress = document.querySelector(".slider .progress")
-const items = document.querySelectorAll(`#productpage li`)
+const items = document.querySelectorAll(`#productpage > ul > li`)
 
 let lastAgeRange = []
 for (let i = 0; i <= 99; i++) {

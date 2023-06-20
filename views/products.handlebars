@@ -1,11 +1,11 @@
 <header>
-    <section>
-    </section>
+    <img src="images/favicon.ico" alt="" />
     <nav>
+        <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
+        <a href="/wishlist">Wishlist</a>
         <form id="logout" action="/logout" method="POST">
             <button type="submit">Logout</button>
         </form>
-        <a href="/wishlist">Wishlist</a>
     </nav>
 </header>
 
@@ -30,19 +30,33 @@
                     <section>
                         <h3 class="visually-hidden">Gegevens:</h3>
 
-                        <p><b>Naam:</b> {{naam}}</p>
-                        <p><b>Leeftijd:</b> {{leeftijd}}</p>
-                        <p><b>Soort:</b> {{this.soort}}</p>
+                        <p>{{naam}}</p>
+                        <p>{{leeftijd}} jaar</p>
+                        <p>{{this.soort}}</p>
                         <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
                     </section>
                     {{#productInfo}}{{/productInfo}}
 
                     <section>
                         <h4 class="visually-hidden">Eigenschappen:</h4>
-                        <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
-                        <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
-                        <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
-                        <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
+                        <ul>
+                            <li>
+                                Is:
+                                {{this.eigenschappen.activiteit}}
+                            </li>
+                            <li>
+                                Buiten of binnen:
+                                {{this.eigenschappen.leefstijl}}
+                            </li>
+                            <li>
+                                Grootte:
+                                {{this.eigenschappen.grootte}}
+                            </li>
+                            <li>
+                                {{this.eigenschappen.dag}}
+                                dieren
+                            </li>
+                        </ul>
                     </section>
                 </a>
             </li>

@@ -277,11 +277,10 @@ app.get("/voorkeuren", async (req, res) => {
 
 app.get("/products", async (req, res) => {
     try {
-        const { gebruikersnaam } = req.session
-        const gebruiker = await User.findOne({ gebruikersnaam })
-
+        const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
         if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
 
             console.log("Ingelogde gebruiker:", gebruikersnaam)
             console.log("Energielevel:", energielevel)
@@ -291,6 +290,8 @@ app.get("/products", async (req, res) => {
 
             const query = {
                 $or: [
+                    //er worden meerdere voorwaarden(4) gecombineert. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
+
                     { "eigenschappen.energielevel": energielevel },
                     { "eigenschappen.leefstijl": leefstijl },
                     { "eigenschappen.grootte": grootte },
