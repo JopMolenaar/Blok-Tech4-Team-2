@@ -299,7 +299,7 @@ app.get("/products", async (req, res) => {
                 ],
             }
 
-            const producten = await Product.find(query) // Zoek producten in de database die overeenkomen met de voorkeuren
+            const producten = await Product.find(query)
             res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
@@ -309,6 +309,9 @@ app.get("/products", async (req, res) => {
         }
     } catch (error) {
         console.error(error)
+
+        // Handle the error and send an appropriate response to the client
+        res.status(500).send("An error occurred. Please try again later.")
     } finally {
         console.log("got all products for normal user")
     }
