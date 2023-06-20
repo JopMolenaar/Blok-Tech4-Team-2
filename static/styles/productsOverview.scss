@@ -10,10 +10,9 @@ $color-white: #eeeeee;
     height: calc(100vh - 4em);
     width: 100%;
     display: grid;
-    grid-template-columns: 12em 1fr;
+    grid-template-columns: 14em 1fr;
     grid-template-rows: 6.25em 1fr;
     flex-direction: column;
-    overflow-y: hidden;
     background-color: $color-backgroundPurple;
 
     // heading of list section
@@ -48,14 +47,14 @@ $color-white: #eeeeee;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
-        font-size: 1em;
+        font-size: 0.8em;
         display: grid;
         width: 98%;
         height: fit-content;
-        padding: 1em;
+        padding: 0.4em;
         gap: 2em;
         margin: 0em;
-        padding-bottom: 5em;
+        padding-bottom: 4em;
         padding-top: 0;
         margin-left: auto;
         margin-right: auto;
@@ -72,7 +71,6 @@ $color-white: #eeeeee;
             justify-content: center;
             align-items: center;
             width: 100%;
-            // margin: 1em;
             max-width: 22em;
             height: 21em;
             overflow: hidden;
@@ -167,9 +165,9 @@ $color-white: #eeeeee;
         flex-direction: column;
         padding: 2em;
         padding-top: 0;
-        font-size: 0.7em;
+        font-size: 0.8em;
         position: relative;
-        max-width: 13em;
+        max-width: 14em;
         background-color: $color-white;
         h2 {
             width: 100%;
@@ -267,5 +265,11 @@ $color-white: #eeeeee;
             width: 10.625em;
             color: $color-error;
         }
+    }
+}
+
+@media (min-width: 45.625em) {
+    #productpage > ul {
+        font-size: 1em;
     }
 }
