@@ -1,4 +1,7 @@
 #productpage {
+  overflow: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   height: calc(100vh - 4em);
   width: 100%;
   display: grid;
@@ -39,16 +42,16 @@
   grid-row-end: 3;
   font-size: 0.8em;
   display: grid;
-  width: 98%;
+  width: 90%;
   height: fit-content;
-  padding: 0.4em;
-  gap: 2em;
+  padding: 1em;
+  gap: 1.5em;
   margin: 0em;
   padding-bottom: 4em;
   padding-top: 0;
   margin-left: auto;
   margin-right: auto;
-  max-width: 65em;
+  max-width: 67em;
   max-height: 90%;
   overflow-y: auto;
   grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
@@ -118,11 +121,16 @@
   position: absolute;
   top: -4.28em;
   left: -0.2em;
+  width: 6em;
   font-size: 1em;
   background: rgba(255, 255, 255, 0.7);
 }
+#productpage > ul > li a section:nth-child(2) p:nth-child(3) {
+  border-radius: 0px 10px 0px 0px;
+}
 #productpage > ul > li a section:nth-child(2) p:nth-child(4) {
-  top: -2.2em;
+  top: -2.19em;
+  width: 6em;
 }
 #productpage > ul > li a section:nth-child(3) {
   grid-column-start: 2;
@@ -145,7 +153,14 @@
 #productpage > ul > li a section:nth-child(3) ul li {
   list-style-type: square;
 }
+#productpage > section:nth-child(3)::-webkit-scrollbar {
+  display: none;
+}
 #productpage > section:nth-child(3) {
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  height: calc(100vh - 4em);
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
@@ -167,15 +182,18 @@
   font-size: 1.5em;
 }
 #productpage > section:nth-child(3) section {
-  border-bottom: lightgrey solid 3px;
-  padding-bottom: 0.5em;
+  border-bottom: lightgray solid 3px;
   display: none;
   grid-template-columns: 1fr 1fr;
+  padding-bottom: 0.5em;
 }
 #productpage > section:nth-child(3) section h3 {
   font-size: 1em;
   grid-column-start: 1;
   grid-column-end: 3;
+}
+#productpage > section:nth-child(3) section:last-child {
+  margin-bottom: 3em;
 }
 #productpage > section:nth-child(3) section.soort {
   display: none;
@@ -214,7 +232,7 @@
   right: 0%;
   position: absolute;
   border-radius: 5px;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) > section:nth-child(3) .range-input {
   position: relative;
@@ -234,7 +252,7 @@
   border-radius: 50%;
   pointer-events: auto;
   -webkit-appearance: none;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) > section:nth-child(3) .range-input input[type=range]::-moz-range-thumb {
   height: 17px;
@@ -243,7 +261,7 @@
   border: none;
   pointer-events: auto;
   -moz-appearance: none;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) #javascriptOff {
   display: flex;
