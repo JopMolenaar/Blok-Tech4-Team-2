@@ -1,15 +1,19 @@
 .container {
   position: absolute;
   background-color: white;
-  left: 2em;
+  left: 6em;
   top: 6em;
   padding: 2em;
-  width: 87%;
+  width: 76%;
   border-radius: 0.4em;
 }
 
 .background-color {
   background-color: #dcd6f7;
+}
+
+p:nth-of-type(2) {
+  margin-bottom: 3em;
 }
 
 .button {
