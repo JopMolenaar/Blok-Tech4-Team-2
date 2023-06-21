@@ -543,15 +543,21 @@ app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 })
 
 // Confirmation page
-const doggo = {
-    naam: "Barry",
-    soort: "Golden retriever",
-    leeftijd: "1",
-    beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
-}
+app.get("/confirm-form/:id", requireLogin, async (req, res) => {
+    try {
+        // zoekt product op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
 
-app.get("/confirm-form", async (req, res) => {
-    res.render("confirm-form", { doggo })
+        res.render("confirm-form", {
+            doggo: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("afspraak pagina geladen")
+    }
 })
 
 //Post the form information
@@ -567,7 +573,6 @@ app.post("/meet", async (req, res, next) => {
         next(err)
     }
 })
-
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy
 const GOOGLE_CLIENT_ID = "593422950502-97fr9pua64objfd3htu6n4u4oa6i2usm.apps.googleusercontent.com"
