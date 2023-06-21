@@ -26,7 +26,7 @@ dropdowns.forEach((dropdown) => {
 nextButton.addEventListener("click", (event) => {
     if (!allDropdownsSelected) {
         event.preventDefault()
-        alert("Niet alle dropdowns zijn geselecteerd.")
+        alert("Niet alle onderdelen zijn geselecteerd.")
     }
 })
 
@@ -46,3 +46,9 @@ energielevel.addEventListener("change", updateText) // Luistert naar wijzigingen
 leefstijl.addEventListener("change", updateText)
 grootte.addEventListener("change", updateText)
 slaapritme.addEventListener("change", updateText)
+
+// Controleer of JavaScript is ingeschakeld
+document.addEventListener("DOMContentLoaded", function () {
+    var enhancement = document.getElementById("enhancement")
+    enhancement.style.display = "none"
+})

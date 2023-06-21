@@ -1,15 +1,13 @@
 <body class="background-image2">
-    <header>
-        <img src="images/favicon.ico" alt="" />
-        <nav>
-            <form id="logout" action="/logout" method="POST">
-                <button type="submit">Logout</button>
-            </form>
-        </nav>
-    </header>
-    <main>
+    <head>
+
+    </head>
+    <main class="voorkeuren">
         <form id="voorkeurenForm" action="/voorkeuren" method="POST">
             <h1 class="voorkeurenH">Kies uw voorkeur</h1>
+            <noscript>
+                <p id="enhancement">U zult alle voorkeuren moeten invullen om de beste resultaten te krijgen.</p>
+            </noscript>
             <p class="voorkeurenP">U zal elk onderdeel in moeten vullen</p>
             <label class="voorkeurenLabel" for="energielevel">Hoe actief mag het dier zijn?</label>
             <select id="energielevel" name="energielevel">
@@ -39,15 +37,14 @@
             </select>
             <p id="styleText3"></p>
 
-        <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
-        <select id="slaapritme" name="slaapritme">
-            <option>--</option>
-            <option value="Ochtend">S'ochtends</option>
-            <option value="Overdag">Overdag</option>
-            <option value="Avond">S'avonds</option>
-            <option value="Nachts">S'nachts</option>
-        </select>
-        <div id="AantalSection4">
+            <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
+            <select id="slaapritme" name="slaapritme">
+                <option>--</option>
+                <option value="nacht">S'ochtends</option>
+                <option value="dag">Overdag</option>
+                <option value="ochtend/avond">S'avonds</option>
+                <option value="geen voorkeur">S'nachts</option>
+            </select>
             <p id="styleText4"></p>
 
             <button id="nextButton" type="submit">Submit</button>

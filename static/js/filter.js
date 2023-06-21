@@ -123,10 +123,8 @@ inputsCheck.forEach((input) => {
             if (index > -1) {
                 activeFilter.splice(index, 1)
             }
-            console.log(activeFilter)
         } else {
             activeFilter.push(input.value)
-            console.log(activeFilter)
         }
 
         if (activeFilter.length < 1) {

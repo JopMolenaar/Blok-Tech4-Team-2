@@ -1,0 +1,48 @@
+#productPageAdmin {
+  display: grid;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  margin-right: auto;
+  margin-right: auto;
+  background: rgb(230, 219, 243);
+}
+#productPageAdmin div {
+  width: 80dvw;
+  display: grid;
+  gap: 1rem;
+}
+#productPageAdmin input {
+  width: 100%;
+  height: 3rem;
+}
+#productPageAdmin #animalsList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+#productPageAdmin #delBtn {
+  height: 1rem;
+  width: 1rem;
+}
+#productPageAdmin ul {
+  border: 1px solid #4e4c67;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #eeeeee;
+}
+#productPageAdmin li {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  margin: 0.5rem;
+  width: 5em;
+  height: 5rem;
+}
+#productPageAdmin img {
+  width: 4rem;
+  height: 4rem;
+}

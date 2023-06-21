@@ -1,5 +1,5 @@
 <header>
-    <img src="images/favicon.ico" alt="" />
+    <img src="../../images/favicon.ico" alt="" loading="lazy" />
     <nav>
         <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
         <a href="/wishlist">Wishlist</a>
@@ -8,32 +8,44 @@
         </form>
     </nav>
 </header>
-<main>
+<main id="detailpagina">
     {{#each product}}
-        <a href="/products">Back</a>
-        <section>
-            <div>
-                <img src="/upload/{{this.img}}" alt="Picture" />
-            </div>
+        <div>
+            <a class="buttonPrimary" href="/products">Back</a>
             <section>
-                <h3 class="visually-hidden">Gegevens:</h3>
-                <p><b>Naam:</b> {{this.naam}}</p>
-                <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
-                <p><b>Soort:</b> {{this.soort}}</p>
-                <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
-            </section>
+                <div>
+                    <img src="/upload/{{this.img}}" alt="Picture" loading="lazy" />
+                </div>
+                <section>
+                    <h3 class="visually-hidden">Gegevens</h3>
+                    <p><b>Naam:</b> {{this.naam}}</p>
+                    <p><b>Leeftijd:</b> {{this.leeftijd}}</p>
+                    <p><b>Soort:</b> {{this.soort}}</p>
 
-            <section>
-                <h4 class="visually-hidden">Eigenschappen:</h4>
-                <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
-                <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
-                <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
-                <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
+                    <p><b>Activiteit:</b> {{this.eigenschappen.activiteit}}</p>
+                    <p><b>Leefomgeving:</b> {{this.eigenschappen.leefstijl}}</p>
+                    <p><b>Grootte:</b> {{this.eigenschappen.grootte}}</p>
+                    <p><b>Dag of nacht dieren:</b> {{this.eigenschappen.dag}}</p>
+                </section>
             </section>
+            <article>
+                <h2>Beschrijving:</h2>
+                {{this.beschrijving}}
+            </article>
+            <section>
+                <form action="/wishlist-add/{{this._id}}" method="post">
+                    <button type="submit" class="submitButton">Add to Wishlist</button>
+                </form>
+                <a href="/confirm-form/{{this._id}}" class="submitButton">Maak een afspraak</a>
+            </section>
+<<<<<<< HEAD
         </section>
         <form action="/wishlist-add/{{this._id}}" method="post">
             <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
         </form>
+=======
+        </div>
+>>>>>>> 9344080281d656b67b7f6516ada82c496b2b577b
 
     {{/each}}
 </main>

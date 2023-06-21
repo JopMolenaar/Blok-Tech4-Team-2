@@ -1,5 +1,5 @@
 <header>
-    <img src="images/favicon.ico" alt="" />
+    <img src="../images/favicon.ico" alt="" loading="lazy"/>
     <nav>
         <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
         <a href="/wishlist">Wishlist</a>
@@ -10,57 +10,16 @@
 </header>
 
 
-<main id="confirmPage">
+<main id="thankYouPage">
 
-    <section class="message">
-        {{#with doggo}}
-        <h1>Wat fijn dat u {{this.naam}} heeft gevonden!</h1>
-        {{!-- foto dier --}}
+    {{#with person}}
+    <section>
+            <h1>Bedankt, {{name}} dat u een afspraak wilt maken om {{../doggo.naam}} te ontmoeten. </h1>
         
-        <ul class="dogContainer">
-            <li class="liIMG"><img src="/images/dog.webp" alt="dog Barry"></li>
-            <ul class="dogInfo">
-            <li>Naam: {{this.naam}}</li>
-            <li>Leeftijd: {{this.leeftijd}}</li>
-            <li>Soort: {{this.soort}}</li>
-            <li>Beschrijving: {{this.beschrijving}}</li>
-            </ul>
-            {{/with}}
-        </ul>
-
-        <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
     </section>
 
-    <form class="confirm">
-
-        <div class="formName">
-            <label>Wat is uw naam?</label>
-            <input type="text" id="name" name="name" placeholder="Uw naam" required />
-        </div>
-
-        <div class="formPhone">
-            <label>Wat is uw telefoon nummer?</label>
-            <input type="tel" inputmode="tel" id="phone" name="phone" placeholder="+31612345678" required />
-        </div>
-
-
-        <div class="formDate">
-            <label for="date-input">Welke dag wilt u het dier komen ophalen?</label>
-            <input type="date" id="date-input" name="date" min="" max="" required>
-        </div>
-
-        <div class="formTime">
-            <label for="time-input">Hoelaat wilt u het dier komen ophalen?</label>
-            <select id="time-input" name="time" required></select>
-        </div>
-
-        <div class="formSubmit">
-            <input class="submitButton" type="submit" value="Maak uw afspraak" required>
-        </div>
-    </form>
-
+    <section>
+        <h2>We zien u graag op {{date}}, om {{time}}</h2>
+    </section>
+    {{/with}}
 </main>
-
-<script src="/js/confirm-time.js"></script>
-<script src="/js/confirm-date.js"></script>
-

@@ -1,4 +1,4 @@
-/* General styling */
+// General styling
 
 $background-image: url("/images/paws2.jpg");
 $primary-color: #242424;
@@ -32,6 +32,8 @@ main{
   margin: 1em auto;
 }
 
+// signupForm styling
+
 #signupForm .of-P {
   text-align: center;
   font-size: 1.2em;
@@ -40,8 +42,6 @@ main{
   padding-top: .3em;
   color: $lack-of-color;
 }
-
-/* signupForm styling */
 
 #signupForm fieldset{
     border: none;
@@ -72,6 +72,7 @@ main{
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
+    //Blurry background styling
     &::before {
       content: "";
       position: absolute;
@@ -79,7 +80,7 @@ main{
       left: 0;
       width: 100%;
       height: 100%;
-      backdrop-filter: blur(.6em); /* Adjust the blur strength as needed */
+      backdrop-filter: blur(.6em);
       z-index: -1;
       border-radius: .4em;
     }
