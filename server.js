@@ -543,32 +543,39 @@ app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm", requireLogin, async (req, res) => {
-    const doggo = {
-        naam: "Barry",
-        soort: "Golden retriever",
-        leeftijd: "1",
-        beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+app.get("/confirm/:id", requireLogin, async (req, res) => {
+    try {
+        // zoekt product op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+
+        const today = new Date()
+        const weekdays = new Date()
+        weekdays.setDate(today.getDate() + 7)
+
+        const tomorrow = new Date()
+        tomorrow.setDate(tomorrow.getDate() + 1)
+
+        if (today.getDay() === 5) {
+            weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
+        }
+
+        while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
+            weekdays.setDate(weekdays.getDate() + 1)
+        }
+
+        const weekdaysStr = weekdays.toISOString().split("T")[0]
+
+        res.render("confirm", {
+            doggo: getItToJson.map((product) => product.toJSON()),
+            weekdaysStr,
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("afspraak pagina geladen")
     }
-
-    const today = new Date()
-    const weekdays = new Date()
-    weekdays.setDate(today.getDate() + 7)
-
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    if (today.getDay() === 5) {
-        weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
-    }
-
-    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
-        weekdays.setDate(weekdays.getDate() + 1)
-    }
-
-    const weekdaysStr = weekdays.toISOString().split("T")[0]
-
-    res.render("confirm", { weekdaysStr, doggo })
 })
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy
