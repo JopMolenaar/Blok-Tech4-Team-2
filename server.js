@@ -543,38 +543,34 @@ app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm/:id", requireLogin, async (req, res) => {
+app.get("/confirm-form/:id", requireLogin, async (req, res) => {
     try {
         // zoekt product op id
         const products = await Product.findById(req.params.id)
         const getItToJson = []
         getItToJson.push(products)
 
-        const today = new Date()
-        const weekdays = new Date()
-        weekdays.setDate(today.getDate() + 7)
-
-        const tomorrow = new Date()
-        tomorrow.setDate(tomorrow.getDate() + 1)
-
-        if (today.getDay() === 5) {
-            weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
-        }
-
-        while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
-            weekdays.setDate(weekdays.getDate() + 1)
-        }
-
-        const weekdaysStr = weekdays.toISOString().split("T")[0]
-
-        res.render("confirm", {
+        res.render("confirm-form", {
             doggo: getItToJson.map((product) => product.toJSON()),
-            weekdaysStr,
         })
     } catch (error) {
         console.log(error)
     } finally {
         console.log("afspraak pagina geladen")
+    }
+})
+
+//Post the form information
+app.post("/meet", async (req, res, next) => {
+    try {
+        const person = {
+            name: req.body.name,
+            date: req.body.date,
+            time: req.body.time,
+        }
+        res.render("confirm", { person, doggo })
+    } catch (err) {
+        next(err)
     }
 })
 
