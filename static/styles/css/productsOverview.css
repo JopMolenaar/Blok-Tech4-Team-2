@@ -182,7 +182,7 @@
   font-size: 1.5em;
 }
 #productpage > section:nth-child(3) section {
-  border-bottom: lightgrey solid 3px;
+  border-bottom: lightgray solid 3px;
   display: none;
   grid-template-columns: 1fr 1fr;
   padding-bottom: 0.5em;
@@ -232,7 +232,7 @@
   right: 0%;
   position: absolute;
   border-radius: 5px;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) > section:nth-child(3) .range-input {
   position: relative;
@@ -252,7 +252,7 @@
   border-radius: 50%;
   pointer-events: auto;
   -webkit-appearance: none;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) > section:nth-child(3) .range-input input[type=range]::-moz-range-thumb {
   height: 17px;
@@ -261,7 +261,7 @@
   border: none;
   pointer-events: auto;
   -moz-appearance: none;
-  background-color: #17a2b8;
+  background-color: rgb(158, 72, 255);
 }
 #productpage > section:nth-child(3) #javascriptOff {
   display: flex;
