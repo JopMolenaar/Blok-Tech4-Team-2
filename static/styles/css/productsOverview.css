@@ -193,7 +193,7 @@
   grid-column-end: 3;
 }
 #productpage > section:nth-child(3) section:last-child {
-  padding-bottom: 3em;
+  margin-bottom: 3em;
 }
 #productpage > section:nth-child(3) section.soort {
   display: none;
