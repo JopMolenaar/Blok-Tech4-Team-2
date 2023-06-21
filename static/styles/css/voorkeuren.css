@@ -33,8 +33,7 @@
   margin: 0.5em;
   color: #a6b1e1;
 }
-
-select {
+#voorkeurenForm select {
   border: 0.01em solid #4e4c67;
   border-radius: 0.1875em;
   font-size: 1em;
@@ -44,8 +43,7 @@ select {
   margin: 1em auto;
   margin-top: 0.2em;
 }
-
-button {
+#voorkeurenForm button {
   background-color: #dcd6f7;
   border-radius: 0.4em;
   cursor: pointer;
