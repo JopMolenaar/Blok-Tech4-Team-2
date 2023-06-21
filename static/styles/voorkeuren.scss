@@ -107,3 +107,11 @@ button {
 .selected {
     background-color: #a6b1e1;
 }
+
+//styling progressive enhancement
+noscript > p {
+    text-align: center;
+    margin-top: 1em;
+    padding: 0.5em;
+    border: 1px solid #a6b1e1;
+}
