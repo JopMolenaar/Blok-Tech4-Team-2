@@ -1,0 +1,28 @@
+.container {
+  position: absolute;
+  background-color: white;
+  left: 2em;
+  top: 6em;
+  padding: 2em;
+  width: 87%;
+  border-radius: 0.4em;
+}
+
+.background-color {
+  background-color: #dcd6f7;
+}
+
+.button {
+  background-color: #dcd6f7;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.625em;
+  padding-left: 3em;
+  margin-right: 2em;
+  padding-right: 4em;
+}

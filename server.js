@@ -108,6 +108,10 @@ mongoose
     .then(() => {
         console.log("Verbonden met de database")
     })
+//hoofdpagina
+app.get("/", (req, res) => {
+    res.render("hoofdpagina", { error: "" })
+})
 
 app.get("/admin-login", async (req, res) => {
     const errorMessage = req.session.error
