@@ -8,25 +8,24 @@
     </nav>
 </header>
 
-
 <main id="confirmPage">
 
     <section class="message">
-        {{#with doggo}}
-        <h1>Wat fijn dat u {{this.naam}} heeft gevonden!</h1>
-        {{!-- foto dier --}}
-        
-        <ul class="dogContainer">
-            <li class="liIMG"><img src="/images/dog.webp" alt="dog Barry"></li>
-            <ul class="dogInfo">
-            <li>Naam: {{this.naam}}</li>
-            <li>Leeftijd: {{this.leeftijd}}</li>
-            <li>Soort: {{this.soort}}</li>
-            <li>Beschrijving: {{this.beschrijving}}</li>
-            </ul>
-            {{/with}}
-        </ul>
+        {{#each doggo}}
+            <h1>Wat fijn dat u {{this.naam}} heeft gevonden!</h1>
+            {{! foto dier }}
 
+            <ul class="dogContainer">
+                <li class="liIMG"><img src="../upload/{{this.img}}" alt="dog Barry" /></li>
+                <ul class="dogInfo">
+                    <li>Naam: {{this.naam}}</li>
+                    <li>Leeftijd: {{this.leeftijd}}</li>
+                    <li>Soort: {{this.soort}}</li>
+                    <li>Beschrijving: {{this.beschrijving}}</li>
+                </ul>
+
+            </ul>
+        {{/each}}
         <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
     </section>
 
@@ -42,10 +41,9 @@
             <input type="tel" inputmode="tel" id="phone" name="phone" placeholder="+31612345678" required />
         </div>
 
-
         <div class="formDate">
             <label for="date-input">Welke dag wilt u het dier komen ophalen?</label>
-            <input type="date" id="date-input" name="date" min="" max="" required>
+            <input type="date" id="date-input" name="date" min="" max="" required />
         </div>
 
         <div class="formTime">
@@ -54,11 +52,10 @@
         </div>
 
         <div class="formSubmit">
-            <input class="submitButton" type="submit" value="Maak uw afspraak" required>
+            <input class="submitButton" type="submit" value="Maak uw afspraak" required />
         </div>
     </form>
 
 </main>
 
 <script src="/js/confirm-time.js"></script>
-
