@@ -1,8 +1,22 @@
+.voorkeuren {
+  height: 93%;
+}
+
 .background-image2 {
   background-image: url("../images/paws2.jpg");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
+}
+
+header {
+  height: 4em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; /* Grijze box-shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #eeeeee;
 }
 
 #voorkeurenForm {
@@ -12,11 +26,10 @@
   padding: 1.25em;
   display: block;
   position: absolute;
-  left: 100%;
-  top: 4em;
-  -webkit-transform: translate(-100%, 0%);
-  -ms-transform: translate(-100%, 0%);
-  transform: translate(-100%, 0%);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.4em;
 }
 #voorkeurenForm label {
   display: block;
@@ -82,4 +95,11 @@ button {
 
 .selected {
   background-color: #a6b1e1;
+}
+
+noscript > p {
+  text-align: center;
+  margin-top: 1em;
+  padding: 0.5em;
+  border: 1px solid #a6b1e1;
 }

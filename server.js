@@ -110,7 +110,7 @@ mongoose
 
 //hoofdpagina
 app.get("/", (req, res) => {
-    res.render("hoofdpagina", { error: "" })
+    res.render("hoofdpagina")
 })
 
 app.get("/admin-login", async (req, res) => {
@@ -295,15 +295,16 @@ app.post("/signUp", (req, res) => {
 app.get("/voorkeuren", requireLogin, async (req, res) => {
     res.render("voorkeuren")
 })
-//
-// normale gebruikers
 
-app.get("/products", requireLogin, async (req, res) => {
+app.get("/products", async (req, res) => {
     try {
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
-        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+
+        // Zoek de gebruiker in de database op basis van de gebruikersnaam
+        const gebruiker = await User.findOne({ gebruikersnaam })
+
         if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal de voorkeuren uit het gebruikersobject
 
             console.log("Ingelogde gebruiker:", gebruikersnaam)
             console.log("Energielevel:", energielevel)
@@ -311,10 +312,9 @@ app.get("/products", requireLogin, async (req, res) => {
             console.log("Grootte:", grootte)
             console.log("Slaapritme:", slaapritme)
 
+            // Stel de query samen met behulp van de voorkeuren van de gebruiker
             const query = {
                 $or: [
-                    //er worden meerdere voorwaarden(4) gecombineert. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
-
                     { "eigenschappen.energielevel": energielevel },
                     { "eigenschappen.leefstijl": leefstijl },
                     { "eigenschappen.grootte": grootte },
@@ -322,7 +322,10 @@ app.get("/products", requireLogin, async (req, res) => {
                 ],
             }
 
+            // Zoek producten in de database die voldoen aan de query
             const producten = await Product.find(query)
+
+            // Stuur de producten als respons naar de client
             res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
@@ -333,10 +336,11 @@ app.get("/products", requireLogin, async (req, res) => {
     } catch (error) {
         console.error(error)
 
-        // Handle the error and send an appropriate response to the client
-        res.status(500).send("An error occurred. Please try again later.")
+        // Als er een fout optreedt, wordt deze hier afgehandeld
+        // De fout wordt afgedrukt en een 500-statuscode en een foutmelding worden naar de client gestuurd
+        res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
     } finally {
-        console.log("got all products for normal user")
+        console.log("Alle producten zijn opgehaald")
     }
 })
 
