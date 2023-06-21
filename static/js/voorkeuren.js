@@ -46,10 +46,3 @@ energielevel.addEventListener("change", updateText) // Luistert naar wijzigingen
 leefstijl.addEventListener("change", updateText)
 grootte.addEventListener("change", updateText)
 slaapritme.addEventListener("change", updateText)
-
-// Controleer of JavaScript is ingeschakeld
-if (!document.querySelector("html").classList.contains("js")) {
-    const noscriptText = document.createElement("p")
-    noscriptText.textContent = "U dient alle voorkeuren in te vullen om de beste resultaten te krijgen."
-    document.body.appendChild(noscriptText)
-}
