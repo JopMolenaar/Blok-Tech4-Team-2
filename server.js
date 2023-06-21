@@ -171,6 +171,17 @@ app.post("/admin-logout", (req, res) => {
 	res.redirect("/admin-login")
 })
 
+//middleware die checkt of de gebruiker ingelogd is
+const requireLogin = (req, res, next) => {
+	if (req.session.loggedIn) {
+	// User is logged in, proceed to the next middleware
+		next()
+	} else {
+	// User is not logged in, redirect to the login page
+		res.redirect("/login")
+	}
+}
+
 // Regular user login
 app.post("/login", (req, res) => {
 	const { gebruikersnaam, wachtwoord } = req.body
@@ -283,13 +294,13 @@ app.post("/signUp", (req, res) => {
 		})
 }) 
 
-app.get("/voorkeuren", async (req, res) => {
+app.get("/voorkeuren", requireLogin, async (req, res) => {
 	res.render("voorkeuren")
 })
 //
 // normale gebruikers
 
-app.get("/products", async (req, res) => {
+app.get("/products", requireLogin, async (req, res) => {
 	try {
 		const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
 		const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
@@ -332,10 +343,22 @@ app.get("/products", async (req, res) => {
 })
 
 // Admin pagina's
-//
-app.get("/producten-overzicht", async (req, res) => {
+
+// Middleware function to check if the user is logged in as an admin
+const requireAdminLogin = (req, res, next) => {
+	if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
+	// User is logged in as an admin, proceed to the next middleware
+		next()
+	} else {
+	// User is not logged in as an admin, redirect to the login page
+		res.redirect("/admin-login")
+	}
+}
+
+// Route for "/producten-overzicht" accessible only to logged-in admins
+app.get("/producten-overzicht", requireAdminLogin, async (req, res) => {
 	try {
-		// zoekt producten op
+	// Search for products
 		const products = await Product.find({})
 		res.render("admin-overzicht", {
 			product: products.map((product) => product.toJSON()),
@@ -343,7 +366,7 @@ app.get("/producten-overzicht", async (req, res) => {
 	} catch (error) {
 		console.log(error)
 	} finally {
-		console.log("got all products for admin")
+		console.log("Got all products for admin")
 	}
 })
 
@@ -417,11 +440,11 @@ const changeProduct = async (req, res) => {
 }
 
 // forms post requests: add en change
-app.post("/producten-overzicht/add", upload.single("image"), addProduct)
-app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
+app.post("/producten-overzicht/add", requireAdminLogin, upload.single("image"), addProduct)
+app.post("/producten-overzicht/change", requireAdminLogin, upload.single("image"), changeProduct)
 
 // pas producten aan als admin
-app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
+app.get("/producten-overzicht/aanpassen/:id", requireAdminLogin, async (req, res) => {
 	try {
 		// zoekt producten op id
 		const products = await Product.findById(req.params.id)
@@ -492,7 +515,7 @@ app.post("/voorkeuren", (req, res) => {
 		})
 })
 
-app.get("/voorkeuren-opgeslagen", async (req, res) => {
+app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 	try {
 		const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
 
@@ -518,7 +541,7 @@ app.get("/voorkeuren-opgeslagen", async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm", async (req, res) => {
+app.get("/confirm", requireLogin, async (req, res) => {
 	const doggo = {
 		naam: "Barry",
 		soort: "Golden retriever",
@@ -614,7 +637,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
 	res.redirect("/products")
 })
 
-app.get("/wishlist", async (req, res) => {
+app.get("/wishlist", requireLogin, async (req, res) => {
 	try {
 		const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
 		if (!user) {
@@ -633,7 +656,7 @@ app.get("/wishlist", async (req, res) => {
 	}
 })
 
-app.post("/wishlist-add/:id", async (req, res) => {
+app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
 	try {
 		const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $push: { wishlist: req.params.id } })
 		console.log(userUpdate)
