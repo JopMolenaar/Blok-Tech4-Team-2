@@ -8,6 +8,9 @@ $color-backgroundPurple: rgb(230, 219, 243);
 $color-white: #eeeeee;
 
 #productpage {
+    overflow: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     height: calc(100vh - 4em);
     width: 100%;
     display: grid;
@@ -50,16 +53,16 @@ $color-white: #eeeeee;
         grid-row-end: 3;
         font-size: 0.8em;
         display: grid;
-        width: 97%;
+        width: 90%;
         height: fit-content;
-        padding: 0.4em;
-        gap: 2em;
+        padding: 1em;
+        gap: 1.5em;
         margin: 0em;
         padding-bottom: 4em;
         padding-top: 0;
         margin-left: auto;
         margin-right: auto;
-        max-width: 65em;
+        max-width: 67em;
         max-height: 90%;
         overflow-y: auto;
         grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
@@ -157,7 +160,14 @@ $color-white: #eeeeee;
         }
     }
     // filter section
+    > section:nth-child(3)::-webkit-scrollbar {
+        display: none;
+    }
     > section:nth-child(3) {
+        overflow-y: auto;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        height: calc(100vh - 4em);
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -179,16 +189,18 @@ $color-white: #eeeeee;
         }
         section {
             border-bottom: lightgrey solid 3px;
-            padding-bottom: 0.5em;
             display: none;
             grid-template-columns: 1fr 1fr;
+            padding-bottom: 0.5em;
             h3 {
                 font-size: 1em;
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
         }
-
+        section:last-child {
+            padding-bottom: 3em;
+        }
         section.soort {
             display: none;
             flex-direction: column;
