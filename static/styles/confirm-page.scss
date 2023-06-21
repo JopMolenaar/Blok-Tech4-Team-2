@@ -60,7 +60,10 @@ $error-color: #ca1e1e;
         text-align: center;
     }
 
-    input,
+    input[type="name"],
+    input[type="phone"],
+    input[type="date"],
+    input[type="tim"],
     select {
         border: 0.01em solid $input-border-color;
         border-radius: 0.1875em;

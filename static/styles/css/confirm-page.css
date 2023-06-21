@@ -35,7 +35,10 @@
   margin: 0;
   text-align: center;
 }
-#confirmPage input,
+#confirmPage input[type=name],
+#confirmPage input[type=phone],
+#confirmPage input[type=date],
+#confirmPage input[type=tim],
 #confirmPage select {
   border: 0.01em solid #98e6bf;
   border-radius: 0.1875em;
