@@ -25,6 +25,7 @@ header {
   left: 50%;
   top: 55%;
   transform: translate(-50%, -50%);
+  border-radius: 0.4em;
 }
 #voorkeurenForm label {
   display: block;
