@@ -291,9 +291,8 @@ app.post("/signUp", (req, res) => {
 app.get("/voorkeuren", requireLogin, async (req, res) => {
 	res.render("voorkeuren")
 })
-//
-// normale gebruikers
 
+// normale gebruikers
 app.get("/products", requireLogin, async (req, res) => {
 	try {
 		const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
@@ -337,7 +336,6 @@ app.get("/products", requireLogin, async (req, res) => {
 })
 
 // Admin pagina's
-
 // Middleware function to check if the user is logged in as an admin
 const requireAdminLogin = (req, res, next) => {
 	if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
