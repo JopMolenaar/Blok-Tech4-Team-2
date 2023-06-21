@@ -3,30 +3,108 @@
   grid-template-rows: max-content 1fr;
   align-items: center;
   text-align: center;
+  background-image: url("/images/paws.jpg");
+  background-size: cover;
+  background-position: center;
+  gap: 1rem;
 }
 #confirmPage section {
   display: grid;
   margin: auto;
   width: 80%;
+  border: 0em solid #252154;
+  border-radius: 0.4em;
+  background-color: rgba(34, 26, 69, 0.3333333333);
+  color: #eeeeee;
 }
-#confirmPage ul {
+#confirmPage section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.6em);
+  z-index: -1;
+  border-radius: 0.4em;
+}
+#confirmPage label {
+  display: block;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+}
+#confirmPage input,
+#confirmPage select {
+  border: 0.01em solid #98e6bf;
+  border-radius: 0.1875em;
+  font-size: 1em;
+  padding: 0.625em;
+  width: 80%;
+  display: block;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+#confirmPage button[type=submit] {
+  background-color: #dcd6f7;
+  border: none;
+  border-radius: 0.4em;
+  color: #242424;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.625em;
+  width: 80%;
+  margin: 1em auto;
+}
+#confirmPage button[type=submit]:hover {
+  background-color: #a6b1e1;
+}
+#confirmPage input:required:invalid {
+  color: #252154;
+  border-color: #252154;
+  border-width: 0.1em;
+  border-style: solid;
+}
+#confirmPage input:required:-moz-placeholder-shown {
+  border-color: #98e6bf;
+  border-width: 0.1em;
+  border-style: solid;
+}
+#confirmPage input:required:-ms-input-placeholder {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
+#confirmPage input:required:valid,
+#confirmPage input:required:placeholder-shown {
+  border-color: #98e6bf;
+  border-width: 0.2em;
+  border-style: solid;
+}
+
+ul {
   list-style: none;
 }
-#confirmPage .dogcontainer {
+
+.dogcontainer {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
-#confirmPage img {
+.dogcontainer img {
   width: 100%;
   height: auto;
+  border-radius: 0.4em;
 }
-#confirmPage .liIMG {
+.dogcontainer .liIMG {
   display: grid;
   justify-self: end;
 }
-#confirmPage .dogInfo {
+.dogcontainer .dogInfo {
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -34,7 +112,7 @@
   text-align: start;
   gap: 0.5rem;
 }
-#confirmPage .dogInfo li {
+.dogcontainer .dogInfo li {
   height: min-content;
   display: flex;
   flex-direction: column;
