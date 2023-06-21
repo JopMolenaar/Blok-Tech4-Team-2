@@ -1,6 +1,7 @@
 /* General styling */
 .error-message {
   text-align: center;
+  color: #CA1E1E;
 }
 
 .background-image {
@@ -154,8 +155,4 @@
 }
 .formButton:hover {
   background-color: #a6b1e1;
-}
-
-.question {
-  margin-bottom: 1.25em;
 }

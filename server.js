@@ -108,9 +108,8 @@ mongoose
     .then(() => {
         console.log("Verbonden met de database")
     })
-//hoofdpagina
 app.get("/", (req, res) => {
-    res.render("hoofdpagina", { error: "" })
+    res.render("hoofdpagina")
 })
 
 app.get("/admin-login", async (req, res) => {
@@ -227,6 +226,7 @@ app.post("/signUp", (req, res) => {
     const { gebruikersnaam, wachtwoord, wachtwoordBevestigen, naam, email, leeftijd } = req.body
     console.log(gebruikersnaam)
     console.log("post request werkt")
+
     // Check if username is filled in
     if (!gebruikersnaam) {
         req.session.error = "Vul een gebruikersnaam in"
@@ -241,35 +241,42 @@ app.post("/signUp", (req, res) => {
         return
     }
 
-    // Create a new user object with the filled-in information
-    const newUser = new User({
-        naam: naam,
-        email: email,
-        leeftijd: leeftijd,
-        gebruikersnaam: gebruikersnaam,
-        wachtwoord: wachtwoord,
-    })
+    // Check if username or email already exists in the database
+    User.findOne({ $or: [{ gebruikersnaam: gebruikersnaam }, { email: email }] })
+        .then((existingUser) => {
+            if (existingUser) {
+                // User with the same username or email already exists
+                req.session.error = "Gebruikersnaam of email is al in gebruik"
+                res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
+                return Promise.reject("Duplicate user")
+            }
 
-    // Save the new user to the database
-    newUser
-        .save()
+            // Create a new user object with the filled-in information
+            const newUser = new User({
+                naam: naam,
+                email: email,
+                leeftijd: leeftijd,
+                gebruikersnaam: gebruikersnaam,
+                wachtwoord: wachtwoord,
+            })
+
+            // Save the new user to the database
+            return newUser.save()
+        })
         .then(() => {
             console.log("new user")
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/voorkeuren")
+                res.redirect("/products")
             })
         })
         .catch((error) => {
-            console.error("Error gebruiker aanmaken:", error)
-            if (error.code === 11000) {
-                // Duplicate key error
-                req.session.error = "Email al in gebruik"
-            } else {
+            if (error !== "Duplicate user") {
+                console.error("Error gebruiker aanmaken:", error)
                 req.session.error = "Gebruiker niet kunnen registreren"
+                res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
             }
-            res.render("signUp", { error: req.session.error }) // Render the signup page with the error message
         })
 })
 

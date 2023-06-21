@@ -1,19 +1,26 @@
 <head>
     <title>Admin Login</title>
 </head>
+<body class="background-image">
+    <main>
+        <form id="adminForm" action="/admin-login" method="POST">
+            <h1 class="loginH">Welkom Admin</h1>
+                {{#if error}}
+                    <p class="error-message">{{error}}</p>
+                {{/if}}
+            <fieldset>
+                <label for="gebruikersnaam">Gebruikersnaam:</label>
+                <input type="username" id="adminGebruikersnaam" name="gebruikersnaam" />
+            </fieldset>
+            
+            <fieldset>
+                <label for="wachtwoord">Wachtwoord:</label>
+                <input type="password" id="adminWachtwoord" name="wachtwoord" />
+            </fieldset>
 
-<body>
-    <h1>Welkom Admin</h1>
-    {{#if error}}
-        <p class="error-message">{{error}}</p>
-    {{/if}}
-    <form action="/admin-login" method="POST">
-        <label for="gebruikersnaam">Gebruikersnaam:</label>
-        <input type="text" id="gebruikersnaam" name="gebruikersnaam" />
-        <br />
-        <label for="wachtwoord">Wachtwoord:</label>
-        <input type="password" id="wachtwoord" name="wachtwoord" />
-        <br />
-        <button type="submit">Login</button>
-    </form>
+            <button class="formButton" type="submit">Login</button>
+
+            <script src="/js/login.js"></script>
+        </form>
+    </main>
 </body>

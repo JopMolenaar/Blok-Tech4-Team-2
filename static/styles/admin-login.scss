@@ -1,6 +1,5 @@
 /* General styling */
-
-$background-image: url("/images/paws.jpg");
+$background-image: url("/images/paws2.jpg");
 $primary-color: #242424;
 $secondary-color:#252154;
 $background-color: #221a4555;
@@ -12,18 +11,7 @@ $color-primary-button-hover: #a6b1e1;
 $lack-of-color: #ffff;
 $error-color: #CA1E1E;
 
-.error-message{
-  text-align: center;
-  color: $error-color;
-}
-
-.background-image {
-  background-image: $background-image;
-  background-size: cover;
-  background-position: center;
-}
-
-#loginForm .loginH {
+#adminForm .loginH {
   text-align: center;
   color: $lack-of-color;
   font-size: 1.5em;
@@ -31,21 +19,15 @@ $error-color: #CA1E1E;
   margin-bottom: 1em;
 }
 
-.formH3 {
-  text-align: center;
-  font-size: 1em;
-  color: $lack-of-color;
-}
+/* adminForm styling */
 
-/* loginForm styling */
-
-#loginForm fieldset{
+#adminForm fieldset{
   border: none;
   padding: 0;
   color: $lack-of-color;
 }
 
-#loginForm {
+#adminForm {
   border: 0em solid $secondary-color;
   border-radius: 0.4em;
   background-color: $background-color;
@@ -136,52 +118,3 @@ $error-color: #CA1E1E;
     border-style: solid;
   }
 }
-
-.googleButton {
-  background-color: $google-input-border-color;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 0.4em;
-  color: $primary-color;
-  cursor: pointer;
-  display: block;
-  font-size: 1em;
-  padding: 0.625em;
-  margin: 1em auto;
-  font-weight: bold;
-  width: 75%;
-
-  background-image: url("/images/google.png");
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 3.5em;
-
-  &:hover {
-    background-color: $google-hover-color;
-  }
-}
-
-/* Neutral form styling */
-
-.formButton {
-  background-color: $color-primary-button;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 0.4em;
-  color: $primary-color;
-  cursor: pointer;
-  display: block;
-  font-size: 1em;
-  padding: 0.625em;
-  margin: 1em auto;
-  font-weight: bold;
-  width: 75%;
-
-  &:hover {
-    background-color: $color-primary-button-hover;
-  }
-}
-
-
