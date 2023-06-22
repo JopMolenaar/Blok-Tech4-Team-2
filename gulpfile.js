@@ -6,17 +6,21 @@ const livereload = require("gulp-livereload")
 const bundleJS = require("gulp-uglify")
 
 gulp.task("bundleJS", function () {
-    return gulp.src("./static/js/*.js").pipe(bundleJS()).pipe(gulp.dest("./static/js/")).pipe(livereload())
+    return gulp
+        .src("./static/js/*.js")
+        .pipe(bundleJS())
+        .pipe(gulp.dest("./static/js/gulp-js"))
+        .pipe(livereload())
 })
 
 gulp.task("sass", function () {
-	return gulp
-		.src("./static/styles/*.scss")
-		.pipe(sass().on("error", sass.logError))
-		.pipe(gulp.dest("./static/styles/css"))
-		.pipe(autoprefixer())
-		.pipe(cleanCSS())
-		.pipe(livereload())
+    return gulp
+        .src("./static/styles/*.scss")
+        .pipe(sass().on("error", sass.logError))
+        .pipe(gulp.dest("./static/styles/css"))
+        .pipe(autoprefixer())
+        .pipe(cleanCSS())
+        .pipe(livereload())
 })
 gulp.task("watch", function () {
     livereload.listen() // Start livereload
