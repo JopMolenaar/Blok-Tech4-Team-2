@@ -26,6 +26,7 @@ $color-secondary-button-hover: #7dc2b2;
     margin-right: auto;
     margin-right: auto;
     background: $color-backgroundPurple;
+    height: 100dvh;
 
     div {
         width: 80dvw;
@@ -44,16 +45,10 @@ $color-secondary-button-hover: #7dc2b2;
         gap: 2rem;
     }
 
-    #delBtn {
-        height: 1rem;
-        width: 1rem;
-    }
-
     ul {
         border: 1px solid $color-input-normal;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 0.5fr 0.5fr;
         gap: 1rem;
         background-color: $color-white;
     }
@@ -71,5 +66,15 @@ $color-secondary-button-hover: #7dc2b2;
     img {
         width: 4rem;
         height: 4rem;
+    }
+
+    #delBtn {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+    .icon {
+        height: auto;
+        width: 2rem;
     }
 }

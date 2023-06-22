@@ -4,7 +4,7 @@
   align-items: center;
   text-align: center;
   background-image: url("/images/paws.jpg");
-  background-image: repeat;
+  background-image: repeat infinite;
   background-size: cover;
 }
 #confirmPage section {
