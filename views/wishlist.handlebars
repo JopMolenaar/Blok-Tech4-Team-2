@@ -1,13 +1,13 @@
 <header>
-    <img src="images/favicon.ico" alt="" loading="lazy" />
-    <nav>
-        <a href="/products">Producten</a>
-        <a href="/voorkeuren">Voorkeuren</a>
-        <a href="/wishlist">Wishlist</a>
-        <form id="logout" action="/logout" method="POST">
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
+  <img src="images/favicon.ico" alt="" loading="lazy" />
+  <nav>
+    <a href="/products">Producten</a>
+    <a href="/voorkeuren">Voorkeuren</a>
+    <a href="/wishlist">Wishlist</a>
+    <form id="logout" action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </nav>
 </header>
 
 <h2 id="h2wish">Jouw Wishlist</h2>
@@ -23,7 +23,9 @@
           <p>Soort: {{this.soort}}</p>
           <p>Leeftijd: {{this.leeftijd}}</p>
         </div>
-        {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
+        <form action="/wishlist-delete/{{this._id}}" method="post">
+          <button type="submit" class="submitButton">Delete from wishlist</button>
+        </form>
       </div>
     {{/each}}
   </div>
