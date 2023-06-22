@@ -2,6 +2,7 @@
   height: 93%;
 }
 .voorkeuren div {
+  transform: translate(-46%, -50%);
   width: fit-content;
   height: fit-content;
   display: flex;
@@ -30,12 +31,12 @@ header {
 }
 
 #voorkeurenForm {
+  transform: translate(10px, 10px);
   border: 0em solid #4e4c67;
   background-color: #ffffff;
   display: block;
   max-width: 25em;
   padding: 1.25em;
-  transform: translate(-50%, -50%);
   border-radius: 0.4em;
 }
 #voorkeurenForm label {
@@ -99,11 +100,12 @@ header {
 }
 
 #Preferences {
+  transform: translate(10px, 10px);
+  margin-left: 1em;
   border: 0em solid #4e4c67;
   background-color: #ffffff;
   width: 13em;
   padding: 1.25em;
-  transform: translate(-50%, -50%);
   border-radius: 0.4em;
 }
 #Preferences h2 {
