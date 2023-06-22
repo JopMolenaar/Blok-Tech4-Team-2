@@ -315,7 +315,7 @@ app.get("/products", async (req, res) => {
             const producten = await Product.find(query)
 
             // Stuur de producten als respons naar de client
-            return res.render("", {
+            return res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
         } else {

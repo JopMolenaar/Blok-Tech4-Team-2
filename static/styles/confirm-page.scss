@@ -26,17 +26,14 @@ $error-color: #ca1e1e;
     align-items: center;
     text-align: center;
     background-image: $background-image;
-    background-repeat: repeat;
+    background-image: repeat;
     background-size: cover;
-    background-position: center;
-    gap: 1rem;
 
     section {
         display: grid;
         margin: auto;
         width: 80%;
         border: 0em solid $secondary-color;
-        border-radius: 0.4em;
         background-color: $background-color;
         color: $color-white;
 
@@ -50,15 +47,7 @@ $error-color: #ca1e1e;
             height: 100%;
             backdrop-filter: blur(0.6em);
             z-index: -1;
-            border-radius: 0.4em;
         }
-    }
-    label {
-        display: block;
-        font-weight: bold;
-        font-size: 1em;
-        margin: 0;
-        text-align: center;
     }
 
     input[type="text"],
@@ -101,20 +90,8 @@ $error-color: #ca1e1e;
         border-style: solid;
     }
 
-    input:required:-moz-placeholder-shown {
-        border-color: $input-border-color;
-        border-width: 0.1em;
-        border-style: solid;
-    }
-
-    input:required:-ms-input-placeholder {
-        border-color: $input-border-color;
-        border-width: 0.2em;
-        border-style: solid;
-    }
-
-    input:required:valid,
-    input:required:placeholder-shown {
+    select:required:valid,
+    input:required:valid {
         border-color: $input-border-color;
         border-width: 0.2em;
         border-style: solid;

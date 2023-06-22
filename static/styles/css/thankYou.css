@@ -1,4 +1,5 @@
 #thankYouPage {
+  height: 100dvh;
   display: grid;
   grid-template-rows: max-content 1fr;
   align-items: center;
@@ -28,4 +29,7 @@
   backdrop-filter: blur(0.6em);
   z-index: -1;
   border-radius: 0.4em;
+}
+#thankYouPage .submitButton {
+  margin-bottom: 1rem;
 }

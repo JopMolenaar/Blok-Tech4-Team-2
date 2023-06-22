@@ -21,6 +21,7 @@ $lack-of-color: #ffff;
 $error-color: #ca1e1e;
 
 #thankYouPage {
+    height: 100dvh;
     display: grid;
     grid-template-rows: max-content 1fr;
     align-items: center;
@@ -52,5 +53,9 @@ $error-color: #ca1e1e;
             z-index: -1;
             border-radius: 0.4em;
         }
+    }
+
+    .submitButton {
+        margin-bottom: 1rem;
     }
 }

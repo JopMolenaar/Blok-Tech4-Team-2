@@ -4,17 +4,14 @@
   align-items: center;
   text-align: center;
   background-image: url("/images/paws.jpg");
-  background-repeat: repeat;
+  background-image: repeat;
   background-size: cover;
-  background-position: center;
-  gap: 1rem;
 }
 #confirmPage section {
   display: grid;
   margin: auto;
   width: 80%;
   border: 0em solid #252154;
-  border-radius: 0.4em;
   background-color: rgba(34, 26, 69, 0.3333333333);
   color: #eeeeee;
 }
@@ -27,14 +24,6 @@
   height: 100%;
   backdrop-filter: blur(0.6em);
   z-index: -1;
-  border-radius: 0.4em;
-}
-#confirmPage label {
-  display: block;
-  font-weight: bold;
-  font-size: 1em;
-  margin: 0;
-  text-align: center;
 }
 #confirmPage input[type=text],
 #confirmPage input[type=tel],
@@ -72,18 +61,8 @@
   border-width: 0.1em;
   border-style: solid;
 }
-#confirmPage input:required:-moz-placeholder-shown {
-  border-color: #98e6bf;
-  border-width: 0.1em;
-  border-style: solid;
-}
-#confirmPage input:required:-ms-input-placeholder {
-  border-color: #98e6bf;
-  border-width: 0.2em;
-  border-style: solid;
-}
-#confirmPage input:required:valid,
-#confirmPage input:required:placeholder-shown {
+#confirmPage select:required:valid,
+#confirmPage input:required:valid {
   border-color: #98e6bf;
   border-width: 0.2em;
   border-style: solid;
