@@ -345,10 +345,6 @@ app.get("/products", async (req, res) => {
             return res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
-        } else {
-            // Dit is wanneer de gebruiker niet gevonden is in de database
-            console.log("Gebruiker niet gevonden")
-            return res.render("notfound")
         }
     } catch (error) {
         console.error(error)
