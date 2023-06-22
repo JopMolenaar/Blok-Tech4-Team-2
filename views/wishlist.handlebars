@@ -11,18 +11,25 @@
 </header>
 
 {{!-- {{#if wishlist && wishlist.length}} --}}
-<h2>Wishlist</h2>
-<a href="/products">Back</a>
+<h2 id="h2wish">Jouw Wishlist</h2>
 <ul>
+  <div class="wishlist">
     {{#each wishlist}}
-        <li>
-            <h3>{{this.naam}}</h3>
-            <p>Director: {{this.soort}}</p>
-            <p>Release Year: {{this.leeftijd}}</p>
-            <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button>
-        </li>
+      <div class="list-item">
+        <div>
+          <img src="/upload/{{this.img}}" alt="Picture" />
+        </div>
+        <div>
+          <h3>{{this.naam}}</h3>
+          <p>Soort: {{this.soort}}</p>
+          <p>Leeftijd: {{this.leeftijd}}</p>
+        </div>
+        {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
+      </div>
     {{/each}}
+  </div>
 </ul>
+<a id="terugwish" href="/products">Terug</a>
 {{!-- {{else}}
     <p>No movies in watchlist.</p>
 {{/if}} --}}
