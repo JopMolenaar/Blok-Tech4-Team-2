@@ -384,81 +384,8 @@ app.get("/products", async (req, res) => {
     }
 })
 
-// normale gebruikers
-// app.get("/products", async (req, res) => {
-//     try {
-//         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
-//         const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
-//         if (gebruiker) {
-//             const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
-
-//             console.log("Ingelogde gebruiker:", gebruikersnaam)
-//             console.log("Energielevel:", energielevel)
-//             console.log("Leefstijl:", leefstijl)
-//             console.log("Grootte:", grootte)
-//             console.log("Slaapritme:", slaapritme)
-
-//             // Stel de query samen met behulp van de voorkeuren van de gebruiker
-//             const query = {
-//                 $or: [
-//                     // Er worden meerdere voorwaarden (4) gecombineerd. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
-//                     { "eigenschappen.energielevel": energielevel },
-//                     { "eigenschappen.leefstijl": leefstijl },
-//                     { "eigenschappen.grootte": grootte },
-//                     { "eigenschappen.slaapritme": slaapritme },
-//                 ],
-//             }
-
-//             // Zoek producten in de database die voldoen aan de query
-//             const producten = await Product.find(query)
-
-//             // Stuur de producten als respons naar de client
-//             return res.render("products", {
-//                 product: producten.map((product) => product.toJSON()),
-//             })
-//         } else {
-//             // Dit is wanneer de gebruiker niet gevonden is in de database
-//             console.log("Gebruiker niet gevonden")
-//             return res.render("notfound")
-//         }
-//     } catch (error) {
-//         console.error(error)
-//         // Wanneer er een fout is bij het ophalen van producten uit de database
-//         // 500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
-//         return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
-//     } finally {
-//         console.log("Alle producten zijn opgehaald")
-//     }
-// })
-
 // Admin pagina's
 // Middleware function to check if the user is logged in as an admin
-const requireAdminLogin = async (req, res, next) => {
-    if (req.session.loggedIn) {
-        const naam = req.session.naam
-        console.log(naam)
-        // Check if the user is logged in as an admin
-        await Admin.findOne({ naam: naam }, (err, admin) => {
-            console.log(admin)
-            console.log(err)
-            console.log(naam)
-            if (err) {
-                console.error("Error finding admin:", err)
-                res.redirect("/admin-login")
-            } else if (admin) {
-                // User is logged in as an admin, proceed to the next middleware
-                next()
-            } else {
-                // User is not logged in as an admin, redirect to the login page
-                res.redirect("/admin-login")
-            }
-        })
-    } else {
-        // User is not logged in, redirect to the login page
-        res.redirect("/admin-login")
-    }
-}
-
 // Route for "/producten-overzicht" accessible only to logged-in admins
 app.get("/producten-overzicht", async (req, res) => {
     try {
@@ -562,36 +489,70 @@ const changeProduct = async (req, res) => {
 }
 
 // forms post requests: add en change
-app.post("/producten-overzicht/add", requireAdminLogin, upload.single("image"), addProduct)
-app.post("/producten-overzicht/change", requireAdminLogin, upload.single("image"), changeProduct)
+app.post("/producten-overzicht/add", upload.single("image"), addProduct)
+app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
 
 // pas producten aan als admin
-app.get("/producten-overzicht/aanpassen/:id", requireAdminLogin, async (req, res) => {
+app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     try {
-        // zoekt producten op id
-        const products = await Product.findById(req.params.id)
-        const getItToJson = []
-        getItToJson.push(products)
-        res.render("admin-aanpassen", {
-            product: getItToJson.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProduct = async () => {
+                        // zoekt producten op id
+                        const products = await Product.findById(req.params.id)
+                        const getItToJson = []
+                        getItToJson.push(products)
+                        res.render("admin-aanpassen", {
+                            product: getItToJson.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProduct()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
-        console.log("got product for admin")
+        console.log("Got all products for admin")
     }
 })
 
 // product detail pagina
 app.get("/producten-overzicht/detail/:id", async (req, res) => {
     try {
-        // zoekt producten op id
-        const products = await Product.findById(req.params.id)
-        const getItToJson = []
-        getItToJson.push(products)
-        res.render("product-detail", {
-            product: getItToJson.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProduct = async () => {
+                        // zoekt producten op id
+                        const products = await Product.findById(req.params.id)
+                        const getItToJson = []
+                        getItToJson.push(products)
+                        res.render("product-detail", {
+                            product: getItToJson.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProduct()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
