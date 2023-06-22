@@ -169,17 +169,6 @@ app.post("/admin-logout", (req, res) => {
     res.redirect("/admin-login")
 })
 
-//middleware die checkt of de gebruiker ingelogd is
-const requireLogin = (req, res, next) => {
-    if (req.session.loggedIn) {
-        // User is logged in, proceed to the next middleware
-        next()
-    } else {
-        // User is not logged in, redirect to the login page
-        res.redirect("/login")
-    }
-}
-
 // Regular user login
 app.post("/login", (req, res) => {
     const { gebruikersnaam, wachtwoord } = req.body
@@ -280,7 +269,7 @@ app.post("/signUp", (req, res) => {
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/products")
+                res.redirect("/voorkeuren")
             })
         })
         .catch((error) => {
@@ -292,12 +281,12 @@ app.post("/signUp", (req, res) => {
         })
 })
 
-app.get("/voorkeuren", requireLogin, async (req, res) => {
+app.get("/voorkeuren", async (req, res) => {
     res.render("voorkeuren")
 })
 
 // normale gebruikers
-app.get("/products", requireLogin, async (req, res) => {
+app.get("/products", async (req, res) => {
     try {
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
         const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
@@ -326,7 +315,7 @@ app.get("/products", requireLogin, async (req, res) => {
             const producten = await Product.find(query)
 
             // Stuur de producten als respons naar de client
-            return res.render("products", {
+            return res.render("", {
                 product: producten.map((product) => product.toJSON()),
             })
         } else {
@@ -516,7 +505,7 @@ app.post("/voorkeuren", (req, res) => {
         })
 })
 
-app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
+app.get("/voorkeuren-opgeslagen", async (req, res) => {
     try {
         const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
 
@@ -542,7 +531,7 @@ app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm-form/:id", requireLogin, async (req, res) => {
+app.get("/confirm-form/:id", async (req, res) => {
     try {
         // zoekt product op id
         const products = await Product.findById(req.params.id)
@@ -647,7 +636,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
     res.redirect("/products")
 })
 
-app.get("/wishlist", requireLogin, async (req, res) => {
+app.get("/wishlist", async (req, res) => {
     try {
         const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
         if (!user) {
@@ -666,7 +655,7 @@ app.get("/wishlist", requireLogin, async (req, res) => {
     }
 })
 
-app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
+app.post("/wishlist-add/:id", async (req, res) => {
     try {
         const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $push: { wishlist: req.params.id } })
         console.log(userUpdate)
