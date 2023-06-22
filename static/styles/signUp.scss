@@ -130,6 +130,7 @@ main{
       background-color: $hover-color;
     }
   
+    //progressive enhancement input borders
     input:required:invalid {
       color: $secondary-color;
       border-color: $secondary-color;

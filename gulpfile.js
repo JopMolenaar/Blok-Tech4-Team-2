@@ -10,13 +10,13 @@ gulp.task("bundleJS", function () {
 })
 
 gulp.task("sass", function () {
-    return gulp
-        .src("./static/styles/*.scss")
-        .pipe(sass().on("error", sass.logError))
-        .pipe(gulp.dest("./static/styles/css"))
-        .pipe(autoprefixer())
-        .pipe(cleanCSS())
-        .pipe(livereload())
+	return gulp
+		.src("./static/styles/*.scss")
+		.pipe(sass().on("error", sass.logError))
+		.pipe(gulp.dest("./static/styles/css"))
+		.pipe(autoprefixer())
+		.pipe(cleanCSS())
+		.pipe(livereload())
 })
 gulp.task("watch", function () {
     livereload.listen() // Start livereload
