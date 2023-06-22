@@ -280,6 +280,7 @@ app.post("/signUp", (req, res) => {
             }
         })
 })
+
 //voorkeuren pagina
 app.get("/voorkeuren", async (req, res) => {
     try {
@@ -306,11 +307,17 @@ app.get("/voorkeuren", async (req, res) => {
     }
 })
 
-// normale gebruikers
 app.get("/products", async (req, res) => {
     try {
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
-        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+
+        // Controleer of er een gebruiker is ingelogd
+        if (!gebruikersnaam) {
+            console.log("Gebruiker niet ingelogd")
+            return res.render("notfound")
+        }
+
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoek de gebruiker in de database op basis van de gebruikersnaam
         if (gebruiker) {
             const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
 
@@ -352,6 +359,53 @@ app.get("/products", async (req, res) => {
         console.log("Alle producten zijn opgehaald")
     }
 })
+
+// normale gebruikers
+// app.get("/products", async (req, res) => {
+//     try {
+//         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+//         const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+//         if (gebruiker) {
+//             const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
+
+//             console.log("Ingelogde gebruiker:", gebruikersnaam)
+//             console.log("Energielevel:", energielevel)
+//             console.log("Leefstijl:", leefstijl)
+//             console.log("Grootte:", grootte)
+//             console.log("Slaapritme:", slaapritme)
+
+//             // Stel de query samen met behulp van de voorkeuren van de gebruiker
+//             const query = {
+//                 $or: [
+//                     // Er worden meerdere voorwaarden (4) gecombineerd. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
+//                     { "eigenschappen.energielevel": energielevel },
+//                     { "eigenschappen.leefstijl": leefstijl },
+//                     { "eigenschappen.grootte": grootte },
+//                     { "eigenschappen.slaapritme": slaapritme },
+//                 ],
+//             }
+
+//             // Zoek producten in de database die voldoen aan de query
+//             const producten = await Product.find(query)
+
+//             // Stuur de producten als respons naar de client
+//             return res.render("products", {
+//                 product: producten.map((product) => product.toJSON()),
+//             })
+//         } else {
+//             // Dit is wanneer de gebruiker niet gevonden is in de database
+//             console.log("Gebruiker niet gevonden")
+//             return res.render("notfound")
+//         }
+//     } catch (error) {
+//         console.error(error)
+//         // Wanneer er een fout is bij het ophalen van producten uit de database
+//         // 500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
+//         return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
+//     } finally {
+//         console.log("Alle producten zijn opgehaald")
+//     }
+// })
 
 // Admin pagina's
 // Middleware function to check if the user is logged in as an admin

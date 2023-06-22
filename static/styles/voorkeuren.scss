@@ -11,15 +11,26 @@ $input-border-color: #dcd6f7;
 $placeholder-border-color: #98e6bf;
 
 $shadow-header: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
 //voorkeuren dropdown
 .voorkeuren {
     height: 93%;
+    div {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        align-items: flex-start;
+    }
 }
 .background-image2 {
     background-image: $background-image;
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 header {
@@ -35,12 +46,9 @@ header {
 #voorkeurenForm {
     border: 0em solid #4e4c67;
     background-color: #ffffff;
+    display: block;
     max-width: 25em;
     padding: 1.25em;
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 0.4em;
 
@@ -112,10 +120,6 @@ header {
     background-color: #ffffff;
     width: 13em;
     padding: 1.25em;
-    display: block;
-    position: absolute;
-    left: 82%;
-    top: 32.5%;
     transform: translate(-50%, -50%);
     border-radius: 0.4em;
     h2 {
