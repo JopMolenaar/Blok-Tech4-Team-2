@@ -1,4 +1,5 @@
 const button = document.querySelector("button")
 button.addEventListener("click", () => {
-    new Audio("audio/lionel-richie.mp3").play()
+    var audio = new Audio("audio/lionel-richie.mp3")
+    audio.play()
 })

@@ -1,7 +1,15 @@
 const search = () => {
-    const t = document.querySelector("#searchAnimals").value.toLowerCase()
-    document.querySelectorAll("#animalsList ul").forEach((e) => {
-        ;-1 !== e.getElementsByTagName("li")[1].textContent.toLowerCase().indexOf(t) ? (e.style.display = "block") : (e.style.display = "none")
+    const input = document.querySelector("#searchAnimals").value.toLowerCase()
+    const animals = document.querySelectorAll("#animalsList ul")
+
+    animals.forEach((animal) => {
+        const name = animal.getElementsByTagName("li")[1].textContent.toLowerCase()
+        if (name.indexOf(input) !== -1) {
+            animal.style.display = "block"
+        } else {
+            animal.style.display = "none"
+        }
     })
 }
+
 document.getElementById("searchAnimals").addEventListener("input", search)
