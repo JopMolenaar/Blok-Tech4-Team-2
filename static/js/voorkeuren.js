@@ -7,7 +7,7 @@ const nextButton = document.getElementById("nextButton")
 const dropdowns = document.querySelectorAll("select")
 let allDropdownsSelected = false // Variabele om bij te houden of alle dropdowns zijn geselecteerd
 
-function updateButton() {
+const updateButton = () => {
     allDropdownsSelected = true
 
     dropdowns.forEach((dropdown) => {
@@ -16,7 +16,7 @@ function updateButton() {
         }
     })
 
-    nextButton.classList.toggle("selected", allDropdownsSelected) // Achtergrondkleur wordt gewijzigd op basis van de selectiestatus
+    nextButton.classList.toggle("selected", allDropdownsSelected)
 }
 
 dropdowns.forEach((dropdown) => {
@@ -30,13 +30,13 @@ nextButton.addEventListener("click", (event) => {
     }
 })
 
-function updateText() {
+const updateText = () => {
     const styleText1 = document.getElementById("styleText1")
     const styleText2 = document.getElementById("styleText2")
     const styleText3 = document.getElementById("styleText3")
     const styleText4 = document.getElementById("styleText4")
 
-    styleText1.innerHTML = energielevel.value !== "--" ? "checked" : "" // Bijwerken van de innerHTML van styleText1 op basis van de geselecteerde waarde in energielevel
+    styleText1.innerHTML = energielevel.value !== "--" ? "checked" : ""
     styleText2.innerHTML = leefstijl.value !== "--" ? "checked" : ""
     styleText3.innerHTML = grootte.value !== "--" ? "checked" : ""
     styleText4.innerHTML = slaapritme.value !== "--" ? "checked" : ""
@@ -48,7 +48,7 @@ grootte.addEventListener("change", updateText)
 slaapritme.addEventListener("change", updateText)
 
 // Controleer of JavaScript is ingeschakeld
-document.addEventListener("DOMContentLoaded", function () {
-    var enhancement = document.getElementById("enhancement")
+document.addEventListener("DOMContentLoaded", () => {
+    const enhancement = document.getElementById("enhancement")
     enhancement.style.display = "none"
 })

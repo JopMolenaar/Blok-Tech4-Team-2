@@ -298,6 +298,12 @@ app.get("/voorkeuren", requireLogin, async (req, res) => {
 
 app.get("/products", async (req, res) => {
     try {
+        if (!req.session.gebruikersnaam) {
+            // Als er geen gebruikersnaam is in de sessie, betekent dit dat er niemand is ingelogd
+            console.log("Gebruiker niet ingelogd")
+            return res.render("notfound")
+        }
+
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
 
         // Zoek de gebruiker in de database op basis van de gebruikersnaam
@@ -326,19 +332,19 @@ app.get("/products", async (req, res) => {
             const producten = await Product.find(query)
 
             // Stuur de producten als respons naar de client
-            res.render("products", {
+            return res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
         } else {
+            //dit is wanneer de gebruiker niet gevonden is in de database
             console.log("Gebruiker niet gevonden")
-            res.render("gebruiker-niet-gevonden")
+            return res.render("gebruiker-niet-gevonden")
         }
     } catch (error) {
         console.error(error)
-
-        // Als er een fout optreedt, wordt deze hier afgehandeld
-        // De fout wordt afgedrukt en een 500-statuscode en een foutmelding worden naar de client gestuurd
-        res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
+        // wanneer er een fout is bij het ophalen van producten uit de database
+        //500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
+        return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
     } finally {
         console.log("Alle producten zijn opgehaald")
     }
