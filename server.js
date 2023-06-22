@@ -529,17 +529,9 @@ app.get("/producten-overzicht/toevoegen", async (req, res) => {
 			const naam = req.session.adminUsername
 			Admin.findOne({ naam: naam }).then((admin) => {
 				console.log(admin)
-				if (admin) {
-					const findProducts = async () => {
-						// User is logged in as an admin, proceed to the next middleware
-						// Search for products
-						const products = await Product.find({})
-						res.render("admin-addProducts", {
-							product: products.map((product) => product.toJSON()),
-						})
-					}
-					findProducts()
-				} else {
+				if (admin) { 
+					res.render("admin-addProducts")
+				} else { 
 					// User is not logged in as an admin, redirect to the login page
 					res.redirect("/admin-login")
 				}
