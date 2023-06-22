@@ -7,10 +7,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-}
 
-.wishlist div {
-    background-color: rgb(230, 219, 243);
+    div {
+        background-color: rgb(230, 219, 243);
+    }
 }
 
 .list-item {
