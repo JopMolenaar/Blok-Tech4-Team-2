@@ -5,7 +5,7 @@ const search = () => {
     animals.forEach((animal) => {
         const name = animal.getElementsByTagName("li")[1].textContent.toLowerCase()
         if (name.indexOf(input) !== -1) {
-            animal.style.display = "block"
+            animal.style.display = "flex"
         } else {
             animal.style.display = "none"
         }
