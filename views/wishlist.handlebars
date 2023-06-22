@@ -9,7 +9,6 @@
   </nav>
 </header>
 
-{{!-- {{#if wishlist && wishlist.length}} --}}
 <h2 id="h2wish">Jouw Wishlist</h2>
 <ul>
   <div class="wishlist">
@@ -23,12 +22,11 @@
           <p>Soort: {{this.soort}}</p>
           <p>Leeftijd: {{this.leeftijd}}</p>
         </div>
-        {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
+        <form action="/wishlist-delete/{{this._id}}" method="post">
+          <button type="submit" class="submitButton">Delete from wishlist</button>
+        </form>
       </div>
     {{/each}}
   </div>
 </ul>
 <a id="terugwish" href="/products">Terug</a>
-{{!-- {{else}}
-    <p>No movies in watchlist.</p>
-{{/if}} --}}

@@ -644,14 +644,14 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
 
 app.get("/wishlist", requireLogin, async (req, res) => {
     try {
-        const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
+        const user = await User.findOne({ gebruikersnaam: req.session.gebruikersnaam })
         if (!user) {
             throw new Error("User not found")
         }
-        let lol = user[0]
-        let iets2 = lol.wishlist
-        console.log(iets2)
-        const multipleP = await Product.find({ _id: { $in: iets2 } })
+        let userWishlist = user.wishlist
+        // let iets2 = lol.wishlist
+        console.log(userWishlist)
+        const multipleP = await Product.find({ _id: { $in: userWishlist } })
         console.log(multipleP)
 
         res.render("wishlist", { wishlist: multipleP.map((product) => product.toJSON()) })
@@ -667,7 +667,18 @@ app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
         console.log(userUpdate)
         res.redirect("/products")
     } catch (error) {
-        console.error("Error adding movie to wishlist:", error)
+        console.error("Error adding product to wishlist:", error)
+        res.status(500).json({ error: "Internal server error" })
+    }
+})
+
+app.post("/wishlist-delete/:id", requireLogin, async (req, res) => {
+    try {
+        const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $pull: { wishlist: req.params.id } })
+        console.log(userUpdate)
+        res.redirect("/wishlist")
+    } catch (error) {
+        console.error("Error deleting product from wishlist:", error)
         res.status(500).json({ error: "Internal server error" })
     }
 })
