@@ -11,6 +11,7 @@ $input-border-color: #dcd6f7;
 $placeholder-border-color: #98e6bf;
 
 $shadow-header: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+//voorkeuren dropdown
 .voorkeuren {
     height: 93%;
 }
@@ -105,7 +106,27 @@ header {
     font-size: 1.2em;
     margin: 1em auto;
 }
-
+//voorkeuren onderdeel
+#Preferences {
+    border: 0em solid #4e4c67;
+    background-color: #ffffff;
+    width: 13em;
+    padding: 1.25em;
+    display: block;
+    position: absolute;
+    left: 82%;
+    top: 32.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.4em;
+    h2 {
+        margin-top: 0em;
+    }
+    p {
+        font-size: 0.8em;
+        margin: 0;
+        padding-bottom: 1em;
+    }
+}
 //styling progressive enhancement
 noscript > p {
     text-align: center;
