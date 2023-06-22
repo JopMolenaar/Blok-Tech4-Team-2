@@ -1,0 +1,61 @@
+$color-white: #eeeeee;
+$color-black: #232323;
+$color-text-white: #eeeeee;
+$color-text-black: #232323;
+$color-parel-white: #ffffff;
+$color-hover-a: #cecece;
+// Input colors
+$color-input-normal: #4e4c67;
+$color-input-error: #f00;
+$color-input-expected: #98e6bf;
+$background-image: url("/images/paws.jpg");
+$primary-color: #242424;
+$secondary-color: #252154;
+$background-color: #221a4555;
+$google-hover-color: #e1e1e1;
+$google-input-border-color: #ffff;
+$input-border-color: #98e6bf;
+$color-primary-button: #dcd6f7;
+$color-primary-button-hover: #a6b1e1;
+$lack-of-color: #ffff;
+$error-color: #ca1e1e;
+
+#thankYouPage {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    align-items: center;
+    text-align: center;
+    background-image: $background-image;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    gap: 1rem;
+
+    section {
+        display: grid;
+        margin: auto;
+        width: 80%;
+        border: 0em solid $secondary-color;
+        border-radius: 0.4em;
+        background-color: $background-color;
+        color: $color-white;
+
+        //Blurry background styling
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(0.6em);
+            z-index: -1;
+            border-radius: 0.4em;
+        }
+    }
+
+    .submitButton {
+        margin-bottom: 1rem;
+    }
+}

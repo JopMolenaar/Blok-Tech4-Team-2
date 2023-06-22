@@ -19,5 +19,3 @@ while (maxDate.getDay() === 0 || maxDate.getDay() === 6) {
 
 const maxDateStr = maxDate.toISOString().split("T")[0]
 getDateInput.max = maxDateStr
-
-// This doesn't work :C

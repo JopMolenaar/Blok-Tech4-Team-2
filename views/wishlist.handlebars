@@ -1,5 +1,5 @@
 <header>
-    <img src="images/favicon.ico" alt="" loading="lazy"/>
+    <img src="images/favicon.ico" alt="" loading="lazy" />
     <nav>
         <a href="/products">Producten</a>
         <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
@@ -13,21 +13,21 @@
 {{!-- {{#if wishlist && wishlist.length}} --}}
 <h2 id="h2wish">Jouw Wishlist</h2>
 <ul>
-  <div class="wishlist">
-    {{#each wishlist}}
-      <div class="list-item">
-        <div>
-          <img src="/upload/{{this.img}}" alt="Picture" />
-        </div>
-        <div>
-          <h3>{{this.naam}}</h3>
-          <p>Soort: {{this.soort}}</p>
-          <p>Leeftijd: {{this.leeftijd}}</p>
-        </div>
-        {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
-      </div>
-    {{/each}}
-  </div>
+    <div class="wishlist">
+        {{#each wishlist}}
+            <div class="list-item">
+                <div>
+                    <img src="/upload/{{this.img}}" alt="Picture" />
+                </div>
+                <div>
+                    <h3>{{this.naam}}</h3>
+                    <p>Soort: {{this.soort}}</p>
+                    <p>Leeftijd: {{this.leeftijd}}</p>
+                </div>
+                {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
+            </div>
+        {{/each}}
+    </div>
 </ul>
 <a id="terugwish" href="/products">Terug</a>
 {{!-- {{else}}
