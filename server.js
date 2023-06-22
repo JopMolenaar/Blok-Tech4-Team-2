@@ -682,6 +682,17 @@ app.post("/wishlist-delete/:id", requireLogin, async (req, res) => {
     }
 })
 
+app.post("/product-delete/:id", requireLogin, async (req, res) => {
+    try {
+        const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $pull: { wishlist: req.params.id } })
+        console.log(userUpdate)
+        res.redirect("/producten-overzicht")
+    } catch (error) {
+        console.error("Error removing product from list:", error)
+        res.status(500).json({ error: "Internal server error" })
+    }
+})
+
 // 404
 //
 app.get("*", (req, res) => {
