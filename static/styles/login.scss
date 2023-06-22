@@ -181,6 +181,7 @@ $error-color: #CA1E1E;
   margin: 1em auto;
   font-weight: bold;
   width: 75%;
+  transition: none;
 
   &:hover {
     background-color: $color-primary-button-hover;
