@@ -1,26 +1,14 @@
-<header>
-    <img src="../images/favicon.ico" alt="" loading="lazy"/>
-    <nav>
-        <a href="/products">Producten</a>
-        <a href="/voorkeuren">Voorkeuren</a>
-        <a href="/wishlist">Wishlist</a>
-        <form id="logout" action="/logout" method="POST">
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
-</header>
+{{> header}}
 
 
 <main id="thankYouPage">
 
     {{#with person}}
     <section>
-            <h1>Bedankt, {{name}} dat u een afspraak wilt maken om {{../doggo.naam}} te ontmoeten. </h1>
+            <h1>Bedankt, {{{name}}} dat u een afspraak wilt maken om {{../doggo.naam}} te ontmoeten. </h1>
         
-    </section>
-
-    <section>
         <h2>We zien u graag op {{date}}, om {{time}}</h2>
     </section>
     {{/with}}
+
 </main>

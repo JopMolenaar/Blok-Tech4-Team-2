@@ -12,6 +12,7 @@ const { engine } = require("express-handlebars")
 const { ObjectId } = mongoose.Types
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const GoogleStrategy = require("passport-google-oauth20").Strategy
 
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
@@ -116,8 +117,9 @@ app.get("/", (req, res) => {
 app.get("/admin-login", async (req, res) => {
     const errorMessage = req.session.error
     req.session.error = "" // Clear the error message from the session
-    const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
-    res.render("admin-login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
+
+    const naam = req.session.loggedIn ? req.session.naam : "" // Get the username from the session
+    res.render("admin-login", { error: errorMessage, naam: naam })
 })
 
 app.get("/login", async (req, res) => {
@@ -136,34 +138,53 @@ app.get("/signUp", async (req, res) => {
     }
 })
 
+const admin = new mongoose.Schema({
+    naam: String,
+    wachtwoord: String,
+})
+
+const Admin = mongoose.model("Admin", admin, "admins")
+
 // Admin login
 app.post("/admin-login", (req, res) => {
     const { gebruikersnaam, wachtwoord } = req.body
-    const adminUsername = process.env.ADMIN_USERNAME
-    const adminPassword = process.env.ADMIN_PASSWORD
-
-    console.log("Login username:", gebruikersnaam)
-
-    // Check if the provided username and password match the admin credentials
-    if (gebruikersnaam === adminUsername && wachtwoord === adminPassword) {
-        console.log("Admin login successful")
-
-        // Set loggedIn session variable to true for admin
-        req.session.loggedIn = true
-        req.session.gebruikersnaam = gebruikersnaam
-        req.session.save(() => {
-            console.log("Session saved")
-            res.redirect("/producten-overzicht")
+    Admin.findOne({ naam: gebruikersnaam })
+        .then((admin) => {
+            console.log(admin.naam)
+            if (gebruikersnaam === admin.naam) {
+                console.log("Admin login successful")
+                bcrypt.compare(wachtwoord, admin.wachtwoord, (err, result) => {
+                    console.log(result)
+                    if (result) {
+                        console.log("Password matched")
+                        // Check if the provided username and password match the admin credentials
+                        // Set loggedIn session variable to true for admin
+                        req.session.loggedIn = true
+                        req.session.adminUsername = gebruikersnaam
+                        req.session.save(() => {
+                            console.log("Session saved")
+                            res.redirect("/producten-overzicht")
+                        })
+                    } else {
+                        console.log("Password did not match")
+                        // Password does not match
+                        req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+                        res.redirect("/admin-login")
+                    }
+                })
+            } else {
+                console.log("Admin login failed")
+                // Admin login failed
+                req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+                res.redirect("/admin-login")
+            }
         })
-    } else {
-        console.log("Admin login failed")
-
-        // Admin login failed
-        req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-        res.redirect("/admin-login")
-    }
+        .catch((error) => {
+            console.error("Error admin niet gevonden:", error)
+            req.session.error = "Inloggen onsuccesvol"
+            res.redirect("/login")
+        })
 })
-
 app.post("/admin-logout", (req, res) => {
     req.session.destroy()
     res.redirect("/admin-login")
@@ -269,7 +290,7 @@ app.post("/signUp", (req, res) => {
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/voorkeuren")
+                res.redirect("/products")
             })
         })
         .catch((error) => {
@@ -405,24 +426,58 @@ app.get("/products", async (req, res) => {
 
 // Admin pagina's
 // Middleware function to check if the user is logged in as an admin
-const requireAdminLogin = (req, res, next) => {
-    if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
-        // User is logged in as an admin, proceed to the next middleware
-        next()
+const requireAdminLogin = async (req, res, next) => {
+    if (req.session.loggedIn) {
+        const naam = req.session.naam
+        console.log(naam)
+        // Check if the user is logged in as an admin
+        await Admin.findOne({ naam: naam }, (err, admin) => {
+            console.log(admin)
+            console.log(err)
+            console.log(naam)
+            if (err) {
+                console.error("Error finding admin:", err)
+                res.redirect("/admin-login")
+            } else if (admin) {
+                // User is logged in as an admin, proceed to the next middleware
+                next()
+            } else {
+                // User is not logged in as an admin, redirect to the login page
+                res.redirect("/admin-login")
+            }
+        })
     } else {
-        // User is not logged in as an admin, redirect to the login page
+        // User is not logged in, redirect to the login page
         res.redirect("/admin-login")
     }
 }
 
 // Route for "/producten-overzicht" accessible only to logged-in admins
-app.get("/producten-overzicht", requireAdminLogin, async (req, res) => {
+app.get("/producten-overzicht", async (req, res) => {
     try {
-        // Search for products
-        const products = await Product.find({})
-        res.render("admin-overzicht", {
-            product: products.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProducts = async () => {
+                        // User is logged in as an admin, proceed to the next middleware
+                        // Search for products
+                        const products = await Product.find({})
+                        res.render("admin-overzicht", {
+                            product: products.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProducts()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
@@ -539,7 +594,27 @@ app.get("/producten-overzicht/detail/:id", async (req, res) => {
 
 // add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
-    res.render("admin-addProducts")
+    try {
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    res.render("admin-addProducts")
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("Got all products for admin")
+    }
 })
 
 // voorkeuren pagina
@@ -594,6 +669,12 @@ app.get("/confirm-form/:id", async (req, res) => {
 })
 
 //Post the form information
+const doggo = {
+    naam: "Barry",
+    soort: "Golden retriever",
+    leeftijd: "1",
+    beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+}
 app.post("/meet", async (req, res, next) => {
     try {
         const person = {
@@ -607,9 +688,8 @@ app.post("/meet", async (req, res, next) => {
     }
 })
 
-const GoogleStrategy = require("passport-google-oauth20").Strategy
-const GOOGLE_CLIENT_ID = "593422950502-97fr9pua64objfd3htu6n4u4oa6i2usm.apps.googleusercontent.com"
-const GOOGLE_CLIENT_SECRET = "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"
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 
 // Configure Passport to use the Google strategy
 passport.use(
