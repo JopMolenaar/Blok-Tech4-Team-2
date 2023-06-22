@@ -126,6 +126,7 @@
   margin: 1em auto;
   font-weight: bold;
   width: 75%;
+  transition: none;
   background-image: url("/images/google.png");
   background-repeat: no-repeat;
   background-position: left center;

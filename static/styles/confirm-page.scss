@@ -26,16 +26,14 @@ $error-color: #ca1e1e;
     align-items: center;
     text-align: center;
     background-image: $background-image;
+    background-image: repeat;
     background-size: cover;
-    background-position: center;
-    gap: 1rem;
 
     section {
         display: grid;
         margin: auto;
         width: 80%;
         border: 0em solid $secondary-color;
-        border-radius: 0.4em;
         background-color: $background-color;
         color: $color-white;
 
@@ -49,21 +47,13 @@ $error-color: #ca1e1e;
             height: 100%;
             backdrop-filter: blur(0.6em);
             z-index: -1;
-            border-radius: 0.4em;
         }
     }
-    label {
-        display: block;
-        font-weight: bold;
-        font-size: 1em;
-        margin: 0;
-        text-align: center;
-    }
 
-    input[type="name"],
-    input[type="phone"],
+    input[type="text"],
+    input[type="tel"],
     input[type="date"],
-    input[type="tim"],
+    input[type="time"],
     select {
         border: 0.01em solid $input-border-color;
         border-radius: 0.1875em;
@@ -100,20 +90,8 @@ $error-color: #ca1e1e;
         border-style: solid;
     }
 
-    input:required:-moz-placeholder-shown {
-        border-color: $input-border-color;
-        border-width: 0.1em;
-        border-style: solid;
-    }
-
-    input:required:-ms-input-placeholder {
-        border-color: $input-border-color;
-        border-width: 0.2em;
-        border-style: solid;
-    }
-
-    input:required:valid,
-    input:required:placeholder-shown {
+    select:required:valid,
+    input:required:valid {
         border-color: $input-border-color;
         border-width: 0.2em;
         border-style: solid;
@@ -131,7 +109,7 @@ ul {
     gap: 2rem;
 
     img {
-        width: 100%;
+        width: 15rem;
         height: auto;
         border-radius: 0.4em;
     }

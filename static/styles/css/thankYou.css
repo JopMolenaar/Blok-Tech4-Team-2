@@ -1,0 +1,35 @@
+#thankYouPage {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  align-items: center;
+  text-align: center;
+  background-image: url("/images/paws.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  gap: 1rem;
+}
+#thankYouPage section {
+  display: grid;
+  margin: auto;
+  width: 80%;
+  border: 0em solid #252154;
+  border-radius: 0.4em;
+  background-color: rgba(34, 26, 69, 0.3333333333);
+  color: #eeeeee;
+}
+#thankYouPage section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.6em);
+  z-index: -1;
+  border-radius: 0.4em;
+}
+#thankYouPage .submitButton {
+  margin-bottom: 1rem;
+}

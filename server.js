@@ -12,6 +12,7 @@ const { engine } = require("express-handlebars")
 const { ObjectId } = mongoose.Types
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const GoogleStrategy = require("passport-google-oauth20").Strategy
 
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
@@ -116,8 +117,9 @@ app.get("/", (req, res) => {
 app.get("/admin-login", async (req, res) => {
     const errorMessage = req.session.error
     req.session.error = "" // Clear the error message from the session
-    const gebruikersnaam = req.session.loggedIn ? req.session.gebruikersnaam : "" // Get the username from the session
-    res.render("admin-login", { error: errorMessage, gebruikersnaam: gebruikersnaam })
+
+    const naam = req.session.loggedIn ? req.session.naam : "" // Get the username from the session
+    res.render("admin-login", { error: errorMessage, naam: naam })
 })
 
 app.get("/login", async (req, res) => {
@@ -136,49 +138,57 @@ app.get("/signUp", async (req, res) => {
     }
 })
 
+const admin = new mongoose.Schema({
+    naam: String,
+    wachtwoord: String,
+})
+
+const Admin = mongoose.model("Admin", admin, "admins")
+
 // Admin login
 app.post("/admin-login", (req, res) => {
     const { gebruikersnaam, wachtwoord } = req.body
-    const adminUsername = process.env.ADMIN_USERNAME
-    const adminPassword = process.env.ADMIN_PASSWORD
-
-    console.log("Login username:", gebruikersnaam)
-
-    // Check if the provided username and password match the admin credentials
-    if (gebruikersnaam === adminUsername && wachtwoord === adminPassword) {
-        console.log("Admin login successful")
-
-        // Set loggedIn session variable to true for admin
-        req.session.loggedIn = true
-        req.session.gebruikersnaam = gebruikersnaam
-        req.session.save(() => {
-            console.log("Session saved")
-            res.redirect("/producten-overzicht")
+    Admin.findOne({ naam: gebruikersnaam })
+        .then((admin) => {
+            console.log(admin.naam)
+            if (gebruikersnaam === admin.naam) {
+                console.log("Admin login successful")
+                bcrypt.compare(wachtwoord, admin.wachtwoord, (err, result) => {
+                    console.log(result)
+                    if (result) {
+                        console.log("Password matched")
+                        // Check if the provided username and password match the admin credentials
+                        // Set loggedIn session variable to true for admin
+                        req.session.loggedIn = true
+                        req.session.adminUsername = gebruikersnaam
+                        req.session.save(() => {
+                            console.log("Session saved")
+                            res.redirect("/producten-overzicht")
+                        })
+                    } else {
+                        console.log("Password did not match")
+                        // Password does not match
+                        req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+                        res.redirect("/admin-login")
+                    }
+                })
+            } else {
+                console.log("Admin login failed")
+                // Admin login failed
+                req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
+                res.redirect("/admin-login")
+            }
         })
-    } else {
-        console.log("Admin login failed")
-
-        // Admin login failed
-        req.session.error = "Gebruikersnaam of wachtwoord ongeldig"
-        res.redirect("/admin-login")
-    }
+        .catch((error) => {
+            console.error("Error admin niet gevonden:", error)
+            req.session.error = "Inloggen onsuccesvol"
+            res.redirect("/login")
+        })
 })
-
 app.post("/admin-logout", (req, res) => {
     req.session.destroy()
     res.redirect("/admin-login")
 })
-
-//middleware die checkt of de gebruiker ingelogd is
-const requireLogin = (req, res, next) => {
-    if (req.session.loggedIn) {
-        // User is logged in, proceed to the next middleware
-        next()
-    } else {
-        // User is not logged in, redirect to the login page
-        res.redirect("/login")
-    }
-}
 
 // Regular user login
 app.post("/login", (req, res) => {
@@ -292,15 +302,43 @@ app.post("/signUp", (req, res) => {
         })
 })
 
-app.get("/voorkeuren", requireLogin, async (req, res) => {
-    res.render("voorkeuren")
+//voorkeuren pagina
+app.get("/voorkeuren", async (req, res) => {
+    try {
+        const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
+
+        // Zoek de gebruiker in de database op basis van de gebruikersnaam
+        const gebruiker = await User.findOne({ gebruikersnaam })
+
+        if (gebruiker) {
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Je haalt de voorkeuren op uit het gebruikersobject
+
+            console.log("Ingelogde gebruiker:", gebruikersnaam)
+            console.log("Energielevel:", energielevel)
+            console.log("Leefstijl:", leefstijl)
+            console.log("Grootte:", grootte)
+            console.log("Slaapritme:", slaapritme)
+
+            res.render("voorkeuren", { energielevel, leefstijl, grootte, slaapritme })
+        } else {
+            console.log("Gebruiker niet gevonden")
+        }
+    } catch (error) {
+        console.error("Fout bij het ophalen van gebruikersgegevens:", error)
+    }
 })
 
-// normale gebruikers
-app.get("/products", requireLogin, async (req, res) => {
+app.get("/products", async (req, res) => {
     try {
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
-        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+
+        // Controleer of er een gebruiker is ingelogd
+        if (!gebruikersnaam) {
+            console.log("Gebruiker niet ingelogd")
+            return res.render("notfound")
+        }
+
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoek de gebruiker in de database op basis van de gebruikersnaam
         if (gebruiker) {
             const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
 
@@ -313,8 +351,7 @@ app.get("/products", requireLogin, async (req, res) => {
             // Stel de query samen met behulp van de voorkeuren van de gebruiker
             const query = {
                 $or: [
-                    //er worden meerdere voorwaarden(4) gecombineert. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
-
+                    // Er worden meerdere voorwaarden (4) gecombineerd. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
                     { "eigenschappen.energielevel": energielevel },
                     { "eigenschappen.leefstijl": leefstijl },
                     { "eigenschappen.grootte": grootte },
@@ -329,41 +366,118 @@ app.get("/products", requireLogin, async (req, res) => {
             return res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
-        } else {
-            //dit is wanneer de gebruiker niet gevonden is in de database
-            console.log("Gebruiker niet gevonden")
-            return res.render("gebruiker-niet-gevonden")
         }
     } catch (error) {
         console.error(error)
-        // wanneer er een fout is bij het ophalen van producten uit de database
-        //500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
+        // Wanneer er een fout is bij het ophalen van producten uit de database
+        // 500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
         return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
     } finally {
         console.log("Alle producten zijn opgehaald")
     }
 })
 
+// normale gebruikers
+// app.get("/products", async (req, res) => {
+//     try {
+//         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+//         const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+//         if (gebruiker) {
+//             const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
+
+//             console.log("Ingelogde gebruiker:", gebruikersnaam)
+//             console.log("Energielevel:", energielevel)
+//             console.log("Leefstijl:", leefstijl)
+//             console.log("Grootte:", grootte)
+//             console.log("Slaapritme:", slaapritme)
+
+//             // Stel de query samen met behulp van de voorkeuren van de gebruiker
+//             const query = {
+//                 $or: [
+//                     // Er worden meerdere voorwaarden (4) gecombineerd. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
+//                     { "eigenschappen.energielevel": energielevel },
+//                     { "eigenschappen.leefstijl": leefstijl },
+//                     { "eigenschappen.grootte": grootte },
+//                     { "eigenschappen.slaapritme": slaapritme },
+//                 ],
+//             }
+
+//             // Zoek producten in de database die voldoen aan de query
+//             const producten = await Product.find(query)
+
+//             // Stuur de producten als respons naar de client
+//             return res.render("products", {
+//                 product: producten.map((product) => product.toJSON()),
+//             })
+//         } else {
+//             // Dit is wanneer de gebruiker niet gevonden is in de database
+//             console.log("Gebruiker niet gevonden")
+//             return res.render("notfound")
+//         }
+//     } catch (error) {
+//         console.error(error)
+//         // Wanneer er een fout is bij het ophalen van producten uit de database
+//         // 500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
+//         return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
+//     } finally {
+//         console.log("Alle producten zijn opgehaald")
+//     }
+// })
+
 // Admin pagina's
 // Middleware function to check if the user is logged in as an admin
-const requireAdminLogin = (req, res, next) => {
-    if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
-        // User is logged in as an admin, proceed to the next middleware
-        next()
+const requireAdminLogin = async (req, res, next) => {
+    if (req.session.loggedIn) {
+        const naam = req.session.naam
+        console.log(naam)
+        // Check if the user is logged in as an admin
+        await Admin.findOne({ naam: naam }, (err, admin) => {
+            console.log(admin)
+            console.log(err)
+            console.log(naam)
+            if (err) {
+                console.error("Error finding admin:", err)
+                res.redirect("/admin-login")
+            } else if (admin) {
+                // User is logged in as an admin, proceed to the next middleware
+                next()
+            } else {
+                // User is not logged in as an admin, redirect to the login page
+                res.redirect("/admin-login")
+            }
+        })
     } else {
-        // User is not logged in as an admin, redirect to the login page
+        // User is not logged in, redirect to the login page
         res.redirect("/admin-login")
     }
 }
 
 // Route for "/producten-overzicht" accessible only to logged-in admins
-app.get("/producten-overzicht", requireAdminLogin, async (req, res) => {
+app.get("/producten-overzicht", async (req, res) => {
     try {
-        // Search for products
-        const products = await Product.find({})
-        res.render("admin-overzicht", {
-            product: products.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProducts = async () => {
+                        // User is logged in as an admin, proceed to the next middleware
+                        // Search for products
+                        const products = await Product.find({})
+                        res.render("admin-overzicht", {
+                            product: products.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProducts()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
@@ -480,7 +594,27 @@ app.get("/producten-overzicht/detail/:id", async (req, res) => {
 
 // add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
-    res.render("admin-addProducts")
+    try {
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    res.render("admin-addProducts")
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("Got all products for admin")
+    }
 })
 
 // voorkeuren pagina
@@ -516,33 +650,8 @@ app.post("/voorkeuren", (req, res) => {
         })
 })
 
-app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
-    try {
-        const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
-
-        // Zoek de gebruiker in de database op basis van de gebruikersnaam
-        const gebruiker = await User.findOne({ gebruikersnaam })
-
-        if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // je haalt de voorkeuren op uit het gebruikersobject
-
-            console.log("Ingelogde gebruiker:", gebruikersnaam)
-            console.log("Energielevel:", energielevel)
-            console.log("Leefstijl:", leefstijl)
-            console.log("Grootte:", grootte)
-            console.log("Slaapritme:", slaapritme)
-
-            res.render("voorkeuren-opgeslagen", { energielevel, leefstijl, grootte, slaapritme })
-        } else {
-            console.log("Gebruiker niet gevonden")
-        }
-    } catch (error) {
-        console.error("Fout bij het ophalen van gebruikersgegevens:", error)
-    }
-})
-
 // Confirmation page
-app.get("/confirm-form/:id", requireLogin, async (req, res) => {
+app.get("/confirm-form/:id", async (req, res) => {
     try {
         // zoekt product op id
         const products = await Product.findById(req.params.id)
@@ -560,6 +669,12 @@ app.get("/confirm-form/:id", requireLogin, async (req, res) => {
 })
 
 //Post the form information
+const doggo = {
+    naam: "Barry",
+    soort: "Golden retriever",
+    leeftijd: "1",
+    beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+}
 app.post("/meet", async (req, res, next) => {
     try {
         const person = {
@@ -573,9 +688,8 @@ app.post("/meet", async (req, res, next) => {
     }
 })
 
-const GoogleStrategy = require("passport-google-oauth20").Strategy
-const GOOGLE_CLIENT_ID = "593422950502-97fr9pua64objfd3htu6n4u4oa6i2usm.apps.googleusercontent.com"
-const GOOGLE_CLIENT_SECRET = "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"
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 
 // Configure Passport to use the Google strategy
 passport.use(
@@ -641,7 +755,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
     res.redirect("/products")
 })
 
-app.get("/wishlist", requireLogin, async (req, res) => {
+app.get("/wishlist", async (req, res) => {
     try {
         const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
         if (!user) {
@@ -660,7 +774,7 @@ app.get("/wishlist", requireLogin, async (req, res) => {
     }
 })
 
-app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
+app.post("/wishlist-add/:id", async (req, res) => {
     try {
         const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $push: { wishlist: req.params.id } })
         console.log(userUpdate)
