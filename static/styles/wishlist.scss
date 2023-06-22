@@ -1,26 +1,26 @@
 #h2wish {
     text-align: center;
     font-size: 2em;
-  }
-  
-  .wishlist {
+}
+
+.wishlist {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    
+
     div {
-      background-color: rgb(230, 219, 243);
+        background-color: rgb(230, 219, 243);
     }
-  }
-  
-  .list-item {
+}
+
+.list-item {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  #terugwish {
+}
+
+#terugwish {
     position: fixed;
     bottom: 1em;
     left: 1em;
     color: black;
-  }  
+}

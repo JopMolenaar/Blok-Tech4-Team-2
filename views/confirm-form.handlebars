@@ -13,6 +13,7 @@
     <section class="message">
         {{#each doggo}}
             <h1>Wat fijn dat u {{this.naam}} heeft gevonden!</h1>
+            {{! foto dier }}
 
             <ul class="dogContainer">
                 <li class="liIMG"><img src="../upload/{{this.img}}" alt="dog Barry" /></li>
@@ -28,7 +29,6 @@
         <p>Graag willen we wat gegevens van u zodat we een afspraak kunnen maken voor een ontmoeting.</p>
     </section>
 
-    <section>
     <form class="confirm" method="post" action="/meet">
 
         <div class="formName">
@@ -55,8 +55,7 @@
             <input class="submitButton" type="submit" value="Maak uw afspraak" required />
         </div>
     </form>
-<script src="/js/confirm-date.js"></script>
 
 </main>
 
-<script src="/js/gulp-js/confirm-date.js"></script>
+<script src="/js/confirm-time.js"></script>

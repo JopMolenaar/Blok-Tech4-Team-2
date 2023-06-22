@@ -1,115 +1,181 @@
-const jsOff = (document.getElementById("javascriptOff").style.display = "none"),
-    rangeInput = document.querySelectorAll(".range-input input"),
-    priceInput = document.querySelectorAll(".price-input input"),
-    progress = document.querySelector(".slider .progress"),
-    items = document.querySelectorAll("#productpage > ul > li")
+// progressive enhancement
+const jsOff = (document.getElementById("javascriptOff").style.display = "none")
+
+// slider
+const rangeInput = document.querySelectorAll(".range-input input")
+const priceInput = document.querySelectorAll(".price-input input")
+const progress = document.querySelector(".slider .progress")
+const items = document.querySelectorAll(`#productpage > ul > li`)
+
 let lastAgeRange = []
-for (let e = 0; e <= 99; e++) lastAgeRange.push(e)
+for (let i = 0; i <= 99; i++) {
+    lastAgeRange.push(i)
+}
 let gap = 1
-rangeInput.forEach((e) => {
-    e.addEventListener("input", (e) => {
-        var r = parseInt(rangeInput[0].value),
-            a = parseInt(rangeInput[1].value)
-        if (a - r < gap) "range-min" === e.target.classname ? (rangeInput[0].value = a - gap) : (rangeInput[1].value = r + gap)
-        else {
-            ;(priceInput[0].value = r),
-                (priceInput[1].value = a),
-                (progress.style.left = (r / rangeInput[0].max) * 99 + "%"),
-                (progress.style.right = 99 - (a / rangeInput[1].max) * 99 + "%")
-            let t = []
-            for (let e = priceInput[0].value; e <= priceInput[1].value; e++) t.push(e)
-            ;(lastAgeRange = t),
-                items.forEach((e) => {
-                    ;(e.style.display = "none"),
-                        t.forEach((e) => {
-                            const r = document.querySelectorAll("._" + e)
-                            0 < activeFilter.length
-                                ? activeFilter.forEach((e) => {
-                                      document.querySelectorAll("." + e).forEach((t) => {
-                                          r.forEach((e) => {
-                                              t === e && (t.style.display = "grid")
-                                          })
-                                      })
-                                  })
-                                : r.forEach((e) => {
-                                      null != e && (e.style.display = "grid")
-                                  })
+
+// function that filters and moves the value bar on the frontend
+rangeInput.forEach((input) => {
+    input.addEventListener("input", (e) => {
+        let minVal = parseInt(rangeInput[0].value)
+        let maxVal = parseInt(rangeInput[1].value)
+        // min value is always less then max value
+        if (maxVal - minVal < gap) {
+            if (e.target.classname === "range-min") {
+                rangeInput[0].value = maxVal - gap
+            } else {
+                rangeInput[1].value = minVal + gap
+            }
+        } else {
+            // filter
+            priceInput[0].value = minVal
+            priceInput[1].value = maxVal
+            progress.style.left = (minVal / rangeInput[0].max) * 99 + "%"
+            progress.style.right = 99 - (maxVal / rangeInput[1].max) * 99 + "%"
+            let list = []
+            for (let i = priceInput[0].value; i <= priceInput[1].value; i++) {
+                list.push(i)
+            }
+            lastAgeRange = list
+            items.forEach((item) => {
+                item.style.display = "none"
+                list.forEach((number) => {
+                    const activeItems = document.querySelectorAll(`._${number}`)
+                    if (activeFilter.length > 0) {
+                        activeFilter.forEach((item) => {
+                            const alreadyActive = document.querySelectorAll(`.${item}`)
+                            alreadyActive.forEach((item) => {
+                                activeItems.forEach((activeItem) => {
+                                    if (item === activeItem) {
+                                        // als het is aangechecked en binnen de leeftijd valt
+                                        item.style.display = "grid"
+                                    }
+                                })
+                            })
                         })
+                    } else {
+                        activeItems.forEach((item) => {
+                            if (item != undefined) {
+                                item.style.display = "grid"
+                            }
+                        })
+                    }
                 })
+            })
         }
     })
-}),
-    priceInput.forEach((e) => {
-        e.addEventListener("input", (e) => {
-            var t = parseInt(priceInput[0].value),
-                r = parseInt(priceInput[1].value)
-            let a = []
-            for (let e = priceInput[0].value; e <= priceInput[1].value; e++) a.push(e)
-            ;(lastAgeRange = a),
-                items.forEach((e) => {
-                    ;(e.style.display = "none"),
-                        a.forEach((e) => {
-                            const r = document.querySelectorAll("._" + e)
-                            0 < activeFilter.length
-                                ? activeFilter.forEach((e) => {
-                                      document.querySelectorAll("." + e).forEach((t) => {
-                                          r.forEach((e) => {
-                                              t === e && (t.style.display = "grid")
-                                          })
-                                      })
-                                  })
-                                : r.forEach((e) => {
-                                      null != e && (e.style.display = "grid")
-                                  })
+})
+// function that filters (does the same as the above) bu is for the number input (moves the value bar too)
+priceInput.forEach((input) => {
+    input.addEventListener("input", (e) => {
+        let minVal = parseInt(priceInput[0].value)
+        let maxVal = parseInt(priceInput[1].value)
+        let list = []
+        for (let i = priceInput[0].value; i <= priceInput[1].value; i++) {
+            list.push(i)
+        }
+        lastAgeRange = list
+        items.forEach((item) => {
+            item.style.display = "none"
+            list.forEach((number) => {
+                const activeItems = document.querySelectorAll(`._${number}`)
+                if (activeFilter.length > 0) {
+                    activeFilter.forEach((item) => {
+                        const alreadyActive = document.querySelectorAll(`.${item}`)
+                        alreadyActive.forEach((item) => {
+                            activeItems.forEach((activeItem) => {
+                                if (item === activeItem) {
+                                    // als het is aangchecked en binnen de leeftijd valt
+                                    item.style.display = "grid"
+                                }
+                            })
                         })
-                }),
-                r - t >= gap &&
-                    r <= 99 &&
-                    ("input-min" === e.target.classname
-                        ? ((rangeInput[0].value = t), (progress.style.left = (t / rangeInput[0].max) * 99 + "%"))
-                        : ((rangeInput[1].value = r), (progress.style.right = 99 - (r / rangeInput[1].max) * 99 + "%")))
-        })
-    })
-const inputsCheck = document.querySelectorAll("#productpage section:nth-child(3) input[type=checkbox]")
-let isItEvenArray = [],
-    activeFilter = [],
-    optionValueArray =
-        (inputsCheck.forEach((t) => {
-            t.addEventListener("input", () => {
-                var e
-                isItEvenArray.push(t.value),
-                    isItEvenArray.filter((e) => e === t.value).length % 2 == 0
-                        ? -1 < (e = activeFilter.indexOf(t.value)) && activeFilter.splice(e, 1)
-                        : activeFilter.push(t.value),
-                    activeFilter.length < 1
-                        ? items.forEach((t) => {
-                              lastAgeRange.forEach((e) => {
-                                  document.querySelectorAll("._" + e).forEach((e) => {
-                                      t === e && (t.style.display = "grid")
-                                  })
-                              })
-                          })
-                        : (items.forEach((e) => {
-                              e.style.display = "none"
-                          }),
-                          activeFilter.forEach((e) => {
-                              const r = document.querySelectorAll("." + e)
-                              lastAgeRange.forEach((e) => {
-                                  document.querySelectorAll("._" + e).forEach((t) => {
-                                      r.forEach((e) => {
-                                          e === t && (e.style.display = "grid")
-                                      })
-                                  })
-                              })
-                          }))
+                    })
+                } else {
+                    activeItems.forEach((item) => {
+                        if (item != undefined) {
+                            item.style.display = "grid"
+                        }
+                    })
+                }
             })
-        }),
-        [])
+        })
+        if (maxVal - minVal >= gap && maxVal <= 99) {
+            if (e.target.classname === "input-min") {
+                rangeInput[0].value = minVal
+                progress.style.left = (minVal / rangeInput[0].max) * 99 + "%"
+            } else {
+                rangeInput[1].value = maxVal
+                progress.style.right = 99 - (maxVal / rangeInput[1].max) * 99 + "%"
+            }
+        }
+    })
+})
+// De bron van hierboven: https://www.youtube.com/watch?v=FShnKqPXknI deels de code gebruikt en verder aanpgast (onderandere het gedeelte waar ik rekening moest houden met de al aangevinkte producten)
+
+// filter functions
+const inputsCheck = document.querySelectorAll("#productpage section:nth-child(3) input[type=checkbox]")
+
+// filter function for all checkboxes + checks if option is clicked evenly or odd
+let isItEvenArray = []
+let activeFilter = []
+inputsCheck.forEach((input) => {
+    input.addEventListener("input", () => {
+        isItEvenArray.push(input.value)
+        const filter = isItEvenArray.filter((word) => word === input.value)
+        if (filter.length % 2 == 0) {
+            const index = activeFilter.indexOf(input.value)
+            if (index > -1) {
+                activeFilter.splice(index, 1)
+            }
+        } else {
+            activeFilter.push(input.value)
+        }
+
+        if (activeFilter.length < 1) {
+            items.forEach((item) => {
+                lastAgeRange.forEach((number) => {
+                    const activeItems = document.querySelectorAll(`._${number}`)
+                    activeItems.forEach((activeItem) => {
+                        if (item === activeItem) {
+                            // als het is aangchecked en binnen de leeftijd valt
+                            item.style.display = "grid"
+                        }
+                    })
+                })
+            })
+        } else {
+            items.forEach((item) => {
+                item.style.display = "none"
+            })
+            activeFilter.forEach((item) => {
+                const activeItems = document.querySelectorAll(`.${item}`)
+                lastAgeRange.forEach((number) => {
+                    const activeAge = document.querySelectorAll(`._${number}`)
+                    activeAge.forEach((activeItem) => {
+                        activeItems.forEach((item) => {
+                            if (item === activeItem) {
+                                // als het is aangchecked en binnen de leeftijd valt
+                                item.style.display = "grid"
+                            }
+                        })
+                    })
+                })
+            })
+        }
+    })
+})
+
+// deletes all double options
+let optionValueArray = []
 const fixOptions = () => {
-    inputsCheck.forEach((e) => {
-        var t = e.value,
-            t = t.charAt(0).toUpperCase() + t.slice(1)
-        optionValueArray.includes("" + t) && ((e.parentElement.style.display = "none"), (e.style.display = "none")), optionValueArray.push("" + t)
+    inputsCheck.forEach((input) => {
+        let theValue = input.value
+        const firstLetterCapOption = theValue.charAt(0).toUpperCase() + theValue.slice(1)
+        if (optionValueArray.includes(`${firstLetterCapOption}`)) {
+            input.parentElement.style.display = "none"
+            input.style.display = "none"
+        }
+        optionValueArray.push(`${firstLetterCapOption}`)
     })
 }
 fixOptions()
