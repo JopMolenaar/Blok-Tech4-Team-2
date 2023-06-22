@@ -1,12 +1,22 @@
 .voorkeuren {
   height: 93%;
 }
+.voorkeuren div {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  align-items: flex-start;
+}
 
 .background-image2 {
   background-image: url("../images/paws2.jpg");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 header {
@@ -22,12 +32,9 @@ header {
 #voorkeurenForm {
   border: 0em solid #4e4c67;
   background-color: #ffffff;
+  display: block;
   max-width: 25em;
   padding: 1.25em;
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 0.4em;
 }
@@ -96,10 +103,6 @@ header {
   background-color: #ffffff;
   width: 13em;
   padding: 1.25em;
-  display: block;
-  position: absolute;
-  left: 82%;
-  top: 32.5%;
   transform: translate(-50%, -50%);
   border-radius: 0.4em;
 }
