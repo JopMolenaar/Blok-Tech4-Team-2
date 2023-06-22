@@ -6,6 +6,7 @@ $color-parel-white: #ffffff;
 $color-hover-a: #cecece;
 $color-span: red;
 $shadow-header: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+$color-backgroundPurple: rgb(230, 219, 243);
 // Input colors
 $color-input-normal: #4e4c67;
 $color-input-error: #f00;
@@ -90,28 +91,6 @@ summary {
     padding: 1rem;
     width: fit-content;
     font-size: 1.4rem;
-}
-
-.buttonPrimary:hover,
-.submitButton:hover {
-    background-color: $color-primary-button-hover;
-}
-
-.buttonPrimary:active,
-.submitButton:active {
-    animation-name: fillButton;
-    animation-duration: 3s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes fillButton {
-    0% {
-        background-color: $color-primary-button-hover;
-    }
-    100% {
-        background-color: $color-input-normal;
-    }
 }
 
 .buttonPrimary:hover,

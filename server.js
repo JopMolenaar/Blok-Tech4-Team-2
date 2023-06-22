@@ -296,21 +296,13 @@ app.get("/voorkeuren", requireLogin, async (req, res) => {
     res.render("voorkeuren")
 })
 
-app.get("/products", async (req, res) => {
+// normale gebruikers
+app.get("/products", requireLogin, async (req, res) => {
     try {
-        if (!req.session.gebruikersnaam) {
-            // Als er geen gebruikersnaam is in de sessie, betekent dit dat er niemand is ingelogd
-            console.log("Gebruiker niet ingelogd")
-            return res.render("notfound")
-        }
-
         const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
-
-        // Zoek de gebruiker in de database op basis van de gebruikersnaam
-        const gebruiker = await User.findOne({ gebruikersnaam })
-
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
         if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal de voorkeuren uit het gebruikersobject
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
 
             console.log("Ingelogde gebruiker:", gebruikersnaam)
             console.log("Energielevel:", energielevel)
@@ -321,6 +313,8 @@ app.get("/products", async (req, res) => {
             // Stel de query samen met behulp van de voorkeuren van de gebruiker
             const query = {
                 $or: [
+                    //er worden meerdere voorwaarden(4) gecombineert. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
+
                     { "eigenschappen.energielevel": energielevel },
                     { "eigenschappen.leefstijl": leefstijl },
                     { "eigenschappen.grootte": grootte },
@@ -351,7 +345,6 @@ app.get("/products", async (req, res) => {
 })
 
 // Admin pagina's
-
 // Middleware function to check if the user is logged in as an admin
 const requireAdminLogin = (req, res, next) => {
     if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
@@ -549,32 +542,35 @@ app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
 })
 
 // Confirmation page
-app.get("/confirm", requireLogin, async (req, res) => {
-    const doggo = {
-        naam: "Barry",
-        soort: "Golden retriever",
-        leeftijd: "1",
-        beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+app.get("/confirm-form/:id", requireLogin, async (req, res) => {
+    try {
+        // zoekt product op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+
+        res.render("confirm-form", {
+            doggo: getItToJson.map((product) => product.toJSON()),
+        })
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("afspraak pagina geladen")
     }
+})
 
-    const today = new Date()
-    const weekdays = new Date()
-    weekdays.setDate(today.getDate() + 7)
-
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    if (today.getDay() === 5) {
-        weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
+//Post the form information
+app.post("/meet", async (req, res, next) => {
+    try {
+        const person = {
+            name: req.body.name,
+            date: req.body.date,
+            time: req.body.time,
+        }
+        res.render("confirm", { person, doggo })
+    } catch (err) {
+        next(err)
     }
-
-    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
-        weekdays.setDate(weekdays.getDate() + 1)
-    }
-
-    const weekdaysStr = weekdays.toISOString().split("T")[0]
-
-    res.render("confirm", { weekdaysStr, doggo })
 })
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy
