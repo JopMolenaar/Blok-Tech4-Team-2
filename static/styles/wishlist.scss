@@ -18,9 +18,13 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
+.list-item form {
+    grid-column: span 2;
+}
+
 #terugwish {
     position: fixed;
     bottom: 1em;
     left: 1em;
     color: black;
-}
+  }

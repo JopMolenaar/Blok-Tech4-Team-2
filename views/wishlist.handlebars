@@ -1,35 +1,33 @@
 <header>
-    <img src="images/favicon.ico" alt="" loading="lazy" />
-    <nav>
-        <a href="/products">Producten</a>
-        <a href="/voorkeuren">Voorkeuren</a>
-        <a href="/wishlist">Wishlist</a>
-        <form id="logout" action="/logout" method="POST">
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
+  <img src="images/favicon.ico" alt="" loading="lazy" />
+  <nav>
+    <a href="/products">Producten</a>
+    <a href="/voorkeuren">Voorkeuren</a>
+    <a href="/wishlist">Wishlist</a>
+    <form id="logout" action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </nav>
 </header>
 
-{{!-- {{#if wishlist && wishlist.length}} --}}
 <h2 id="h2wish">Jouw Wishlist</h2>
 <ul>
-    <div class="wishlist">
-        {{#each wishlist}}
-            <div class="list-item">
-                <div>
-                    <img src="/upload/{{this.img}}" alt="Picture" />
-                </div>
-                <div>
-                    <h3>{{this.naam}}</h3>
-                    <p>Soort: {{this.soort}}</p>
-                    <p>Leeftijd: {{this.leeftijd}}</p>
-                </div>
-                {{!-- <button class="delete-from-watchlist" data-movie-id="{{this._id}}">Delete from watchlist</button> --}}
-            </div>
-        {{/each}}
-    </div>
+  <div class="wishlist">
+    {{#each wishlist}}
+      <div class="list-item">
+        <div>
+          <img src="/upload/{{this.img}}" alt="Picture" />
+        </div>
+        <div>
+          <h3>{{this.naam}}</h3>
+          <p>Soort: {{this.soort}}</p>
+          <p>Leeftijd: {{this.leeftijd}}</p>
+        </div>
+        <form action="/wishlist-delete/{{this._id}}" method="post">
+          <button type="submit" class="submitButton">Delete from wishlist</button>
+        </form>
+      </div>
+    {{/each}}
+  </div>
 </ul>
 <a id="terugwish" href="/products">Terug</a>
-{{!-- {{else}}
-    <p>No movies in watchlist.</p>
-{{/if}} --}}
