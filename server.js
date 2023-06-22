@@ -560,6 +560,12 @@ app.get("/confirm-form/:id", requireLogin, async (req, res) => {
 })
 
 //Post the form information
+const doggo = {
+    naam: "Barry",
+    soort: "Golden retriever",
+    leeftijd: "1",
+    beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+}
 app.post("/meet", async (req, res, next) => {
     try {
         const person = {

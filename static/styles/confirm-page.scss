@@ -26,6 +26,7 @@ $error-color: #ca1e1e;
     align-items: center;
     text-align: center;
     background-image: $background-image;
+    background-repeat: repeat;
     background-size: cover;
     background-position: center;
     gap: 1rem;
@@ -60,10 +61,10 @@ $error-color: #ca1e1e;
         text-align: center;
     }
 
-    input[type="name"],
-    input[type="phone"],
+    input[type="text"],
+    input[type="tel"],
     input[type="date"],
-    input[type="tim"],
+    input[type="time"],
     select {
         border: 0.01em solid $input-border-color;
         border-radius: 0.1875em;
@@ -131,7 +132,7 @@ ul {
     gap: 2rem;
 
     img {
-        width: 100%;
+        width: 15rem;
         height: auto;
         border-radius: 0.4em;
     }
