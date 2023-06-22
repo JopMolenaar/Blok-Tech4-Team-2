@@ -6,11 +6,7 @@ const livereload = require("gulp-livereload")
 const bundleJS = require("gulp-uglify")
 
 gulp.task("bundleJS", function () {
-    return gulp
-        .src("./static/js/*.js")
-        .pipe(bundleJS())
-        .pipe(gulp.dest("./static/js/gulp-js"))
-        .pipe(livereload())
+    return gulp.src("./static/js/*.js").pipe(bundleJS()).pipe(gulp.dest("./static/js/gulp-js")).pipe(livereload())
 })
 
 gulp.task("sass", function () {
@@ -24,7 +20,8 @@ gulp.task("sass", function () {
 })
 gulp.task("watch", function () {
     livereload.listen() // Start livereload
-    gulp.watch("./static/styles/*.scss", gulp.series("sass", "bundleJS"))
+    gulp.watch("./static/styles/*.scss", gulp.series("sass"))
+    gulp.watch("./static/js/*.js", gulp.series("bundleJS"))
 })
 // Default Task
 gulp.task("default", gulp.parallel("watch", "sass", "bundleJS"))
