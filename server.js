@@ -386,32 +386,6 @@ app.get("/products", async (req, res) => {
 
 // Admin pagina's
 // Middleware function to check if the user is logged in as an admin
-const requireAdminLogin = async (req, res, next) => {
-    if (req.session.loggedIn) {
-        const naam = req.session.naam
-        console.log(naam)
-        // Check if the user is logged in as an admin
-        await Admin.findOne({ naam: naam }, (err, admin) => {
-            console.log(admin)
-            console.log(err)
-            console.log(naam)
-            if (err) {
-                console.error("Error finding admin:", err)
-                res.redirect("/admin-login")
-            } else if (admin) {
-                // User is logged in as an admin, proceed to the next middleware
-                next()
-            } else {
-                // User is not logged in as an admin, redirect to the login page
-                res.redirect("/admin-login")
-            }
-        })
-    } else {
-        // User is not logged in, redirect to the login page
-        res.redirect("/admin-login")
-    }
-}
-
 // Route for "/producten-overzicht" accessible only to logged-in admins
 app.get("/producten-overzicht", async (req, res) => {
     try {
@@ -515,36 +489,70 @@ const changeProduct = async (req, res) => {
 }
 
 // forms post requests: add en change
-app.post("/producten-overzicht/add", requireAdminLogin, upload.single("image"), addProduct)
-app.post("/producten-overzicht/change", requireAdminLogin, upload.single("image"), changeProduct)
+app.post("/producten-overzicht/add", upload.single("image"), addProduct)
+app.post("/producten-overzicht/change", upload.single("image"), changeProduct)
 
 // pas producten aan als admin
-app.get("/producten-overzicht/aanpassen/:id", requireAdminLogin, async (req, res) => {
+app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
     try {
-        // zoekt producten op id
-        const products = await Product.findById(req.params.id)
-        const getItToJson = []
-        getItToJson.push(products)
-        res.render("admin-aanpassen", {
-            product: getItToJson.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProduct = async () => {
+                        // zoekt producten op id
+                        const products = await Product.findById(req.params.id)
+                        const getItToJson = []
+                        getItToJson.push(products)
+                        res.render("admin-aanpassen", {
+                            product: getItToJson.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProduct()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
-        console.log("got product for admin")
+        console.log("Got all products for admin")
     }
 })
 
 // product detail pagina
 app.get("/producten-overzicht/detail/:id", async (req, res) => {
     try {
-        // zoekt producten op id
-        const products = await Product.findById(req.params.id)
-        const getItToJson = []
-        getItToJson.push(products)
-        res.render("product-detail", {
-            product: getItToJson.map((product) => product.toJSON()),
-        })
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    const findProduct = async () => {
+                        // zoekt producten op id
+                        const products = await Product.findById(req.params.id)
+                        const getItToJson = []
+                        getItToJson.push(products)
+                        res.render("product-detail", {
+                            product: getItToJson.map((product) => product.toJSON()),
+                        })
+                    }
+                    findProduct()
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
     } catch (error) {
         console.log(error)
     } finally {
