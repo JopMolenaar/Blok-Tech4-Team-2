@@ -111,6 +111,7 @@ $error-color: #CA1E1E;
     background-color: $color-primary-button-hover;
   }
 
+  //progressive enhancement input borders
   input:required:invalid {
     color: $secondary-color;
     border-color: $secondary-color;
