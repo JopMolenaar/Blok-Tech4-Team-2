@@ -1,164 +1,164 @@
-<body>
-    <header>
-        <img src="images/favicon.ico" alt="" loading="lazy" class="lazy-load"/>
-        <nav>
-            <a href="/products">Producten</a>
-            <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
-            <a href="/wishlist">Wishlist</a>
-            <form id="logout" action="/logout" method="POST">
-                <button type="submit">Logout</button>
-            </form>
-        </nav>
-    </header>
+<header>
+    <img src="images/favicon.ico" alt="" loading="lazy" class="lazy-load" />
+    <nav>
+        <a href="/products">Producten</a>
+        <a href="/voorkeuren-opgeslagen">Voorkeuren</a>
+        <a href="/wishlist">Wishlist</a>
+        <form id="logout" action="/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
 
-    <main id="productpage">
-        <section>
-            <h1>Ons aanbod</h1>
-        </section>
-        <ul>
-            {{#each product}}
-                <li
-                    class="{{this.eigenschappen.activiteit}}
-                        {{this.eigenschappen.leefstijl}}
-                        {{this.eigenschappen.grootte}}
-                        {{this.eigenschappen.dag}}
-                        {{this.soort}}
-                        _{{this.leeftijd}}"
-                >
-                    <a href="/producten-overzicht/detail/{{this._id}}">
+<main id="productpage">
+    <section>
+        <h1>Ons aanbod</h1>
+    </section>
+    <ul>
+        {{#each product}}
+            <li
+                class="{{this.eigenschappen.activiteit}}
+                    {{this.eigenschappen.leefstijl}}
+                    {{this.eigenschappen.grootte}}
+                    {{this.eigenschappen.dag}}
+                    {{this.soort}}
+                    _{{this.leeftijd}}"
+            >
+                <a href="/producten-overzicht/detail/{{this._id}}">
+                    <div>
+                        <img src="/upload/{{this.img}}" alt="Picture" />
+                    </div>
+                    <section>
+                        <h3 class="visually-hidden">Gegevens:</h3>
+
+                        <p>{{naam}}</p>
                         <div>
-                            <img src="/upload/{{this.img}}" alt="Picture" />
-                        </div>
-                        <section>
-                            <h3 class="visually-hidden">Gegevens:</h3>
-
-                            <p>{{naam}}</p>
                             <p>{{leeftijd}} jaar</p>
                             <p>{{this.soort}}</p>
-                            <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
-                        </section>
-                        {{#productInfo}}{{/productInfo}}
+                        </div>
+                        <p><b>Beschrijving:</b> {{this.beschrijving}}</p>
+                    </section>
+                    {{#productInfo}}{{/productInfo}}
 
-                        <section>
-                            <h4 class="visually-hidden">Eigenschappen:</h4>
-                            <ul>
-                                <li>
-                                    Is:
-                                    {{this.eigenschappen.activiteit}}
-                                </li>
-                                <li>
-                                    Buiten of binnen:
-                                    {{this.eigenschappen.leefstijl}}
-                                </li>
-                                <li>
-                                    Grootte:
-                                    {{this.eigenschappen.grootte}}
-                                </li>
-                                <li>
-                                    {{this.eigenschappen.dag}}
-                                    dieren
-                                </li>
-                            </ul>
-                        </section>
-                    </a>
-                </li>
+                    <section>
+                        <h4 class="visually-hidden">Eigenschappen:</h4>
+                        <ul>
+                            <li>
+                                Is:
+                                {{this.eigenschappen.activiteit}}
+                            </li>
+                            <li>
+                                Buiten of binnen:
+                                {{this.eigenschappen.leefstijl}}
+                            </li>
+                            <li>
+                                Grootte:
+                                {{this.eigenschappen.grootte}}
+                            </li>
+                            <li>
+                                {{this.eigenschappen.dag}}
+                                dieren
+                            </li>
+                        </ul>
+                    </section>
+                </a>
+            </li>
 
-            {{/each}}
-        </ul>
+        {{/each}}
+    </ul>
+    <section>
+
+        <h2>Filter products</h2>
+        <p id="javascriptOff">Turn on Javascript to use the filter function</p>
+
         <section>
-
-            <h2>Filter products</h2>
-            <p id="javascriptOff">Turn on Javascript to use the filter function</p>
-
-            <section>
-                <h3>Leeftijd range</h3>
-                <section class="price-input">
-                    <label>
-                        Min
-                        <input type="number" class="input-min" value="0" />
-                    </label>
-                    <span>-</span>
-                    <label>
-                        Max
-                        <input type="number" class="input-max" value="99" />
-                    </label>
-                </section>
-                <div class="slider">
-                    <div class="progress"></div>
-                </div>
-                <div class="range-input">
-                    <input type="range" class="range-min" min="0" max="100" value="0" />
-                    <input type="range" class="range-max" min="0" max="99" value="99" />
-                </div>
-            </section>
-            <section class="soort">
-                <h3>Soort</h3>
-                {{#each product}}
-                    <label>
-                        <input type="checkbox" name="soort" value="{{this.soort}}" />
-                        {{this.soort}}
-                    </label>
-                {{/each}}
-            </section>
-
-            <section>
-                <h3>Activiteit</h3>
-                <label for="">
-                    <input type="checkbox" name="activiteit" value="Actief" />
-                    Actief
+            <h3>Leeftijd range</h3>
+            <section class="price-input">
+                <label>
+                    Min
+                    <input type="number" class="input-min" value="0" />
                 </label>
-                <label for="">
-                    <input type="checkbox" name="activiteit" value="Rustig" />
-                    Rustig
+                <span>-</span>
+                <label>
+                    Max
+                    <input type="number" class="input-max" value="99" />
                 </label>
             </section>
-
-            <section>
-                <h3>Leefstijl</h3>
-                <label for="">
-                    <input type="checkbox" name="leefstijl" value="Binnen" />
-                    Binnen
+            <div class="slider">
+                <div class="progress"></div>
+            </div>
+            <div class="range-input">
+                <input type="range" class="range-min" min="0" max="100" value="0" />
+                <input type="range" class="range-max" min="0" max="99" value="99" />
+            </div>
+        </section>
+        <section class="soort">
+            <h3>Soort</h3>
+            {{#each product}}
+                <label>
+                    <input type="checkbox" name="soort" value="{{this.soort}}" />
+                    {{this.soort}}
                 </label>
-                <label for="">
-                    <input type="checkbox" name="leefstijl" value="Buiten" />
-                    Buiten
-                </label>
-                <label for="">
-                    <input type="checkbox" name="leefstijl" value="Beiden" />
-                    Beiden
-                </label>
-            </section>
-
-            <section>
-                <h3>Grootte</h3>
-                <label for="">
-                    <input type="checkbox" name="grootte" value="Klein" />
-                    Klein
-                </label>
-                <label for="">
-                    <input type="checkbox" name="grootte" value="Middel" />
-                    Middel
-                </label>
-                <label for="">
-                    <input type="checkbox" name="grootte" value="Groot" />
-                    Groot
-                </label>
-            </section>
-            <section>
-                <h3>Dag of s'nachts</h3>
-                <label for="">
-                    <input type="checkbox" name="dagnacht" value="Dag" />
-                    Overdag
-                </label>
-                <label for="">
-                    <input type="checkbox" name="dagnacht" value="Nacht" />
-                    S'nachts
-                </label>
-            </section>
+            {{/each}}
         </section>
 
-    </main>
+        <section>
+            <h3>Activiteit</h3>
+            <label for="">
+                <input type="checkbox" name="activiteit" value="Actief" />
+                Actief
+            </label>
+            <label for="">
+                <input type="checkbox" name="activiteit" value="Rustig" />
+                Rustig
+            </label>
+        </section>
 
-    <script src="/js/filter.js"></script>
-    <script src="/js/prEnhancement.js"></script>
-</body>
+        <section>
+            <h3>Leefstijl</h3>
+            <label for="">
+                <input type="checkbox" name="leefstijl" value="Binnen" />
+                Binnen
+            </label>
+            <label for="">
+                <input type="checkbox" name="leefstijl" value="Buiten" />
+                Buiten
+            </label>
+            <label for="">
+                <input type="checkbox" name="leefstijl" value="Beiden" />
+                Beiden
+            </label>
+        </section>
+
+        <section>
+            <h3>Grootte</h3>
+            <label for="">
+                <input type="checkbox" name="grootte" value="Klein" />
+                Klein
+            </label>
+            <label for="">
+                <input type="checkbox" name="grootte" value="Middel" />
+                Middel
+            </label>
+            <label for="">
+                <input type="checkbox" name="grootte" value="Groot" />
+                Groot
+            </label>
+        </section>
+        <section>
+            <h3>Dag of s'nachts</h3>
+            <label for="">
+                <input type="checkbox" name="dagnacht" value="Dag" />
+                Overdag
+            </label>
+            <label for="">
+                <input type="checkbox" name="dagnacht" value="Nacht" />
+                S'nachts
+            </label>
+        </section>
+    </section>
+
+</main>
+
+<script src="/js/gulp-js/filter.js"></script>
+<script src="/js/gulp-js/prEnhancement.js"></script>

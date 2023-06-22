@@ -36,6 +36,8 @@
         "gulp-clean-css": "^4.3.0",
         "gulp-livereload": "^4.0.2",
         "gulp-sass": "^5.1.0",
+        "gulp-uglify": "^3.0.2",
         "nodemon": "^2.0.22"
     }
+      
 }
