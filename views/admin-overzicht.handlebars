@@ -11,9 +11,16 @@
                     <li><img src="/upload/{{this.img}}" alt="Picture" /></li>
                     <li>{{this.naam}}</li>
                     <li>{{this.soort}}</li>
-                    <li><a href="/producten-overzicht/aanpassen/{{this._id}}"><img class="icon" src="../images/icons8-edit.svg"></a></li>
-                    <li><button id="delBtn"><img class="icon" src="../images/icons8-delete.svg"></button></li>
+                    <li><a href="/producten-overzicht/aanpassen/{{this._id}}"><img src="../images/icons8-edit.svg" class="icon"></a></li>
+                    <li>                
+                      <form action="/product-delete/{{this._id}}" method="post">
+                        <button type="submit" class="submitButton"><img class="icon" src="../images/icons8-delete.svg"></button>
+                      </form>
+                    </li>
                 </ul>
+                {{!-- <form action="/product-delete/{{this._id}}" method="post">
+                    <button type="submit" class="submitButton"><img class="icon" src="../images/icons8-delete.svg"></button>
+                </form> --}}
             {{/each}}
         </section>
     </div>
