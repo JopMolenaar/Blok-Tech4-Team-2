@@ -1,0 +1,1 @@
+const allButtons=document.querySelectorAll("#button"),formButtons=document.querySelectorAll('#input[type="submit"]');allButtons.forEach(t=>{t.addEventListener("click",()=>{this.classList.toggle("buttonPrimary:active")})}),formButtons.forEach(t=>{formbutton.addEventListener("click",()=>{this.classList.toggle("submitButton:active")})});
