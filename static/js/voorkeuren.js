@@ -1,1 +1,53 @@
-const energielevel=document.getElementById("energielevel"),leefstijl=document.getElementById("leefstijl"),grootte=document.getElementById("grootte"),slaapritme=document.getElementById("slaapritme"),nextButton=document.getElementById("nextButton"),dropdowns=document.querySelectorAll("select");let allDropdownsSelected=!1;const updateButton=()=>{allDropdownsSelected=!0,dropdowns.forEach(e=>{"--"===e.value&&(allDropdownsSelected=!1)}),nextButton.classList.toggle("selected",allDropdownsSelected)},updateText=(dropdowns.forEach(e=>{e.addEventListener("change",updateButton)}),nextButton.addEventListener("click",e=>{allDropdownsSelected||(e.preventDefault(),alert("Niet alle onderdelen zijn geselecteerd."))}),()=>{var e=document.getElementById("styleText1"),t=document.getElementById("styleText2"),n=document.getElementById("styleText3"),l=document.getElementById("styleText4");e.innerHTML="--"!==energielevel.value?"checked":"",t.innerHTML="--"!==leefstijl.value?"checked":"",n.innerHTML="--"!==grootte.value?"checked":"",l.innerHTML="--"!==slaapritme.value?"checked":""});energielevel.addEventListener("change",updateText),leefstijl.addEventListener("change",updateText),grootte.addEventListener("change",updateText),slaapritme.addEventListener("change",updateText),document.addEventListener("DOMContentLoaded",()=>{document.getElementById("enhancement").style.display="none"});
+const energielevel = document.getElementById("energielevel")
+const leefstijl = document.getElementById("leefstijl")
+const grootte = document.getElementById("grootte")
+const slaapritme = document.getElementById("slaapritme")
+const nextButton = document.getElementById("nextButton")
+
+const dropdowns = document.querySelectorAll("select") // Selectie van alle dropdown-elementen
+let allDropdownsSelected = false // Variabele om bij te houden of alle dropdowns zijn geselecteerd
+
+function updateButton() {
+    allDropdownsSelected = true // Stel de variabele allDropdownsSelected in op true
+
+    dropdowns.forEach((dropdown) => {
+        if (dropdown.value === "--") {
+            allDropdownsSelected = false // Als een dropdown de waarde "--" heeft, stel allDropdownsSelected in op false
+        }
+    })
+
+    nextButton.classList.toggle("selected", allDropdownsSelected) // Achtergrondkleur wordt gewijzigd op basis van de selectiestatus
+}
+
+dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("change", updateButton) // Luistert naar wijzigingen in de dropdowns en roept de updateButton-functie aan
+})
+
+nextButton.addEventListener("click", (event) => {
+    if (!allDropdownsSelected) {
+        event.preventDefault() // zodat het formulier niet wordt verzonden wanneer niet alles geselecteerd is
+        alert("Niet alle onderdelen zijn geselecteerd.") // Geeft een waarschuwing weer aan de gebruiker
+    }
+})
+
+function updateText() {
+    const styleText1 = document.getElementById("styleText1")
+    const styleText2 = document.getElementById("styleText2")
+    const styleText3 = document.getElementById("styleText3")
+    const styleText4 = document.getElementById("styleText4")
+
+    styleText1.innerHTML = energielevel.value !== "--" ? "checked" : "" // Bijwerken van de innerHTML van styleText1 op basis van de geselecteerde waarde in energielevel
+    styleText2.innerHTML = leefstijl.value !== "--" ? "checked" : ""
+    styleText3.innerHTML = grootte.value !== "--" ? "checked" : ""
+    styleText4.innerHTML = slaapritme.value !== "--" ? "checked" : ""
+}
+energielevel.addEventListener("change", updateText) // Luistert naar wijzigingen in energielevel en roept de updateText-functie aan
+leefstijl.addEventListener("change", updateText)
+grootte.addEventListener("change", updateText)
+slaapritme.addEventListener("change", updateText)
+
+// Controleer of JavaScript is ingeschakeld
+document.addEventListener("DOMContentLoaded", function () {
+    var enhancement = document.getElementById("enhancement") // Verwijzing naar het enhancement-element
+    enhancement.style.display = "none" // Verbergt het enhancement-element
+})
