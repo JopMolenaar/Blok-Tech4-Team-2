@@ -5,9 +5,13 @@ const cleanCSS = require("gulp-clean-css")
 const livereload = require("gulp-livereload")
 const bundleJS = require("gulp-uglify")
 
-// gulp.task("bundleJS", function () {
-//     return gulp.src("./static/js/*.js").pipe(bundleJS()).pipe(gulp.dest("./static/js/")).pipe(livereload())
-// })
+gulp.task("bundleJS", function () {
+    return gulp
+        .src("./static/js/*.js")
+        .pipe(bundleJS())
+        .pipe(gulp.dest("./static/js/gulp-js"))
+        .pipe(livereload())
+})
 
 gulp.task("sass", function () {
     return gulp
