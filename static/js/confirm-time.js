@@ -1,9 +1,21 @@
-const select = document.querySelector("#time-input"),
-    today = new Date(),
-    startTime = new Date(today.getTime()),
-    endTime = (startTime.setHours(9, 0, 0, 0), new Date(today.getTime())),
-    interval = (endTime.setHours(17, 0, 0, 0), 30)
-for (let e = startTime; e <= endTime; e.setMinutes(e.getMinutes() + interval)) {
-    const b = document.createElement("option")
-    ;(b.value = e.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })), (b.textContent = b.value), select.appendChild(b)
+const select = document.querySelector("#time-input")
+
+// Define the available times
+const today = new Date()
+const startTime = new Date(today.getTime())
+
+// set start time to 5:00 PM
+startTime.setHours(9, 0, 0, 0)
+const endTime = new Date(today.getTime())
+// set end time to 8:00 PM
+endTime.setHours(17, 0, 0, 0)
+// Set interval to 30 minutes
+const interval = 30
+
+// Loop through the available times
+for (let time = startTime; time <= endTime; time.setMinutes(time.getMinutes() + interval)) {
+    const option = document.createElement("option")
+    option.value = time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    option.textContent = option.value
+    select.appendChild(option)
 }
