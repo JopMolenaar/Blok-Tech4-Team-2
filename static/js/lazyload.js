@@ -1,18 +1,1 @@
-//lazy loading 
-const lazyImages = document.querySelectorAll(".lazy-load")
-
-const lazyLoad = (entries, observer) => {
-	entries.forEach(entry => {
-		if (entry.isIntersecting) {
-			const img = entry.target
-			img.src = img.dataset.src
-			img.classList.remove("lazy-load")
-			observer.unobserve(img)
-		}
-	})
-}
-
-const observer = new IntersectionObserver(lazyLoad)
-lazyImages.forEach(image => {
-	observer.observe(image)
-})
+const lazyImages=document.querySelectorAll(".lazy-load"),lazyLoad=(e,a)=>{e.forEach(e=>{e.isIntersecting&&((e=e.target).src=e.dataset.src,e.classList.remove("lazy-load"),a.unobserve(e))})},observer=new IntersectionObserver(lazyLoad);lazyImages.forEach(e=>{observer.observe(e)});

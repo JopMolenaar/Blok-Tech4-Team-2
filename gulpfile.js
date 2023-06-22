@@ -3,6 +3,11 @@ const sass = require("gulp-sass")(require("sass"))
 const autoprefixer = require("gulp-autoprefixer")
 const cleanCSS = require("gulp-clean-css")
 const livereload = require("gulp-livereload")
+const bundleJS = require("gulp-uglify")
+
+gulp.task("bundleJS", function () {
+    return gulp.src("./static/js/*.js").pipe(bundleJS()).pipe(gulp.dest("./static/js/")).pipe(livereload())
+})
 
 gulp.task("sass", function () {
 	return gulp
@@ -14,8 +19,8 @@ gulp.task("sass", function () {
 		.pipe(livereload())
 })
 gulp.task("watch", function () {
-	livereload.listen() // Start livereload
-	gulp.watch("./static/styles/*.scss", gulp.series("sass"))
+    livereload.listen() // Start livereload
+    gulp.watch("./static/styles/*.scss", gulp.series("sass", "bundleJS"))
 })
 // Default Task
-gulp.task("default", gulp.parallel("watch", "sass"))
+gulp.task("default", gulp.parallel("watch", "sass", "bundleJS"))
