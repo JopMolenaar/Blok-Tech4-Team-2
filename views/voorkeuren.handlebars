@@ -5,15 +5,15 @@
     <main class="voorkeuren">
         <form id="voorkeurenForm" action="/voorkeuren" method="POST">
             <h1 class="voorkeurenH">Kies uw voorkeur</h1>
-            <noscript>
-                <p id="enhancement">U zult alle voorkeuren moeten invullen om de beste resultaten te krijgen.</p>
+            <noscript id="enhancement">
+                <p>U zult alle voorkeuren moeten invullen om de beste resultaten te krijgen.</p>
             </noscript>
             <p class="voorkeurenP">U zal elk onderdeel in moeten vullen</p>
             <label class="voorkeurenLabel" for="energielevel">Hoe actief mag het dier zijn?</label>
             <select id="energielevel" name="energielevel">
                 <option>--</option>
                 <option value="rustig">Rustig</option>
-                <option value="actief">Normaal</option>
+                <option value="normaal">Normaal</option>
                 <option value="actief">Actief</option>
             </select>
             <p id="styleText1"></p>
@@ -40,16 +40,24 @@
             <label class="voorkeurenLabel" for="slaapritme">Wanneer wil je dat je dier actief is?</label>
             <select id="slaapritme" name="slaapritme">
                 <option>--</option>
-                <option value="nacht">S'ochtends</option>
+                <option value="ochtend">S'ochtends</option>
                 <option value="dag">Overdag</option>
-                <option value="ochtend/avond">S'avonds</option>
-                <option value="geen voorkeur">S'nachts</option>
+                <option value="avond">S'avonds</option>
+                <option value="nacht">S'nachts</option>
             </select>
             <p id="styleText4"></p>
 
             <button id="nextButton" type="submit">Submit</button>
         </form>
-        <script src="js/voorkeuren.js"></script>
+
+        <div id="Preferences">
+            <h2>Preferences</h2>
+            <p><strong>Energielevel:</strong> {{energielevel}}</p>
+            <p><strong>Leefstijl:</strong> {{leefstijl}}</p>
+            <p><strong>Grootte:</strong> {{grootte}}</p>
+            <p><strong>Slaapritme:</strong> {{slaapritme}}</p>
+        </div>
+        <script src="js/gulp-js/voorkeuren.js"></script>
     </main>
     <footer></footer>
 </body>

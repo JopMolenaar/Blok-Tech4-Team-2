@@ -2,10 +2,12 @@ $color-background: rgb(248, 248, 248);
 $color-error: rgb(197, 0, 0);
 $color-border: black;
 $color-text: black;
-$color-border-bottom-form: rgb(187, 187, 187);
+$color-border-bottom-form: lightgray;
 $shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 $color-backgroundPurple: rgb(230, 219, 243);
+$color-darkpurple: rgb(158, 72, 255);
 $color-white: #eeeeee;
+$opacity-white: rgba(255, 255, 255, 0.7);
 
 #productpage {
     overflow: hidden;
@@ -115,29 +117,25 @@ $color-white: #eeeeee;
                     grid-row-end: 3;
                     height: 100%;
                     position: relative;
-                    p:nth-child(2) {
+                    > p:nth-child(2) {
                         position: absolute;
                         top: -9.5em;
                         left: -0.2em;
                         font-size: 1.3em;
-                        background: rgba(255, 255, 255, 0.7);
+                        background: $opacity-white;
                         border-radius: 0px 0px 10px 0px;
                     }
-                    p:nth-child(3),
-                    p:nth-child(4) {
+                    > div {
                         position: absolute;
                         top: -4.28em;
                         left: -0.2em;
-                        width: 6em;
-                        font-size: 1em;
-                        background: rgba(255, 255, 255, 0.7);
-                    }
-                    p:nth-child(3) {
                         border-radius: 0px 10px 0px 0px;
-                    }
-                    p:nth-child(4) {
-                        top: -2.19em;
-                        width: 6em;
+                        width: fit-content;
+                        height: 4.27em;
+                        font-size: 1em;
+                        background: $opacity-white;
+                        display: flex;
+                        flex-direction: column;
                     }
                 }
                 section:nth-child(3) {
@@ -193,7 +191,7 @@ $color-white: #eeeeee;
             font-size: 1.5em;
         }
         section {
-            border-bottom: lightgrey solid 3px;
+            border-bottom: $color-border-bottom-form solid 3px;
             display: none;
             grid-template-columns: 1fr 1fr;
             padding-bottom: 0.5em;
@@ -204,7 +202,7 @@ $color-white: #eeeeee;
             }
         }
         section:last-child {
-            padding-bottom: 3em;
+            margin-bottom: 3em;
         }
         section.soort {
             display: none;
@@ -243,7 +241,7 @@ $color-white: #eeeeee;
                     right: 0%;
                     position: absolute;
                     border-radius: 5px;
-                    background-color: #17a2b8;
+                    background-color: $color-darkpurple;
                 }
             }
             .range-input {
@@ -263,7 +261,7 @@ $color-white: #eeeeee;
                     border-radius: 50%;
                     pointer-events: auto;
                     -webkit-appearance: none;
-                    background-color: #17a2b8;
+                    background-color: $color-darkpurple;
                 }
                 input[type="range"]::-moz-range-thumb {
                     height: 17px;
@@ -272,7 +270,7 @@ $color-white: #eeeeee;
                     border: none;
                     pointer-events: auto;
                     -moz-appearance: none;
-                    background-color: #17a2b8;
+                    background-color: $color-darkpurple;
                 }
             }
         }

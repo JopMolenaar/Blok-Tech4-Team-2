@@ -1,0 +1,89 @@
+#detailpagina {
+  height: calc(100vh - 4em);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  background-color: rgb(230, 219, 243);
+}
+#detailpagina > div {
+  max-height: min-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr fit-content 1fr;
+  position: relative;
+  max-width: 60em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+#detailpagina > div article {
+  order: 1;
+}
+#detailpagina > div article h2 {
+  margin: 0;
+}
+#detailpagina > div > section:nth-child(2) {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 0;
+  height: fit-content;
+}
+#detailpagina > div > section:nth-child(2) > div {
+  position: absolute;
+  display: flex;
+  height: 8em;
+  width: fit-content;
+  right: 0;
+  top: 0;
+}
+#detailpagina > div > section:nth-child(2) > div img {
+  height: 100%;
+  width: auto;
+}
+#detailpagina > div > section:nth-child(2) section p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+#detailpagina > div > section:nth-child(4) {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1em;
+  height: fit-content;
+}
+#detailpagina > div > section:nth-child(4) button {
+  margin: 0;
+}
+#detailpagina > div > section:nth-child(4) form {
+  width: fit-content;
+  height: fit-content;
+  margin: 0;
+}
+#detailpagina a {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-bottom: 0.5em;
+}
+
+@media (min-width: 48.125em) {
+  #detailpagina > div {
+    grid-template-columns: 1fr 12em;
+    grid-template-rows: 1fr 1fr fit-content;
+  }
+  #detailpagina article {
+    padding-left: 1em;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    order: 1;
+  }
+  #detailpagina a {
+    grid-column-end: 3;
+  }
+}

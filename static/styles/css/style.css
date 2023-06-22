@@ -69,27 +69,6 @@ summary {
   background-color: #a6b1e1;
 }
 
-.buttonPrimary:active,
-.submitButton:active {
-  animation-name: fillButton;
-  animation-duration: 3s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes fillButton {
-  0% {
-    background-color: #a6b1e1;
-  }
-  100% {
-    background-color: #4e4c67;
-  }
-}
-.buttonPrimary:hover,
-.submitButton:hover {
-  background-color: #a6b1e1;
-}
-
 img {
   width: 6.25em;
   height: auto;
@@ -132,6 +111,5 @@ form {
   width: 80%;
   margin: auto;
   display: grid;
-  align-items: center;
   gap: 0.5rem;
 }

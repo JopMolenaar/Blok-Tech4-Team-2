@@ -10,17 +10,17 @@
                 {{/if}}
             <fieldset>
                 <label for="gebruikersnaam">Gebruikersnaam:</label>
-                <input type="username" id="adminGebruikersnaam" name="gebruikersnaam" />
+                <input type="username" id="adminGebruikersnaam" name="gebruikersnaam" required/>
             </fieldset>
             
             <fieldset>
                 <label for="wachtwoord">Wachtwoord:</label>
-                <input type="password" id="adminWachtwoord" name="wachtwoord" />
+                <input type="password" id="adminWachtwoord" name="wachtwoord" required/>
             </fieldset>
 
             <button class="formButton" type="submit">Login</button>
-
-            <script src="/js/login.js"></script>
+            
         </form>
     </main>
+    <script src="/js/gulp-js/admin-login.js"></script>
 </body>

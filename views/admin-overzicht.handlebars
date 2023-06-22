@@ -1,36 +1,30 @@
 <header>
     <img src="images/favicon.ico" alt="" loading="lazy" />
     <nav>
+        <a href="/producten-overzicht/toevoegen">Product toevoegen</a>
         <form id="logout" action="/admin-logout" method="POST">
             <button type="submit">Logout</button>
         </form>
     </nav>
 </header>
 
-<main id="productpageAdmin">
-    <section>
-        <a href="/producten-overzicht/toevoegen">Product toevoegen</a>
-    </section>
-    <ul>
-        {{#each product}}
-            <li>
-                <div>
-                    <img src="/upload/{{this.img}}" alt="Picture" loading="lazy"/>
-                </div>
-                <p>{{this.naam}}</p>
-                <p>{{this.leeftijd}}</p>
-                <p>{{this.soort}}</p>
-                <p>{{this.beschrijving}}</p>
-                <section>
-                    <h2>Eigenschappen</h2>
-                    <p>{{this.eigenschappen.activiteit}}</p>
-                    <p>{{this.eigenschappen.leefstijl}}</p>
-                    <p>{{this.eigenschappen.grootte}}</p>
-                    <p>{{this.eigenschappen.dag}}</p>
-                </section>
+<main id="productPageAdmin">
+    <div>
+        <section>
+            <input id="searchAnimals" type="text" name="search" placeholder="Zoek dieren" />
+        </section>
+        <section id="animalsList">
+            {{#each product}}
+                <ul>
+                    <li><img src="/upload/{{this.img}}" alt="Picture" /></li>
+                    <li>{{this.naam}}</li>
+                    <li>{{this.soort}}</li>
+                    <li><a href="/producten-overzicht/aanpassen/{{this._id}}">change</a></li>
+                    <li><button id="delBtn"></button></li>
+                </ul>
+            {{/each}}
+        </section>
+    </div>
+    <script src="/js/gulp-js/admin-search.js"></script>
 
-                <a href="/producten-overzicht/aanpassen/{{this._id}}">Change</a>
-            </li>
-        {{/each}}
-    </ul>
 </main>

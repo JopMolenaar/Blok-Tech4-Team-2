@@ -1,4 +1,5 @@
-/* General styling */
+// General styling
+
 $background-image: url("/images/paws2.jpg");
 $primary-color: #242424;
 $secondary-color:#252154;
@@ -11,6 +12,8 @@ $color-primary-button-hover: #a6b1e1;
 $lack-of-color: #ffff;
 $error-color: #CA1E1E;
 
+// adminForm styling
+
 #adminForm .loginH {
   text-align: center;
   color: $lack-of-color;
@@ -18,8 +21,6 @@ $error-color: #CA1E1E;
   margin: 0;
   margin-bottom: 1em;
 }
-
-/* adminForm styling */
 
 #adminForm fieldset{
   border: none;
@@ -41,6 +42,7 @@ $error-color: #CA1E1E;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
+  //Blurry background styling
   &::before {
     content: "";
     position: absolute;
@@ -48,7 +50,7 @@ $error-color: #CA1E1E;
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(.6em); /* Adjust the blur strength as needed */
+    backdrop-filter: blur(.6em);
     z-index: -1;
     border-radius: .4em;
   }
@@ -92,6 +94,7 @@ $error-color: #CA1E1E;
     background-color: $color-primary-button-hover;
   }
 
+  //progressive enhancement input borders
   input:required:invalid {
     color: $secondary-color;
     border-color: $secondary-color;

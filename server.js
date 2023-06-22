@@ -169,17 +169,6 @@ app.post("/admin-logout", (req, res) => {
     res.redirect("/admin-login")
 })
 
-//middleware die checkt of de gebruiker ingelogd is
-const requireLogin = (req, res, next) => {
-    if (req.session.loggedIn) {
-        // User is logged in, proceed to the next middleware
-        next()
-    } else {
-        // User is not logged in, redirect to the login page
-        res.redirect("/login")
-    }
-}
-
 // Regular user login
 app.post("/login", (req, res) => {
     const { gebruikersnaam, wachtwoord } = req.body
@@ -280,7 +269,7 @@ app.post("/signUp", (req, res) => {
             req.session.loggedIn = true
             req.session.gebruikersnaam = gebruikersnaam
             req.session.save(() => {
-                res.redirect("/products")
+                res.redirect("/voorkeuren")
             })
         })
         .catch((error) => {
@@ -291,20 +280,39 @@ app.post("/signUp", (req, res) => {
             }
         })
 })
-
-app.get("/voorkeuren", requireLogin, async (req, res) => {
-    res.render("voorkeuren")
-})
-
-app.get("/products", async (req, res) => {
+//voorkeuren pagina
+app.get("/voorkeuren", async (req, res) => {
     try {
-        const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+        const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
 
         // Zoek de gebruiker in de database op basis van de gebruikersnaam
         const gebruiker = await User.findOne({ gebruikersnaam })
 
         if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal de voorkeuren uit het gebruikersobject
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Je haalt de voorkeuren op uit het gebruikersobject
+
+            console.log("Ingelogde gebruiker:", gebruikersnaam)
+            console.log("Energielevel:", energielevel)
+            console.log("Leefstijl:", leefstijl)
+            console.log("Grootte:", grootte)
+            console.log("Slaapritme:", slaapritme)
+
+            res.render("voorkeuren", { energielevel, leefstijl, grootte, slaapritme })
+        } else {
+            console.log("Gebruiker niet gevonden")
+        }
+    } catch (error) {
+        console.error("Fout bij het ophalen van gebruikersgegevens:", error)
+    }
+})
+
+// normale gebruikers
+app.get("/products", async (req, res) => {
+    try {
+        const { gebruikersnaam } = req.session // Haal de gebruikersnaam op uit de sessie van de ingelogde gebruiker
+        const gebruiker = await User.findOne({ gebruikersnaam }) // Zoekt de gebruiker in de database op basis van de gebruikersnaam
+        if (gebruiker) {
+            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // Haal voorkeuren uit de gebruikersobject
 
             console.log("Ingelogde gebruiker:", gebruikersnaam)
             console.log("Energielevel:", energielevel)
@@ -315,6 +323,7 @@ app.get("/products", async (req, res) => {
             // Stel de query samen met behulp van de voorkeuren van de gebruiker
             const query = {
                 $or: [
+                    // Er worden meerdere voorwaarden (4) gecombineerd. Het resultaat van de zoekopdracht zijn documenten die overeenkomen met ten minste één van deze voorwaarden.
                     { "eigenschappen.energielevel": energielevel },
                     { "eigenschappen.leefstijl": leefstijl },
                     { "eigenschappen.grootte": grootte },
@@ -326,26 +335,25 @@ app.get("/products", async (req, res) => {
             const producten = await Product.find(query)
 
             // Stuur de producten als respons naar de client
-            res.render("products", {
+            return res.render("products", {
                 product: producten.map((product) => product.toJSON()),
             })
         } else {
+            // Dit is wanneer de gebruiker niet gevonden is in de database
             console.log("Gebruiker niet gevonden")
-            res.render("gebruiker-niet-gevonden")
+            return res.render("notfound")
         }
     } catch (error) {
         console.error(error)
-
-        // Als er een fout optreedt, wordt deze hier afgehandeld
-        // De fout wordt afgedrukt en een 500-statuscode en een foutmelding worden naar de client gestuurd
-        res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
+        // Wanneer er een fout is bij het ophalen van producten uit de database
+        // 500 status is dat er een onverwachte fout is opgetreden aan de serverzijde tijdens het verwerken van het verzoek. Het is een algemene foutmelding die aangeeft dat er iets intern mis is gegaan, maar geeft niet specifiek aan wat het probleem is.
+        return res.status(500).send("Er is een fout opgetreden. Probeer het later opnieuw.")
     } finally {
         console.log("Alle producten zijn opgehaald")
     }
 })
 
 // Admin pagina's
-
 // Middleware function to check if the user is logged in as an admin
 const requireAdminLogin = (req, res, next) => {
     if (req.session.loggedIn && req.session.gebruikersnaam === process.env.ADMIN_USERNAME) {
@@ -517,58 +525,36 @@ app.post("/voorkeuren", (req, res) => {
         })
 })
 
-app.get("/voorkeuren-opgeslagen", requireLogin, async (req, res) => {
+// Confirmation page
+app.get("/confirm-form/:id", async (req, res) => {
     try {
-        const { gebruikersnaam } = req.session // Gebruikersnaam van de ingelogde gebruiker
+        // zoekt product op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
 
-        // Zoek de gebruiker in de database op basis van de gebruikersnaam
-        const gebruiker = await User.findOne({ gebruikersnaam })
-
-        if (gebruiker) {
-            const { energielevel, leefstijl, grootte, slaapritme } = gebruiker.voorkeuren // je haalt de voorkeuren op uit het gebruikersobject
-
-            console.log("Ingelogde gebruiker:", gebruikersnaam)
-            console.log("Energielevel:", energielevel)
-            console.log("Leefstijl:", leefstijl)
-            console.log("Grootte:", grootte)
-            console.log("Slaapritme:", slaapritme)
-
-            res.render("voorkeuren-opgeslagen", { energielevel, leefstijl, grootte, slaapritme })
-        } else {
-            console.log("Gebruiker niet gevonden")
-        }
+        res.render("confirm-form", {
+            doggo: getItToJson.map((product) => product.toJSON()),
+        })
     } catch (error) {
-        console.error("Fout bij het ophalen van gebruikersgegevens:", error)
+        console.log(error)
+    } finally {
+        console.log("afspraak pagina geladen")
     }
 })
 
-// Confirmation page
-app.get("/confirm", requireLogin, async (req, res) => {
-    const doggo = {
-        naam: "Barry",
-        soort: "Golden retriever",
-        leeftijd: "1",
-        beschrijving: "Barry is een rustige hond die goed met kinderen om kan gaan. Hij houdt erg van buitenspelen en knuffelen.",
+//Post the form information
+app.post("/meet", async (req, res, next) => {
+    try {
+        const person = {
+            name: req.body.name,
+            date: req.body.date,
+            time: req.body.time,
+        }
+        res.render("confirm", { person, doggo })
+    } catch (err) {
+        next(err)
     }
-
-    const today = new Date()
-    const weekdays = new Date()
-    weekdays.setDate(today.getDate() + 7)
-
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    if (today.getDay() === 5) {
-        weekdays.setDate(weekdays.getDate() + 7) // Add additional 7 days if today is Friday
-    }
-
-    while (weekdays.getDay() === 0 || weekdays.getDay() === 6) {
-        weekdays.setDate(weekdays.getDate() + 1)
-    }
-
-    const weekdaysStr = weekdays.toISOString().split("T")[0]
-
-    res.render("confirm", { weekdaysStr, doggo })
 })
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy
@@ -639,7 +625,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
     res.redirect("/products")
 })
 
-app.get("/wishlist", requireLogin, async (req, res) => {
+app.get("/wishlist", async (req, res) => {
     try {
         const user = await User.find({ gebruikersnaam: req.session.gebruikersnaam })
         if (!user) {
@@ -658,7 +644,7 @@ app.get("/wishlist", requireLogin, async (req, res) => {
     }
 })
 
-app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
+app.post("/wishlist-add/:id", async (req, res) => {
     try {
         const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $push: { wishlist: req.params.id } })
         console.log(userUpdate)
