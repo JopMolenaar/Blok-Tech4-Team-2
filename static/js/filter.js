@@ -12,13 +12,10 @@ for (let i = 0; i <= 99; i++) {
     lastAgeRange.push(i)
 }
 let gap = 1
-
-// function that filters and moves the value bar on the frontend
 rangeInput.forEach((input) => {
     input.addEventListener("input", (e) => {
         let minVal = parseInt(rangeInput[0].value)
         let maxVal = parseInt(rangeInput[1].value)
-        // min value is always less then max value
         if (maxVal - minVal < gap) {
             if (e.target.classname === "range-min") {
                 rangeInput[0].value = maxVal - gap
@@ -26,7 +23,6 @@ rangeInput.forEach((input) => {
                 rangeInput[1].value = minVal + gap
             }
         } else {
-            // filter
             priceInput[0].value = minVal
             priceInput[1].value = maxVal
             progress.style.left = (minVal / rangeInput[0].max) * 99 + "%"
@@ -46,7 +42,7 @@ rangeInput.forEach((input) => {
                             alreadyActive.forEach((item) => {
                                 activeItems.forEach((activeItem) => {
                                     if (item === activeItem) {
-                                        // als het is aangechecked en binnen de leeftijd valt
+                                        // als het is aangchecked en binnen de leeftijd valt
                                         item.style.display = "grid"
                                     }
                                 })
@@ -64,7 +60,7 @@ rangeInput.forEach((input) => {
         }
     })
 })
-// function that filters (does the same as the above) bu is for the number input (moves the value bar too)
+
 priceInput.forEach((input) => {
     input.addEventListener("input", (e) => {
         let minVal = parseInt(priceInput[0].value)
@@ -115,7 +111,7 @@ priceInput.forEach((input) => {
 // filter functions
 const inputsCheck = document.querySelectorAll("#productpage section:nth-child(3) input[type=checkbox]")
 
-// filter function for all checkboxes + checks if option is clicked evenly or odd
+// filter function + checks if option is clicked evenly or odd
 let isItEvenArray = []
 let activeFilter = []
 inputsCheck.forEach((input) => {
@@ -149,6 +145,7 @@ inputsCheck.forEach((input) => {
             })
             activeFilter.forEach((item) => {
                 const activeItems = document.querySelectorAll(`.${item}`)
+
                 lastAgeRange.forEach((number) => {
                     const activeAge = document.querySelectorAll(`._${number}`)
                     activeAge.forEach((activeItem) => {
