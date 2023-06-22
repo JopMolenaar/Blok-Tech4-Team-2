@@ -91,10 +91,6 @@ header {
   margin: 1em auto;
 }
 
-.selected {
-  background-color: #a6b1e1;
-}
-
 noscript > p {
   text-align: center;
   margin-top: 1em;
