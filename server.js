@@ -524,7 +524,27 @@ app.get("/producten-overzicht/detail/:id", async (req, res) => {
 
 // add producten
 app.get("/producten-overzicht/toevoegen", async (req, res) => {
-    res.render("admin-addProducts")
+    try {
+        if (req.session.loggedIn) {
+            const naam = req.session.adminUsername
+            Admin.findOne({ naam: naam }).then((admin) => {
+                console.log(admin)
+                if (admin) {
+                    res.render("admin-addProducts")
+                } else {
+                    // User is not logged in as an admin, redirect to the login page
+                    res.redirect("/admin-login")
+                }
+            })
+        } else {
+            // User is not logged in, redirect to the login page
+            res.redirect("/admin-login")
+        }
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log("Got all products for admin")
+    }
 })
 
 // voorkeuren pagina
