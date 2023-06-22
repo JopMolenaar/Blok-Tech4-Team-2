@@ -529,30 +529,13 @@ app.get("/producten-overzicht/aanpassen/:id", async (req, res) => {
 // product detail pagina
 app.get("/producten-overzicht/detail/:id", async (req, res) => {
     try {
-        if (req.session.loggedIn) {
-            const naam = req.session.adminUsername
-            Admin.findOne({ naam: naam }).then((admin) => {
-                console.log(admin)
-                if (admin) {
-                    const findProduct = async () => {
-                        // zoekt producten op id
-                        const products = await Product.findById(req.params.id)
-                        const getItToJson = []
-                        getItToJson.push(products)
-                        res.render("product-detail", {
-                            product: getItToJson.map((product) => product.toJSON()),
-                        })
-                    }
-                    findProduct()
-                } else {
-                    // User is not logged in as an admin, redirect to the login page
-                    res.redirect("/admin-login")
-                }
-            })
-        } else {
-            // User is not logged in, redirect to the login page
-            res.redirect("/admin-login")
-        }
+        // zoekt producten op id
+        const products = await Product.findById(req.params.id)
+        const getItToJson = []
+        getItToJson.push(products)
+        res.render("product-detail", {
+            product: getItToJson.map((product) => product.toJSON()),
+        })
     } catch (error) {
         console.log(error)
     } finally {
