@@ -667,7 +667,18 @@ app.post("/wishlist-add/:id", requireLogin, async (req, res) => {
         console.log(userUpdate)
         res.redirect("/products")
     } catch (error) {
-        console.error("Error adding movie to wishlist:", error)
+        console.error("Error adding product to wishlist:", error)
+        res.status(500).json({ error: "Internal server error" })
+    }
+})
+
+app.post("/wishlist-delete/:id", requireLogin, async (req, res) => {
+    try {
+        const userUpdate = await User.findOneAndUpdate({ gebruikersnaam: req.session.gebruikersnaam }, { $pull: { wishlist: req.params.id } })
+        console.log(userUpdate)
+        res.redirect("/wishlist")
+    } catch (error) {
+        console.error("Error removing product from wishlist:", error)
         res.status(500).json({ error: "Internal server error" })
     }
 })
