@@ -15,8 +15,8 @@ function updateButton() {
             allDropdownsSelected = false // Als een dropdown de waarde "--" heeft, stel allDropdownsSelected in op false
         }
     })
-
-    nextButton.classList.toggle("selected", allDropdownsSelected) // Achtergrondkleur wordt gewijzigd op basis van de selectiestatus
+    nextButton.style.backgroundColor = allDropdownsSelected ? "#A6B1E1" : "" // Achtergrondkleur verandert
+    // nextButton.classList.toggle("selected", allDropdownsSelected) // Achtergrondkleur wordt gewijzigd op basis van de selectiestatus
 }
 
 dropdowns.forEach((dropdown) => {
