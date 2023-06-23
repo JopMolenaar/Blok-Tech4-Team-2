@@ -714,10 +714,8 @@ app.get("/wishlist", async (req, res) => {
         if (!user) {
             throw new Error("User not found")
         }
-        let lol = user[0]
-        let iets2 = lol.wishlist
-        console.log(iets2)
-        const multipleP = await Product.find({ _id: { $in: iets2 } })
+        let userWishlist = user[0].wishlist
+        const multipleP = await Product.find({ _id: { $in: userWishlist } })
         console.log(multipleP)
 
         res.render("wishlist", { wishlist: multipleP.map((product) => product.toJSON()) })
