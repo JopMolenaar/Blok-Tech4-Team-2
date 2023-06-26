@@ -9,11 +9,11 @@ const uglify = require("gulp-uglify")
 const rename = require("gulp-rename")
 const argv = require("yargs").argv
 
-gulp.task("bundleJS", function () {
+gulp.task("bundleJS", () => {
     return gulp.src("./static/js/*.js").pipe(bundleJS()).pipe(gulp.dest("./static/js/gulp-js")).pipe(livereload())
 })
 
-gulp.task("server-uglify", function () {
+gulp.task("server-uglify", () => {
     const compress = argv.c || argv.compress
     const mangle = argv.m || argv.mangle
     const output = argv.o || argv.output || "ugly.js"
@@ -21,7 +21,7 @@ gulp.task("server-uglify", function () {
     return gulp.src("server.js").pipe(uglify({ compress, mangle })).pipe(rename(output)).pipe(gulp.dest("./")).pipe(livereload())
 })
 
-gulp.task("sass", function () {
+gulp.task("sass", () => {
     return gulp
         .src("./static/styles/*.scss")
         .pipe(sass().on("error", sass.logError))
@@ -30,7 +30,7 @@ gulp.task("sass", function () {
         .pipe(cleanCSS())
         .pipe(livereload())
 })
-gulp.task("watch", function () {
+gulp.task("watch", () => {
     livereload.listen() // Start livereload
     gulp.watch("./static/styles/*.scss", gulp.series("sass"))
     gulp.watch("./static/js/*.js", gulp.series("bundleJS"))

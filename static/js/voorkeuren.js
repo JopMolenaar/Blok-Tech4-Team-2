@@ -7,7 +7,7 @@ const nextButton = document.getElementById("nextButton")
 const dropdowns = document.querySelectorAll("select") // Selectie van alle dropdown-elementen
 let allDropdownsSelected = false // Variabele om bij te houden of alle dropdowns zijn geselecteerd
 
-function updateButton() {
+const updateButton = () => {
     allDropdownsSelected = true // Stel de variabele allDropdownsSelected in op true
 
     dropdowns.forEach((dropdown) => {
@@ -29,7 +29,7 @@ nextButton.addEventListener("click", (event) => {
     }
 })
 
-function updateText() {
+const updateText = () => {
     const styleText1 = document.getElementById("styleText1")
     const styleText2 = document.getElementById("styleText2")
     const styleText3 = document.getElementById("styleText3")
@@ -46,7 +46,7 @@ grootte.addEventListener("change", updateText)
 slaapritme.addEventListener("change", updateText)
 
 // Controleer of JavaScript is ingeschakeld
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     var enhancement = document.getElementById("enhancement") // Verwijzing naar het enhancement-element
     enhancement.style.display = "none" // Verbergt het enhancement-element
 })
