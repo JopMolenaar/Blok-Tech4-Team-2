@@ -29,13 +29,6 @@ const storage = multer.diskStorage({
         console.log(file)
         replaceFileName(null, Date.now() + path.extname(file.originalname))
     },
-    destination: (req, file, setPath) => {
-        setPath(null, "static/upload/")
-    },
-    filename: (req, file, replaceFileName) => {
-        console.log(file)
-        replaceFileName(null, Date.now() + path.extname(file.originalname))
-    },
 })
 const upload = multer({ storage: storage })
 
@@ -564,7 +557,7 @@ app.get("/producten-overzicht/toevoegen", async (req, res) => {
             res.redirect("/admin-login")
         }
     } catch (error) {
-        console.log(error)
+        console.log("", error)
     } finally {
         console.log("Got all products for admin")
     }
